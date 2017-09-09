@@ -9,13 +9,34 @@ class PlayerCharacter :
 {
 private:
 
-	void Input(float eTime);
+	enum CONDITION{
+		RIGHTRUN,
+		LEFTRUN,
+		UPRUN,
+		DOWNRUN,
+		RIGHTIDLE,
+		LEFTIDLE,
+		UPIDLE,
+		DOWNIDLE
+	};
+
+	bool isMove;
+
+	int playerCondition;
+	int prevKey;
+
+	void Move(float eTime);
+	void Idle();
 
 public:
 	PlayerCharacter();
-	~PlayerCharacter();
 
-	ZeroAnimation* player;
+	ZeroAnimation* playerSrun;
+	ZeroAnimation* playerUrun;
+	ZeroAnimation* playerDrun;
+	ZeroAnimation* playerSidle; 
+	ZeroAnimation* playerUidle; 
+	ZeroAnimation* playerDidle; 
 
 	float speed;
 
