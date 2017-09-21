@@ -5,23 +5,53 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="Player">
+    <Filter Include="Scenes">
+      <UniqueIdentifier>{4d7c564e-5839-4f81-96e9-3b380da4b431}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\MenuScene">
+      <UniqueIdentifier>{52e01670-c7e5-44b9-8134-173dbd515b87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\GameScene">
+      <UniqueIdentifier>{9cc13ec3-2cef-4f54-8df4-ac1fcfb706b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Unit">
+      <UniqueIdentifier>{4cd2b9d7-c5a0-44a7-a25d-114423d67a75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Unit\Player">
       <UniqueIdentifier>{39ae290b-c68b-44c9-beca-6f6e2919d812}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Unit\Enemy">
+      <UniqueIdentifier>{4b72dd22-f9e6-4bb4-bd35-4fbd51edd560}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Unit\Enemy\Slime">
+      <UniqueIdentifier>{e4d0cc59-8f8d-437e-b1fe-66a574a22b56}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
-    <ClCompile Include="WinMain.cpp" />
     <ClCompile Include="PlayerCharacter.cpp">
-      <Filter>Player</Filter>
+      <Filter>Unit\Player</Filter>
     </ClCompile>
+    <ClCompile Include="MenuScene.cpp">
+      <Filter>Scenes\MenuScene</Filter>
+    </ClCompile>
+    <ClCompile Include="ExampleScene.cpp">
+      <Filter>Scenes\GameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="MenuScene.h">
+      <Filter>Scenes\MenuScene</Filter>
+    </ClInclude>
     <ClInclude Include="PlayerCharacter.h">
-      <Filter>Player</Filter>
+      <Filter>Unit\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="ExampleScene.h">
+      <Filter>Scenes\GameScene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

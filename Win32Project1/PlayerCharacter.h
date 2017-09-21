@@ -9,7 +9,23 @@ class PlayerCharacter :
 {
 private:
 
-	enum CONDITION{
+	pair<float, float> rollTimer;
+
+	bool isMove;
+	bool isRoll;
+	bool isKeydown;
+
+	int playerCondition;
+	int prevKey;
+
+	void Move(float eTime);
+	void Idle();
+	void Roll();
+
+public:
+	PlayerCharacter();
+
+	enum CONDITION {
 		RIGHTRUN,
 		LEFTRUN,
 		UPRUN,
@@ -17,19 +33,12 @@ private:
 		RIGHTIDLE,
 		LEFTIDLE,
 		UPIDLE,
-		DOWNIDLE
+		DOWNIDLE,
+		RIGHTROLL,
+		LEFTROLL,
+		UPROLL,
+		DOWNROLL,
 	};
-
-	bool isMove;
-
-	int playerCondition;
-	int prevKey;
-
-	void Move(float eTime);
-	void Idle();
-
-public:
-	PlayerCharacter();
 
 	ZeroAnimation* playerSrun;
 	ZeroAnimation* playerUrun;
@@ -37,6 +46,9 @@ public:
 	ZeroAnimation* playerSidle; 
 	ZeroAnimation* playerUidle; 
 	ZeroAnimation* playerDidle; 
+	ZeroAnimation* playerSroll;
+	ZeroAnimation* playerUroll;
+	ZeroAnimation* playerDroll;
 
 	float speed;
 

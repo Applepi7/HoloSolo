@@ -115,7 +115,6 @@ public:
 	//만일 안에 있다면 true를 반환한다.
 	bool IsOverlapped(ZeroVec pos);
 
-private:
 	bool IsPosInRect(ZeroRect rect, ZeroVec pos);
 
 public:
