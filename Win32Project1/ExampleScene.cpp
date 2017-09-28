@@ -29,7 +29,8 @@ void ExampleScene::Update(float eTime)
 	player->Update(eTime);
 	slime->Update(eTime);
 
-	slime->Follow(player, slime, eTime);
+	slime->Follow(player, slime, eTime, slime->isAlive);
+	slime->SelfBoom(player, eTime);
 }
 
 void ExampleScene::Render()

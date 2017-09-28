@@ -20,6 +20,6 @@ public:
 	void Update(float eTime) override;
 	void Render() override;
 
-	void Follow(PlayerCharacter* target, Enemy* enemy, float eTime);
+	void Follow(PlayerCharacter* target, Enemy* enemy, float eTime, bool isMove);
 };
 

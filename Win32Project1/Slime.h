@@ -4,19 +4,38 @@
 #include "ZeroSprite.h"
 
 #include "Enemy.h"
+#include "PlayerCharacter.h"
 
 class Slime :
 	public Enemy
 {
+private:
+	int boomDistance;
+	int slimeCondition;
+
+	pair<float, float> boomTimer;
+	pair<float, float> popTimer;
+
 public:
 	Slime();
 	~Slime();
 
-	int speed = 150;
+	enum CONDITION {
+		MOVE,
+		BOOM
+	};
 
-	ZeroAnimation* slime;
+	int speed;
+	int health;
+
+	bool isAlive;
+
+	ZeroAnimation* slimeMove;
+	ZeroAnimation* slimeBoom;
 
 	void Update(float eTime) override;
 	void Render() override;
+
+	void SelfBoom(PlayerCharacter* target, float eTime);
 };
 

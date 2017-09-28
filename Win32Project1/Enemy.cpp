@@ -28,8 +28,10 @@ void Enemy::Render()
 	ZeroIScene::Render();
 }
 
-void Enemy::Follow(PlayerCharacter * target, Enemy * enemy, float eTime)
+void Enemy::Follow(PlayerCharacter * target, Enemy * enemy, float eTime, bool isMove)
 {
 	float rot = atan2(target->Pos().y - enemy->Pos().y, target->Pos().x - enemy->Pos().x);
-	enemy->SetPos(enemy->Pos() += ZeroVec(cos(rot), sin(rot)) * enemy->speed * eTime);
+	if (isMove) {
+		enemy->SetPos(enemy->Pos() += ZeroVec(cos(rot), sin(rot)) * enemy->speed * eTime);
+	}
 }

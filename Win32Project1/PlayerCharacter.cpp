@@ -3,54 +3,54 @@
 
 #include "ZeroInputManager.h"
 
-PlayerCharacter::PlayerCharacter() : isMove(false), isRoll(false), speed(100), playerCondition(LEFTIDLE), prevKey(NULL), rollTimer(0, .7f)
+PlayerCharacter::PlayerCharacter() : isMove(false), isRoll(false), speed(200), playerCondition(LEFTIDLE), prevKey(NULL), rollTimer(0, .7f)
 {
 
-	playerSrun = new ZeroAnimation(1.5f);
+	playerSrun = new ZeroAnimation(3.0f);
 	for (int i = 1; i <= 4; i++) {
 		playerSrun->PushSprite("Resource/Run/run_side_%d.png", i);
 	}
 
-	playerUrun = new ZeroAnimation(1.5f);
+	playerUrun = new ZeroAnimation(3.0f);
 	for (int i = 1; i <= 2; i++) {
 		playerUrun->PushSprite("Resource/Run/run_back_%d.png", i);
 	}
 
-	playerDrun = new ZeroAnimation(1.5f);
+	playerDrun = new ZeroAnimation(3.0f);
 	for (int i = 1; i <= 2; i++) {
 		playerDrun->PushSprite("Resource/Run/run_front_%d.png", i);
 	}
 
 	/*-------------------------------------------------------------------------*/
 
-	playerSidle = new ZeroAnimation(1.5f);
+	playerSidle = new ZeroAnimation(3.0f);
 	for (int i = 1; i <= 2; i++) {
 		playerSidle->PushSprite("Resource/Idle/idle_side_%d.png", i);
 	}
 
-	playerUidle = new ZeroAnimation(1.5f);
+	playerUidle = new ZeroAnimation(3.0f);
 	for (int i = 1; i <= 2; i++) {
 		playerUidle->PushSprite("Resource/Idle/idle_back_%d.png", i);
 	}
 
-	playerDidle = new ZeroAnimation(1.5f);
+	playerDidle = new ZeroAnimation(3.0f);
 	for (int i = 1; i <= 2; i++) {
 		playerDidle->PushSprite("Resource/Idle/idle_front_%d.png", i);
 	}
 
 	/*-------------------------------------------------------------------------*/
 
-	playerSroll = new ZeroAnimation(2.0f);
+	playerSroll = new ZeroAnimation(6.0f);
 	for (int i = 1; i <= 4; i++) {
 		playerSroll->PushSprite("Resource/Roll/roll_side_%d.png", i);
 	}
 
-	playerUroll = new ZeroAnimation(2.0f);
+	playerUroll = new ZeroAnimation(6.0f);
 	for (int i = 1; i <= 4; i++) {
 		playerUroll->PushSprite("Resource/Roll/roll_back_%d.png", i);
 	}
 	
-	playerDroll = new ZeroAnimation(2.0f);
+	playerDroll = new ZeroAnimation(6.0f);
 	for (int i = 1; i <= 4; i++) {
 		playerDroll->PushSprite("Resource/Roll/roll_front_%d.png", i);
 	}
@@ -77,7 +77,7 @@ PlayerCharacter::PlayerCharacter() : isMove(false), isRoll(false), speed(100), p
 void PlayerCharacter::Update(float eTime)
 {
 	ZeroIScene::Update(eTime);
-	playerSrun->Update(eTime);
+	/*playerSrun->Update(eTime);
 	playerUrun->Update(eTime);
 	playerDrun->Update(eTime);
 	playerSidle->Update(eTime);
@@ -85,7 +85,7 @@ void PlayerCharacter::Update(float eTime)
 	playerDidle->Update(eTime);
 	playerSroll->Update(eTime);
 	playerUroll->Update(eTime);
-	playerDroll->Update(eTime);
+	playerDroll->Update(eTime);*/
 
 	Move(eTime);
 	Idle();
