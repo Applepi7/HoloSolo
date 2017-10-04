@@ -2,14 +2,11 @@
 
 #include "ZeroIEffect.h"
 
-#pragma warning(disable: 4996)
-
 #define ZeroEffectMgr ZeroEffectManager::Instance()
 
 using namespace std;
 
 class ZeroEffectManager {
-
 private:
 	ZeroEffectManager();
 

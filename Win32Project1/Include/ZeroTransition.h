@@ -15,4 +15,3 @@
 #include "ZeroTrSaturate.h"
 #include "ZeroTrSlideIn.h"
 #include "ZeroTrSmoothSwirlGrid.h"
-

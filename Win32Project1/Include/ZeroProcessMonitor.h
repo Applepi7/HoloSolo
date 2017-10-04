@@ -12,7 +12,7 @@ public:
 	void Close();
 
 	float GetCpuUsage();
-	DWORD GetMemoryUsage();
+	size_t GetMemoryUsage();
 
 protected:
 	HRESULT CreateCpuUsageCounter();

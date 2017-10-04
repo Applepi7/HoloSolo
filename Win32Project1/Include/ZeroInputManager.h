@@ -1,7 +1,7 @@
 ﻿#pragma once
 
-#include "ZeroVec.h"
 #include "ZeroRect.h"
+#include "ZeroVec.h"
 
 #define ZeroInputMgr ZeroInputManager::Instance()
 

@@ -18,17 +18,17 @@ private:
 
 public:
 	Slime();
-	~Slime();
 
 	enum CONDITION {
 		MOVE,
-		BOOM
+		ATTACK
 	};
 
 	int speed;
 	int health;
 
 	bool isAlive;
+	bool isPop;
 
 	ZeroAnimation* slimeMove;
 	ZeroAnimation* slimeBoom;

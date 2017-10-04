@@ -3,13 +3,31 @@
 #include "ZeroIEffect.h"
 #include "ZeroIParticle.h"
 
-#define SAFE_DELETE(p)       { if(p) { delete (p);     (p)=0; } }
-#define SAFE_DELETE_ARRAY(p) { if(p) { delete[] (p);   (p)=0; } }
-#define SAFE_RELEASE(p)      { if(p) { (p)->Release(); (p)=0; } }
+#define SAFE_DELETE(p)  \
+	{                   \
+		if (p) {        \
+			delete (p); \
+			(p) = 0;    \
+		}               \
+	}
+#define SAFE_DELETE_ARRAY(p) \
+	{                        \
+		if (p) {             \
+			delete[](p);     \
+			(p) = 0;         \
+		}                    \
+	}
+#define SAFE_RELEASE(p)     \
+	{                       \
+		if (p) {            \
+			(p)->Release(); \
+			(p) = 0;        \
+		}                   \
+	}
 
 class ZeroParticleSprite : public ZeroIEffect {
 private:
-	typedef std::vector< ZeroIParticle* > PARTICLE;
+	typedef std::vector<ZeroIParticle*> PARTICLE;
 	PARTICLE particleList;
 
 	int startA, startR, startG, startB;
@@ -28,7 +46,7 @@ private:
 	float direction;
 	float spread;
 
-	void PushParticle(ZeroIParticle *p);
+	void PushParticle(ZeroIParticle* p);
 	void CreateParticle();
 
 public:
@@ -50,17 +68,20 @@ public:
 
 	template <typename T, typename U>
 	void SetParticleSpeed(T _minSpeed, U _maxSpeed) {
-		minSpeed = static_cast<float>(_minSpeed); maxSpeed = static_cast<float>(_maxSpeed);
+		minSpeed = static_cast<float>(_minSpeed);
+		maxSpeed = static_cast<float>(_maxSpeed);
 	}
 
 	template <typename T, typename U>
 	void SetParticleScale(T _minScale, U _maxScale) {
-		minScale = static_cast<float>(_minScale); maxScale = static_cast<float>(_maxScale);
+		minScale = static_cast<float>(_minScale);
+		maxScale = static_cast<float>(_maxScale);
 	}
 
 	template <typename T, typename U>
 	void SetParticleLifeTime(T _minLifeTime, U _maxLifeTime) {
-		minLifeTime = static_cast<float>(_minLifeTime); maxLifeTime = static_cast<float>(_maxLifeTime);
+		minLifeTime = static_cast<float>(_minLifeTime);
+		maxLifeTime = static_cast<float>(_maxLifeTime);
 	}
 
 	template <typename T>

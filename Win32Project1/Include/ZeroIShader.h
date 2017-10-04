@@ -15,14 +15,14 @@ public:
 	void Update(float _eTime);
 	void Render();
 
-	int IsControl()const {
+	int IsControl() const {
 		return control;
 	}
 	void SetControl(bool control) {
 		control = control;
 	}
 
-	bool IsRightErase()const {
+	bool IsRightErase() const {
 		return rightErase;
 	}
 	void SetRightErase(bool erase) {

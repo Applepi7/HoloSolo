@@ -13,8 +13,15 @@ public:
 protected:
 	void FollowPlayer();
 
+	enum CONDITION {
+		MOVE,
+		ATTACK,
+		IDLE
+	};
+
 public:
 
+	bool isAlive;
 	int speed;
 
 	void Update(float eTime) override;

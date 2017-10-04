@@ -20,7 +20,6 @@ private:
 
 	void Move(float eTime);
 	void Idle();
-	void Roll();
 
 public:
 	PlayerCharacter();

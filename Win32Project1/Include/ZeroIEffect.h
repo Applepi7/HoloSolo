@@ -14,7 +14,7 @@ public:
 	void Render();
 
 	int RenderPage() const;
-	void SetRenderPage(int _renderPage){
+	void SetRenderPage(int _renderPage) {
 		renderPage = _renderPage;
 	}
 };

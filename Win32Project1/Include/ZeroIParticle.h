@@ -19,7 +19,16 @@ private:
 	void ReloadResource();
 
 public:
-	ZeroIParticle(char *_path, ZeroVec _speed, float _lifeTime, float _size, float _rotationSpeed, int _colorA, int _colorR, int _colorG, int _colorB, int _renderState);
+	ZeroIParticle(char* _path,
+	              ZeroVec _speed,
+	              float _lifeTime,
+	              float _size,
+	              float _rotationSpeed,
+	              int _colorA,
+	              int _colorR,
+	              int _colorG,
+	              int _colorB,
+	              int _renderState);
 	~ZeroIParticle();
 
 	void Render();

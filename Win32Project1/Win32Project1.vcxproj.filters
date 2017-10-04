@@ -26,6 +26,12 @@
     <Filter Include="Unit\Enemy\Slime">
       <UniqueIdentifier>{e4d0cc59-8f8d-437e-b1fe-66a574a22b56}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Unit\Enemy\Wisp">
+      <UniqueIdentifier>{38e358d7-e7d0-4ca8-87b5-6ea0cc001367}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Unit\Enemy\Totem">
+      <UniqueIdentifier>{e83263ae-5058-48a7-90f9-f123caba3bbb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
@@ -44,6 +50,12 @@
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
       <Filter>Unit\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Wisp.cpp">
+      <Filter>Unit\Enemy\Wisp</Filter>
+    </ClCompile>
+    <ClCompile Include="Totem.cpp">
+      <Filter>Unit\Enemy\Totem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -64,6 +76,12 @@
     </ClInclude>
     <ClInclude Include="Enemy.h">
       <Filter>Unit\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Wisp.h">
+      <Filter>Unit\Enemy\Wisp</Filter>
+    </ClInclude>
+    <ClInclude Include="Totem.h">
+      <Filter>Unit\Enemy\Totem</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -2,6 +2,8 @@
 
 #include "PlayerCharacter.h"
 #include "Slime.h"
+#include "Wisp.h"
+#include "Totem.h"
 
 #include "ZeroIScene.h"
 
@@ -11,10 +13,12 @@ class ExampleScene :
 {
 public:
 	ExampleScene();
-	~ExampleScene();
 
 	PlayerCharacter* player;
+
 	Slime* slime;
+	Wisp* wisp;
+	Totem* totem;
 
 	ZeroSprite* background;
 

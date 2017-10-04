@@ -8,9 +8,7 @@ private:
 	T elements[MaxElements];
 
 public:
-	ZeroRingBuffer() : start(0), count(0) {
-
-	}
+	ZeroRingBuffer() : start(0), count(0) {}
 
 	void Add(T _element) {
 		elements[(start + count) % MaxElements] = _element;

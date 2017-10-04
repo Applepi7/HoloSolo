@@ -1,26 +1,42 @@
 ﻿#pragma once
 
-#include "ZeroRingBuffer.h"
+#include "ZeroCameraManager.h"
+#include "ZeroInputManager.h"
 #include "ZeroProcessMonitor.h"
 #include "ZeroRegulator.h"
-#include "ZeroCameraManager.h"
-#include "ZeroSceneManager.h"
-#include "ZeroSoundManager.h"
-#include "ZeroInputManager.h"
-#include "ZeroTextureManager.h"
-#include "ZeroSpriteManager.h"
-#include "ZeroShaderManager.h"
-#include "ZeroSprite.h"
 #include "ZeroResourceManager.h"
+#include "ZeroRingBuffer.h"
+#include "ZeroSceneManager.h"
+#include "ZeroShaderManager.h"
+#include "ZeroSoundManager.h"
+#include "ZeroSpriteManager.h"
+#include "ZeroTextureManager.h"
 
-#define SAFE_DELETE(p)       { if(p) { delete (p);     (p)=0; } }
-#define SAFE_DELETE_ARRAY(p) { if(p) { delete[] (p);   (p)=0; } }
-#define SAFE_RELEASE(p)      { if(p) { (p)->Release(); (p)=0; } }
+#define SAFE_DELETE(p)  \
+	{                   \
+		if (p) {        \
+			delete (p); \
+			(p) = 0;    \
+		}               \
+	}
+#define SAFE_DELETE_ARRAY(p) \
+	{                        \
+		if (p) {             \
+			delete[](p);     \
+			(p) = 0;         \
+		}                    \
+	}
+#define SAFE_RELEASE(p)     \
+	{                       \
+		if (p) {            \
+			(p)->Release(); \
+			(p) = 0;        \
+		}                   \
+	}
 
 #define ZeroApp ZeroApplication::Instance()
 
 class ZeroApplication {
-
 private:
 	ZeroApplication();
 
@@ -29,6 +45,7 @@ private:
 	D3DPRESENT_PARAMETERS D3D9DeviceProperty;
 	HWND hWnd;
 
+	std::list<std::string> fonts;
 	ZeroRingBuffer<LONGLONG, 10> times;
 	ZeroProcessMonitor processMonitor;
 	ZeroRegulator* processCpuUsageRegulator;
@@ -61,6 +78,8 @@ public:
 	int GetWindowWidth();
 	int GetWindowHeight();
 	void RegisterWindowSize(int _windowWidth, int _windowHeight);
+	void PushFontResource(char* _fileName);
+	void ClearFontResource();
 
 	void Update(float _eTime);
 	void Render();

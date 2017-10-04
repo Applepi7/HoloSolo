@@ -161,7 +161,9 @@
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Totem.cpp" />
     <ClCompile Include="WinMain.cpp" />
+    <ClCompile Include="Wisp.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enemy.h" />
@@ -170,6 +172,8 @@
     <ClInclude Include="PlayerCharacter.h" />
     <ClInclude Include="Slime.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Totem.h" />
+    <ClInclude Include="Wisp.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,6 +1,5 @@
 ﻿#pragma once
 
-
 using namespace std;
 
 #define ZeroTexMgr ZeroTextureManager::Instance()

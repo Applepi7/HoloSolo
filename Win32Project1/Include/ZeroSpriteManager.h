@@ -14,12 +14,13 @@ private:
 	LPD3DXSPRITE sprite;
 
 	ZeroSpriteManager();
+
 public:
 	~ZeroSpriteManager();
 
 	static ZeroSpriteManager* Instance();
 
-	LPD3DXSPRITE Sprite()const;
+	LPD3DXSPRITE Sprite() const;
 
 	void ShutdownSprite();
 	void InitSprite();

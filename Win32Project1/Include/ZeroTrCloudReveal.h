@@ -8,6 +8,7 @@ private:
 
 	LPDIRECT3DTEXTURE9 m_pCloudTex;
 	LPDIRECT3DTEXTURE9 secondTexture;
+
 public:
 	ZeroTrCloudReveal(float _time, char* _renderPage, LPDIRECT3DTEXTURE9 _secondTexture);
 	~ZeroTrCloudReveal();

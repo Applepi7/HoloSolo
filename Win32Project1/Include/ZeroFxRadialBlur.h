@@ -18,6 +18,7 @@ public:
 	void Update(float _eTime);
 
 	void SetCenter(float x, float y) {
-		center.x = x; center.y = y;
+		center.x = x;
+		center.y = y;
 	}
 };

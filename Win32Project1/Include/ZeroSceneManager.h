@@ -2,9 +2,27 @@
 
 #include "ZeroIScene.h"
 
-#define SAFE_DELETE(p)       { if(p) { delete (p);     (p)=0; } }
-#define SAFE_DELETE_ARRAY(p) { if(p) { delete[] (p);   (p)=0; } }
-#define SAFE_RELEASE(p)      { if(p) { (p)->Release(); (p)=0; } }
+#define SAFE_DELETE(p)  \
+	{                   \
+		if (p) {        \
+			delete (p); \
+			(p) = 0;    \
+		}               \
+	}
+#define SAFE_DELETE_ARRAY(p) \
+	{                        \
+		if (p) {             \
+			delete[](p);     \
+			(p) = 0;         \
+		}                    \
+	}
+#define SAFE_RELEASE(p)     \
+	{                       \
+		if (p) {            \
+			(p)->Release(); \
+			(p) = 0;        \
+		}                   \
+	}
 
 #define ZeroSceneMgr ZeroSceneManager::Instance()
 
@@ -34,9 +52,9 @@ class ZeroSceneManager {
 private:
 	ZeroSceneManager();
 
-	ZeroIScene *now;
-	ZeroIScene *temp;
-	ZeroIScene *shader;
+	ZeroIScene* now;
+	ZeroIScene* temp;
+	ZeroIScene* shader;
 	float m_fChangeTime;
 	bool m_bErase;
 
@@ -48,6 +66,9 @@ public:
 	void Update(float _eTime);
 	void Render();
 
-	void ChangeScene(ZeroIScene * _scene, int _kindTr = -1, float _time = 2.0f, bool _isErase = true);
+	void ChangeScene(ZeroIScene* _scene,
+	                 int _kindTr = -1,
+	                 float _time = 2.0f,
+	                 bool _isErase = true);
 	void Clear();
 };

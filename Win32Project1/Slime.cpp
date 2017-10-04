@@ -2,7 +2,7 @@
 #include "Slime.h"
 
 
-Slime::Slime() : slimeCondition(MOVE), boomDistance(150), speed(150), isAlive(true), boomTimer(0, 2), popTimer(0, .5f)
+Slime::Slime() : slimeCondition(MOVE), boomDistance(150), speed(150), isAlive(true), isPop(false), boomTimer(0, 2), popTimer(0, .5f)
 {
 	slimeMove = new ZeroAnimation(1.5f);
 	for (int i = 1; i <= 3; i++) {
@@ -18,10 +18,6 @@ Slime::Slime() : slimeCondition(MOVE), boomDistance(150), speed(150), isAlive(tr
 }
 
 
-Slime::~Slime()
-{
-}
-
 void Slime::Update(float eTime)
 {
 	ZeroIScene::Update(eTime);
@@ -36,7 +32,7 @@ void Slime::Render()
 	case MOVE:
 		slimeMove->Render();
 		break;
-	case BOOM:
+	case ATTACK:
 		slimeBoom->Render();
 		break;
 	}
@@ -47,7 +43,7 @@ void Slime::SelfBoom(PlayerCharacter * target, float eTime)
 	if (target->Pos().x - Pos().x <= boomDistance && target->Pos().y - Pos().y <= boomDistance) {
 		boomTimer.first += eTime;
 		if (boomTimer.first >= boomTimer.second) {
-			slimeCondition = BOOM;
+			slimeCondition = ATTACK;
 			isAlive = false;
 		}
 	}
@@ -55,7 +51,7 @@ void Slime::SelfBoom(PlayerCharacter * target, float eTime)
 		popTimer.first += eTime;
 		if (popTimer.first >= popTimer.second) {
 			PopScene(slimeMove);
-			PopScene(slimeBoom);	// 추후 수정
+			PopScene(slimeBoom);
 		}
 	}
 }

@@ -8,18 +8,21 @@ ExampleScene::ExampleScene()
 {
 	background = new ZeroSprite("Resource/UI/Background/background.png");
 
+	
 	player = new PlayerCharacter();
 	slime = new Slime();
-	PushScene(background);
+	wisp = new Wisp();
+	totem = new Totem();
+
 	PushScene(player);
 	PushScene(slime);
+	PushScene(wisp);
+	PushScene(totem);
 
 	background->SetPos(640 - background->Width() * 0.5f, 355 - background->Height() * 0.5f);
 	slime->SetPos(100, 100);
-}
 
-ExampleScene::~ExampleScene()
-{
+	wisp->SetPos(300, 300);
 }
 
 void ExampleScene::Update(float eTime)
@@ -28,9 +31,13 @@ void ExampleScene::Update(float eTime)
 
 	player->Update(eTime);
 	slime->Update(eTime);
-
+	wisp->Update(eTime);
+	
 	slime->Follow(player, slime, eTime, slime->isAlive);
 	slime->SelfBoom(player, eTime);
+
+	wisp->Follow(player, wisp, eTime, true);
+	wisp->Attack(player);
 }
 
 void ExampleScene::Render()
@@ -40,5 +47,7 @@ void ExampleScene::Render()
 	background->Render();
 
 	player->Render();
-	slime->Render();
+	//slime->Render();
+	//wisp->Render();
+	totem->Render();
 }

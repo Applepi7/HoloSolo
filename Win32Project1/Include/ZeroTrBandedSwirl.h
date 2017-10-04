@@ -7,6 +7,7 @@ private:
 	float beginTime;
 
 	LPDIRECT3DTEXTURE9 secondTexture;
+
 public:
 	ZeroTrBandedSwirl(float _time, char* _renderPage, LPDIRECT3DTEXTURE9 _secondTexture);
 	~ZeroTrBandedSwirl();

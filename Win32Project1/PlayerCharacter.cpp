@@ -77,15 +77,6 @@ PlayerCharacter::PlayerCharacter() : isMove(false), isRoll(false), speed(200), p
 void PlayerCharacter::Update(float eTime)
 {
 	ZeroIScene::Update(eTime);
-	/*playerSrun->Update(eTime);
-	playerUrun->Update(eTime);
-	playerDrun->Update(eTime);
-	playerSidle->Update(eTime);
-	playerUidle->Update(eTime);
-	playerDidle->Update(eTime);
-	playerSroll->Update(eTime);
-	playerUroll->Update(eTime);
-	playerDroll->Update(eTime);*/
 
 	Move(eTime);
 	Idle();
@@ -237,8 +228,4 @@ void PlayerCharacter::Idle()
 			break;
 		}
 	}
-}
-
-void PlayerCharacter::Roll()
-{
 }

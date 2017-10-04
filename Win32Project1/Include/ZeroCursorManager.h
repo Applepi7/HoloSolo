@@ -5,7 +5,6 @@
 #define ZeroCursorMgr ZeroCursorManager::Instance()
 
 class ZeroCursorManager : public ZeroResource {
-
 private:
 	ZeroCursorManager();
 

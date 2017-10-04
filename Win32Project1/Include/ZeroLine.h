@@ -17,7 +17,7 @@ public:
 	ZeroLine();
 	~ZeroLine();
 
-	//포인트들
+	// 포인트들
 	void PushFrontPoint(int _num, ...);
 	void PushBackPoint(int _num, ...);
 	void PushFrontPoint(ZeroVec _point);
@@ -26,11 +26,11 @@ public:
 	void PopBackPoint(int _numberToPop);
 	void ClearPoint();
 
-	//속성
+	// 속성
 	void SetLineWidth(float _width);
 	void SetLinePattern(DWORD _pattern);
 
-	//유틸리티 기능
+	// 유틸리티 기능
 	void DrawRect(ZeroRect _rect);
 	void DrawCircle(ZeroVec _center, float _radius);
 
