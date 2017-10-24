@@ -3,7 +3,7 @@
 
 #include "ZeroInputManager.h"
 
-PlayerCharacter::PlayerCharacter() : isMove(false), isRoll(false), speed(200), playerCondition(LEFTIDLE), prevKey(NULL), rollTimer(0, .7f)
+PlayerCharacter::PlayerCharacter() : isMove(false), isRoll(false), isAttack(false), speed(200), health(100), playerCondition(LEFTIDLE), prevKey(NULL), rollTimer(0, .7f), attackTimer(0, .7f)
 {
 
 	playerSrun = new ZeroAnimation(3.0f);
@@ -54,10 +54,28 @@ PlayerCharacter::PlayerCharacter() : isMove(false), isRoll(false), speed(200), p
 	for (int i = 1; i <= 4; i++) {
 		playerDroll->PushSprite("Resource/Roll/roll_front_%d.png", i);
 	}
+
+	/*-------------------------------------------------------------------------*/
 	
+	playerSattack = new ZeroAnimation(3.0f);
+	for (int i = 1; i <= 2; i++) {
+		playerSattack->PushSprite("Resource/Attack/attack_side_%d.png", i);
+	}
+
+	playerUattack = new ZeroAnimation(3.0f);
+	for (int i = 1; i <= 2; i++) {
+		playerUattack->PushSprite("Resource/Attack/attack_back_%d.png", i);
+	}
+
+	playerDattack = new ZeroAnimation(3.0f);
+	for (int i = 1; i <= 2; i++) {
+		playerDattack->PushSprite("Resource/Attack/attack_front_%d.png", i);
+	}
+
 	playerSrun->SetScalingCenter(playerSrun->Width() * 0.5f);
 	playerSidle->SetScalingCenter(playerSidle->Width() * 0.5f);
 	playerSroll->SetScalingCenter(playerSroll->Width() * 0.5f);
+	playerSattack->SetScalingCenter(playerSattack->Width() * 0.5f);
 
 	PushScene(playerSrun);
 	PushScene(playerUrun);
@@ -70,6 +88,10 @@ PlayerCharacter::PlayerCharacter() : isMove(false), isRoll(false), speed(200), p
 	PushScene(playerSroll);
 	PushScene(playerUroll);
 	PushScene(playerDroll);
+
+	PushScene(playerSattack);
+	PushScene(playerUattack);
+	PushScene(playerDattack);
 
 	SetPos(600, 350);
 }
@@ -130,6 +152,20 @@ void PlayerCharacter::Render()
 	case DOWNROLL:
 		playerDroll->Render();
 		break;
+	case RIGHTATTACK:
+		playerSattack->Render();
+		playerSattack->SetScale(-1, 1);
+		break;
+	case LEFTATTACK:
+		playerSattack->Render();
+		playerSattack->SetScale(1, 1);
+		break;
+	case UPATTACK:
+		playerUattack->Render();
+		break;
+	case DOWNATTACK:
+		playerDattack->Render();
+		break;
 	}
 }
 
@@ -176,10 +212,10 @@ void PlayerCharacter::Move(float eTime)
 		}
 	}
 
-	if (ZeroInputMgr->GetKey('X') == INPUTMGR_KEYDOWN) {
+	if (ZeroInputMgr->GetKey('X') == INPUTMGR_KEYDOWN)
 		isRoll = true;
-		
-	}
+	if (ZeroInputMgr->GetKey('Z') == INPUTMGR_KEYDOWN)
+		isAttack = true;
 
 	if (isRoll) {
 		rollTimer.first += eTime;
@@ -203,6 +239,40 @@ void PlayerCharacter::Move(float eTime)
 			break;
 		case VK_DOWN:
 			playerCondition = DOWNROLL;
+			break;
+		}
+	}
+	else speed = 100;
+
+	Attack(eTime);
+}
+
+void PlayerCharacter::Attack(float eTime)
+{
+	if (isAttack) {
+
+		attackTimer.first += eTime;
+		if (attackTimer.first >= attackTimer.second) 
+		{
+			isAttack = false;
+			attackTimer.first = 0;
+		}
+
+		speed = 0;
+
+		switch (prevKey)
+		{
+		case VK_RIGHT:
+			playerCondition = RIGHTATTACK;
+			break;
+		case VK_LEFT:
+			playerCondition = LEFTATTACK;
+			break;
+		case VK_UP:
+			playerCondition = UPATTACK;
+			break;
+		case VK_DOWN:
+			playerCondition = DOWNATTACK;
 			break;
 		}
 	}
