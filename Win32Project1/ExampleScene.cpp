@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "ExampleScene.h"
+#include "Global.h"
 
 #include <math.h>
 
@@ -20,7 +21,7 @@ ExampleScene::ExampleScene()
 	PushScene(totem);
 
 	background->SetPos(640 - background->Width() * 0.5f, 355 - background->Height() * 0.5f);
-	slime->SetPos(100, 100);
+	slime->SetPos(500, 300);
 
 	wisp->SetPos(300, 300);
 }
@@ -34,10 +35,17 @@ void ExampleScene::Update(float eTime)
 	wisp->Update(eTime);
 	
 	slime->Follow(player, slime, eTime, slime->isAlive);
-	slime->SelfBoom(player, eTime);
+	//slime->SelfBoom(player, eTime);
 
 	wisp->Follow(player, wisp, eTime, true);
 	wisp->Attack(player);
+
+	if (IsCollision(player, slime))
+	{
+		printf("Ãæµ¹!");
+	}
+
+	printf("%.2f\n", player->Pos().y - slime->Pos().y);
 }
 
 void ExampleScene::Render()
@@ -47,7 +55,7 @@ void ExampleScene::Render()
 	background->Render();
 
 	player->Render();
-	//slime->Render();
+	slime->Render();
 	//wisp->Render();
 	totem->Render();
 }

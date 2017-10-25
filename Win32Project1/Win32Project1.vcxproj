@@ -168,6 +168,7 @@
   <ItemGroup>
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="ExampleScene.h" />
+    <ClInclude Include="Global.h" />
     <ClInclude Include="MenuScene.h" />
     <ClInclude Include="PlayerCharacter.h" />
     <ClInclude Include="Slime.h" />
