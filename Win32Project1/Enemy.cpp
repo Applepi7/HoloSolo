@@ -28,6 +28,10 @@ void Enemy::Render()
 	ZeroIScene::Render();
 }
 
+void Enemy::IsCollision(PlayerCharacter * player, Enemy * enemy)
+{
+}
+
 void Enemy::Follow(PlayerCharacter * target, Enemy * enemy, float eTime, bool isMove)
 {
 	float rot = atan2(target->Pos().y - enemy->Pos().y, target->Pos().x - enemy->Pos().x);

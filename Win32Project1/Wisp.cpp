@@ -2,7 +2,7 @@
 #include "Wisp.h"
 
 
-Wisp::Wisp() : wispCondition(MOVE)
+Wisp::Wisp() : wispCondition(MOVE), attackTimer(0, .5f), health(90)
 {
 	wispMove = new ZeroAnimation(3.0f);
 	for (int i = 1; i <= 2; i++) {
@@ -12,7 +12,7 @@ Wisp::Wisp() : wispCondition(MOVE)
 	wispAttack = new ZeroAnimation(3.0f);
 	for (int i = 1; i <= 3; i++) {
 		for (int i = 1; i <= 3; i++) {
-			wispMove->PushSprite("Resource/Enemy/Wisp/Attack/wisp_attack_%d.png", i);
+			wispAttack->PushSprite("Resource/Enemy/Wisp/Attack/wisp_attack_%d.png", i);
 		}
 	}
 
@@ -23,6 +23,11 @@ Wisp::Wisp() : wispCondition(MOVE)
 void Wisp::Update(float eTime)
 {
 	ZeroIScene::Update(eTime);
+
+	if (!isAttack)
+		wispCondition = MOVE;
+	else
+		wispCondition = ATTACK;
 }
 
 void Wisp::Render()
@@ -39,9 +44,28 @@ void Wisp::Render()
 	}
 }
 
-void Wisp::Attack(PlayerCharacter* target)
+void Wisp::Attack(PlayerCharacter* target, float eTime)
 {
-	if (IsOverlapped(target->Pos())) {
-		printf("´Ï¾ó±¼\n");
+	if (isAttack) {
+		attackTimer.first += eTime;
+		if (attackTimer.first >= attackTimer.second)
+		{
+			target->health -= 1;
+			attackTimer.first = 0;
+			isAttack = false;
+		}
 	}
+}
+
+bool Wisp::IsCollision(PlayerCharacter* player, Wisp* wisp)
+{
+	if (
+		(player->Pos().x - wisp->Pos().x <= wisp->wispMove->Width()) &&
+		(wisp->Pos().x - player->Pos().x <= player->playerSidle->Width()) &&
+		(wisp->Pos().y - player->Pos().y <= player->playerSidle->Height()) &&
+		(player->Pos().y - wisp->Pos().y <= wisp->wispMove->Height())
+		)
+		return true;
+	else
+		return false;
 }

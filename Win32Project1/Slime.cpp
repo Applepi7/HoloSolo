@@ -2,18 +2,19 @@
 #include "Slime.h"
 
 
-Slime::Slime() : slimeCondition(MOVE), boomDistance(150), speed(150), isAlive(true), isPop(false), boomTimer(0, 2), popTimer(0, .5f)
+Slime::Slime() : slimeCondition(MOVE), boomDistance(150), speed(150), health(90), isAlive(true), isPop(false), boomTimer(0, 2), popTimer(0, .5f)
 {
 	slimeMove = new ZeroAnimation(1.5f);
 	for (int i = 1; i <= 3; i++) {
 		slimeMove->PushSprite("Resource/Enemy/Slime/Move/slime_front_%d.png", i);
 	}
-	PushScene(slimeMove);
 
 	slimeBoom = new ZeroAnimation(1.5f);
 	for (int i = 1; i <= 3; i++) {
 		slimeBoom->PushSprite("Resource/Enemy/Slime/Boom/slime_boom_%d.png", i);
 	}
+	
+	PushScene(slimeMove);
 	PushScene(slimeBoom);
 }
 
@@ -21,6 +22,7 @@ Slime::Slime() : slimeCondition(MOVE), boomDistance(150), speed(150), isAlive(tr
 void Slime::Update(float eTime)
 {
 	ZeroIScene::Update(eTime);
+
 
 }
 

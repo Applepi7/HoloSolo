@@ -77,6 +77,7 @@ PlayerCharacter::PlayerCharacter() : isMove(false), isRoll(false), isAttack(fals
 	playerSroll->SetScalingCenter(playerSroll->Width() * 0.5f);
 	playerSattack->SetScalingCenter(playerSattack->Width() * 0.5f);
 
+
 	PushScene(playerSrun);
 	PushScene(playerUrun);
 	PushScene(playerDrun);
@@ -101,7 +102,11 @@ void PlayerCharacter::Update(float eTime)
 	ZeroIScene::Update(eTime);
 
 	Move(eTime);
+	Attack(eTime);
 	Idle();
+
+	if (ZeroInputMgr->GetKey('Z') == INPUTMGR_KEYDOWN)
+		isAttack = true;
 }
 
 void PlayerCharacter::Render()
@@ -214,8 +219,8 @@ void PlayerCharacter::Move(float eTime)
 
 	if (ZeroInputMgr->GetKey('X') == INPUTMGR_KEYDOWN)
 		isRoll = true;
-	if (ZeroInputMgr->GetKey('Z') == INPUTMGR_KEYDOWN)
-		isAttack = true;
+	
+	
 
 	if (isRoll) {
 		rollTimer.first += eTime;
@@ -243,45 +248,44 @@ void PlayerCharacter::Move(float eTime)
 		}
 	}
 	else speed = 100;
-
-	Attack(eTime);
 }
 
 void PlayerCharacter::Attack(float eTime)
 {
-	if (isAttack) {
+	
+		if (isAttack) {
 
-		attackTimer.first += eTime;
-		if (attackTimer.first >= attackTimer.second) 
-		{
-			isAttack = false;
-			attackTimer.first = 0;
+			attackTimer.first += eTime;
+			if (attackTimer.first >= attackTimer.second)
+			{
+				isAttack = false;
+				attackTimer.first = 0;
+			}
+
+			speed = 0;
+
+			switch (prevKey)
+			{
+			case VK_RIGHT:
+				playerCondition = RIGHTATTACK;
+				break;
+			case VK_LEFT:
+				playerCondition = LEFTATTACK;
+				break;
+			case VK_UP:
+				playerCondition = UPATTACK;
+				break;
+			case VK_DOWN:
+				playerCondition = DOWNATTACK;
+				break;
+			}
 		}
-
-		speed = 0;
-
-		switch (prevKey)
-		{
-		case VK_RIGHT:
-			playerCondition = RIGHTATTACK;
-			break;
-		case VK_LEFT:
-			playerCondition = LEFTATTACK;
-			break;
-		case VK_UP:
-			playerCondition = UPATTACK;
-			break;
-		case VK_DOWN:
-			playerCondition = DOWNATTACK;
-			break;
-		}
-	}
 	else speed = 100;
 }
 
 void PlayerCharacter::Idle()
 {
-	if (!isMove) {
+	if (!isMove && !isAttack) {
 		switch (prevKey)
 		{
 		case VK_RIGHT:
@@ -299,3 +303,9 @@ void PlayerCharacter::Idle()
 		}
 	}
 }
+
+//void JungWon() {
+//	for (auto &iter = playerList.begin; iter != playerList.end; iter++) {
+//		(*iter)->
+//	}
+//}

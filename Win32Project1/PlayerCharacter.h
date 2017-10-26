@@ -2,7 +2,7 @@
 #include "ZeroIScene.h"
 
 #include "ZeroAnimation.h"
-
+#include <list>
 
 class PlayerCharacter :
 	public ZeroIScene
@@ -14,7 +14,6 @@ private:
 
 	bool isMove;
 	bool isRoll;
-	bool isAttack;
 	bool isKeydown;
 
 	int playerCondition;
@@ -26,6 +25,8 @@ private:
 
 public:
 	PlayerCharacter();
+
+	bool isAttack;
 
 	enum CONDITION {
 		RIGHTRUN,
@@ -58,6 +59,7 @@ public:
 	ZeroAnimation* playerSattack;
 	ZeroAnimation* playerUattack;
 	ZeroAnimation* playerDattack;
+	std::list<ZeroIScene *> playerList;
 
 	float speed;
 	float health;
