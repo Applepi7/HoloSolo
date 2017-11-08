@@ -5,6 +5,9 @@
 #include "Wisp.h"
 #include "Totem.h"
 
+#include "Golem.h"
+#include "Dragon.h"
+
 #include "ZeroIScene.h"
 
 #include "ZeroSprite.h"
@@ -19,6 +22,8 @@ public:
 	Slime* slime;
 	Wisp* wisp;
 	Totem* totem;
+	Golem* golem;
+	Dragon* dragon;
 
 	ZeroSprite* background;
 

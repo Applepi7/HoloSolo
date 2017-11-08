@@ -105,7 +105,7 @@ void PlayerCharacter::Update(float eTime)
 	Attack(eTime);
 	Idle();
 
-	if (ZeroInputMgr->GetKey('Z') == INPUTMGR_KEYDOWN)
+	if (ZeroInputMgr->GetKey(VK_CONTROL) == INPUTMGR_KEYDOWN)
 		isAttack = true;
 }
 
@@ -220,8 +220,6 @@ void PlayerCharacter::Move(float eTime)
 	if (ZeroInputMgr->GetKey('X') == INPUTMGR_KEYDOWN)
 		isRoll = true;
 	
-	
-
 	if (isRoll) {
 		rollTimer.first += eTime;
 		
@@ -252,34 +250,34 @@ void PlayerCharacter::Move(float eTime)
 
 void PlayerCharacter::Attack(float eTime)
 {
-	
-		if (isAttack) {
 
-			attackTimer.first += eTime;
-			if (attackTimer.first >= attackTimer.second)
-			{
-				isAttack = false;
-				attackTimer.first = 0;
-			}
+	if (isAttack) {
 
-			speed = 0;
-
-			switch (prevKey)
-			{
-			case VK_RIGHT:
-				playerCondition = RIGHTATTACK;
-				break;
-			case VK_LEFT:
-				playerCondition = LEFTATTACK;
-				break;
-			case VK_UP:
-				playerCondition = UPATTACK;
-				break;
-			case VK_DOWN:
-				playerCondition = DOWNATTACK;
-				break;
-			}
+		attackTimer.first += eTime;
+		if (attackTimer.first >= attackTimer.second)
+		{
+			isAttack = false;
+			attackTimer.first = 0;
 		}
+
+		speed = 0;
+
+		switch (prevKey)
+		{
+		case VK_RIGHT:
+			playerCondition = RIGHTATTACK;
+			break;
+		case VK_LEFT:
+			playerCondition = LEFTATTACK;
+			break;
+		case VK_UP:
+			playerCondition = UPATTACK;
+			break;
+		case VK_DOWN:
+			playerCondition = DOWNATTACK;
+			break;
+		}
+	}
 	else speed = 100;
 }
 
@@ -301,6 +299,11 @@ void PlayerCharacter::Idle()
 			playerCondition = DOWNIDLE;
 			break;
 		}
+	}
+
+	if (ZeroInputMgr->GetKey(VK_CONTROL) == INPUTMGR_KEYDOWN)
+	{
+		isAttack = true;
 	}
 }
 

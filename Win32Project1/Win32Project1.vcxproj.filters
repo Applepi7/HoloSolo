@@ -32,6 +32,12 @@
     <Filter Include="Unit\Enemy\Totem">
       <UniqueIdentifier>{e83263ae-5058-48a7-90f9-f123caba3bbb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Unit\Enemy\Golem">
+      <UniqueIdentifier>{f77ec0ea-bb8b-4f39-a033-f92692ff27b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Unit\Enemy\Dragon">
+      <UniqueIdentifier>{cce6828f-3853-40aa-8cac-ecef26be6210}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
@@ -57,6 +63,12 @@
     <ClCompile Include="Totem.cpp">
       <Filter>Unit\Enemy\Totem</Filter>
     </ClCompile>
+    <ClCompile Include="Golem.cpp">
+      <Filter>Unit\Enemy\Golem</Filter>
+    </ClCompile>
+    <ClCompile Include="Dragon.cpp">
+      <Filter>Unit\Enemy\Dragon</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -80,11 +92,17 @@
     <ClInclude Include="Totem.h">
       <Filter>Unit\Enemy\Totem</Filter>
     </ClInclude>
-    <ClInclude Include="Global.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerCharacter.h">
       <Filter>Unit\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Golem.h">
+      <Filter>Unit\Enemy\Golem</Filter>
+    </ClInclude>
+    <ClInclude Include="Random.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Dragon.h">
+      <Filter>Unit\Enemy\Dragon</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

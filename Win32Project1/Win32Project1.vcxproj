@@ -153,8 +153,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Dragon.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="ExampleScene.cpp" />
+    <ClCompile Include="Golem.cpp" />
     <ClCompile Include="MenuScene.cpp" />
     <ClCompile Include="PlayerCharacter.cpp" />
     <ClCompile Include="Slime.cpp" />
@@ -166,9 +168,11 @@
     <ClCompile Include="Wisp.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Dragon.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="ExampleScene.h" />
-    <ClInclude Include="Global.h" />
+    <ClInclude Include="Random.h" />
+    <ClInclude Include="Golem.h" />
     <ClInclude Include="MenuScene.h" />
     <ClInclude Include="PlayerCharacter.h" />
     <ClInclude Include="Slime.h" />

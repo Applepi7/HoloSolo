@@ -27,8 +27,6 @@ public:
 	void Update(float eTime) override;
 	void Render() override;
 
-	virtual void IsCollision(PlayerCharacter* player, Enemy* enemy);
-
 	void Follow(PlayerCharacter* target, Enemy* enemy, float eTime, bool isMove);
 };
 

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "ExampleScene.h"
-#include "Global.h"
+
+#include "Random.h"
 
 #include <math.h>
 
@@ -8,17 +9,20 @@
 ExampleScene::ExampleScene()
 {
 	background = new ZeroSprite("Resource/UI/Background/background.png");
-
 	
 	player = new PlayerCharacter();
 	slime = new Slime();
 	wisp = new Wisp();
 	totem = new Totem();
+	golem = new Golem();
+	dragon = new Dragon();
 
 	PushScene(player);
 	PushScene(slime);
 	PushScene(wisp);
 	PushScene(totem);
+	PushScene(golem);
+	PushScene(dragon);
 
 	background->SetPos(640 - background->Width() * 0.5f, 355 - background->Height() * 0.5f);
 	slime->SetPos(500, 300);
@@ -33,6 +37,8 @@ void ExampleScene::Update(float eTime)
 	player->Update(eTime);
 	slime->Update(eTime);
 	wisp->Update(eTime);
+	golem->Update(eTime);
+	dragon->Update(eTime);
 	
 	slime->Follow(player, slime, eTime, slime->isAlive);
 	slime->SelfBoom(player, eTime);
@@ -48,9 +54,6 @@ void ExampleScene::Update(float eTime)
 	{
 		wisp->health -= 1;
 	}
-
-	printf("Player HP : %.2f\n", player->health);
-	printf("wisp HP : %.2f\n", wisp->health);
 }
 
 void ExampleScene::Render()
@@ -59,8 +62,10 @@ void ExampleScene::Render()
 
 	background->Render();
 
+	slime->Render();
+	dragon->Render();
+	//wisp->Render();
+	//totem->Render();
+	//golem->Render();
 	player->Render();
-	//slime->Render();
-	wisp->Render();
-	totem->Render();
 }
