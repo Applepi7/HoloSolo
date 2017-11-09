@@ -1,10 +1,24 @@
 #pragma once
-#include "D:\NewGarden\GardenProject\Dicon\HOLOSOLO\Win32Project1\Include\ZeroIScene.h"
+#include "Stage.h"
+#include "ZeroSprite.h"
+
+#include "PlayerCharacter.h"
+#include "Dragon.h"
+
+
 class FifthStage :
-	public ZeroIScene
+	public Stage
 {
+private:
+	PlayerCharacter* player;
+	Dragon* dragon;
+
+	ZeroSprite* background;
+
 public:
 	FifthStage();
-	~FifthStage();
+
+	void Update(float eTime) override;
+	void Render() override;
 };
 

@@ -114,7 +114,7 @@ void Golem::Attack(float eTime)
 			basicATimer.first += eTime;
 			if (basicATimer.first >= basicATimer.second)
 			{
-				golemCondition = IDLE;
+				golemCondition = IDLE;	
 				basicATimer.first = 0;
 				attackTimer.first = 0;
 				index = RandomInt(0, 2);

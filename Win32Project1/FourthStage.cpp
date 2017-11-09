@@ -29,6 +29,6 @@ void FourthStage::Render()
 
 	background->Render();
 
-	player->Render();
 	golem->Render();
+	player->Render();
 }
