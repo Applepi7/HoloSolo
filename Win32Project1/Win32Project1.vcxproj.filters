@@ -143,9 +143,6 @@
     <ClInclude Include="FirstStage.h">
       <Filter>Scenes\Stages\First</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="FifthStage.h">
       <Filter>Scenes\Stages\Fifth</Filter>
     </ClInclude>
@@ -161,8 +158,5 @@
     <ClInclude Include="Stage.h">
       <Filter>Scenes\Stages</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="Win32Project1.rc" />
   </ItemGroup>
 </Project>

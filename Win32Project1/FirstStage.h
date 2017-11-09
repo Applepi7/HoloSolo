@@ -5,7 +5,6 @@
 #include "PlayerCharacter.h"
 #include "Slime.h"
 
-#include <list>
 class FirstStage :
 	public Stage
 {

@@ -5,8 +5,6 @@
 #include "PlayerCharacter.h"
 #include "Wisp.h"
 
-#include <list>
-
 class SecondStage :
 	public Stage
 {

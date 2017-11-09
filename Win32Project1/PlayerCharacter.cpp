@@ -3,7 +3,7 @@
 
 #include "ZeroInputManager.h"
 
-PlayerCharacter::PlayerCharacter() : isMove(false), isRoll(false), isAttack(false), speed(200), health(100), playerCondition(LEFTIDLE), prevKey(NULL), rollTimer(0, .7f), attackTimer(0, .7f)
+PlayerCharacter::PlayerCharacter() : isMove(false), isRoll(false), isAttack(false), speed(100), health(100), playerCondition(LEFTIDLE), prevKey(NULL), rollTimer(0, .7f), attackTimer(0, .7f)
 {
 
 	playerSrun = new ZeroAnimation(3.0f);
@@ -228,7 +228,7 @@ void PlayerCharacter::Move(float eTime)
 			rollTimer.first = 0;
 		}
 
-		speed = 500;
+		speed = 300;
 		switch (prevKey)
 		{
 		case VK_RIGHT:
@@ -245,7 +245,7 @@ void PlayerCharacter::Move(float eTime)
 			break;
 		}
 	}
-	else speed = 200;
+	else speed = 100;
 }
 
 void PlayerCharacter::Attack(float eTime)

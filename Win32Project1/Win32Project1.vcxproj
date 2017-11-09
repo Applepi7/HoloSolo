@@ -184,7 +184,6 @@
     <ClInclude Include="Golem.h" />
     <ClInclude Include="MenuScene.h" />
     <ClInclude Include="PlayerCharacter.h" />
-    <ClInclude Include="resource.h" />
     <ClInclude Include="SecondStage.h" />
     <ClInclude Include="Slime.h" />
     <ClInclude Include="Stage.h" />
@@ -192,9 +191,6 @@
     <ClInclude Include="ThirdStage.h" />
     <ClInclude Include="Totem.h" />
     <ClInclude Include="Wisp.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="Win32Project1.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

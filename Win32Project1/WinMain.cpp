@@ -41,7 +41,7 @@ INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR, INT)
 		UpdateWindow(hWnd);
 
 		//여기서 처음 시작하는 Scene을 정한다
-		ZeroSceneMgr->ChangeScene(new SecondStage());
+		ZeroSceneMgr->ChangeScene(new ThirdStage());
 
 
 		MSG msg;
