@@ -17,6 +17,7 @@ public:
 
 	float health;
 	bool isAttack;
+	bool isAlive;
 
 	void Update(float eTime) override;
 	void Render() override;

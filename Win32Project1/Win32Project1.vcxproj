@@ -164,6 +164,7 @@
     <ClCompile Include="PlayerCharacter.cpp" />
     <ClCompile Include="SecondStage.cpp" />
     <ClCompile Include="Slime.cpp" />
+    <ClCompile Include="Stage.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
@@ -186,6 +187,7 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="SecondStage.h" />
     <ClInclude Include="Slime.h" />
+    <ClInclude Include="Stage.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="ThirdStage.h" />
     <ClInclude Include="Totem.h" />

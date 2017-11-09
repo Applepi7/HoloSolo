@@ -21,7 +21,6 @@ protected:
 
 public:
 
-	bool isAlive;
 	int speed;
 
 	void Update(float eTime) override;

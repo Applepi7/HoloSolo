@@ -2,7 +2,7 @@
 #include "Wisp.h"
 
 
-Wisp::Wisp() : wispCondition(MOVE), attackTimer(0, .5f), health(90)
+Wisp::Wisp() : wispCondition(MOVE), attackTimer(0, .5f), health(90), isAlive(true)
 {
 	wispMove = new ZeroAnimation(3.0f);
 	for (int i = 1; i <= 2; i++) {

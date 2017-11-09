@@ -5,6 +5,5 @@ class FourthStage :
 {
 public:
 	FourthStage();
-	~FourthStage();
 };
 

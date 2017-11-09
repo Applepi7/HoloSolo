@@ -1,10 +1,29 @@
 #pragma once
-#include "D:\NewGarden\GardenProject\Dicon\HOLOSOLO\Win32Project1\Include\ZeroIScene.h"
+#include "Stage.h"
+#include "ZeroSprite.h"
+
+#include "PlayerCharacter.h"
+#include "Wisp.h"
+
+#include <list>
+
 class SecondStage :
-	public ZeroIScene
+	public Stage
 {
+private:
+	PlayerCharacter* player;
+	list<Wisp*> wispList;
+
+	ZeroSprite* background;
+
+	void CheckOut() override;
+
 public:
 	SecondStage();
-	~SecondStage();
+
+	void Update(float eTime) override;
+	void Render() override;
+
+	
 };
 

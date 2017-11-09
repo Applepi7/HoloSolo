@@ -1,5 +1,5 @@
 #pragma once
-#include "ZeroIScene.h"
+#include "Stage.h"
 #include "ZeroSprite.h"
 
 #include "PlayerCharacter.h"
@@ -7,7 +7,7 @@
 
 #include <list>
 class FirstStage :
-	public ZeroIScene
+	public Stage
 {
 private:
 	list<Slime*> slimeList;
@@ -15,12 +15,12 @@ private:
 
 	ZeroSprite* background;
 
+	void CheckOut() override;
+
 public:
 	FirstStage();
 
 	void Update(float eTime) override;
 	void Render() override;
-
-	void CheckOut();
 };
 

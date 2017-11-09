@@ -102,6 +102,9 @@
     <ClCompile Include="SecondStage.cpp">
       <Filter>Scenes\Stages\Second</Filter>
     </ClCompile>
+    <ClCompile Include="Stage.cpp">
+      <Filter>Scenes\Stages</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -154,6 +157,9 @@
     </ClInclude>
     <ClInclude Include="SecondStage.h">
       <Filter>Scenes\Stages\Second</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage.h">
+      <Filter>Scenes\Stages</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

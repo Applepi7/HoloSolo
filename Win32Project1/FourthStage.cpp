@@ -5,8 +5,3 @@
 FourthStage::FourthStage()
 {
 }
-
-
-FourthStage::~FourthStage()
-{
-}
