@@ -2,7 +2,7 @@
 #include "Slime.h"
 
 
-Slime::Slime() : slimeCondition(MOVE), boomDistance(150), speed(150), health(90), isAlive(true), isPop(false), boomTimer(0, 2), popTimer(0, .5f)
+Slime::Slime() : slimeCondition(MOVE), boomDistance(100), speed(150), health(90), isAlive(true), isPop(false), boomTimer(0, 2), popTimer(0, .5f)
 {
 	slimeMove = new ZeroAnimation(1.5f);
 	for (int i = 1; i <= 3; i++) {
@@ -54,6 +54,7 @@ void Slime::SelfBoom(PlayerCharacter * target, float eTime)
 		if (popTimer.first >= popTimer.second) {
 			PopScene(slimeMove);
 			PopScene(slimeBoom);
+			isPop = true;
 		}
 	}
 }

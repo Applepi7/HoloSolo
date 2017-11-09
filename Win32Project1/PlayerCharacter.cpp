@@ -228,7 +228,7 @@ void PlayerCharacter::Move(float eTime)
 			rollTimer.first = 0;
 		}
 
-		speed = 200;
+		speed = 500;
 		switch (prevKey)
 		{
 		case VK_RIGHT:
@@ -245,7 +245,7 @@ void PlayerCharacter::Move(float eTime)
 			break;
 		}
 	}
-	else speed = 100;
+	else speed = 200;
 }
 
 void PlayerCharacter::Attack(float eTime)
@@ -301,10 +301,8 @@ void PlayerCharacter::Idle()
 		}
 	}
 
-	if (ZeroInputMgr->GetKey(VK_CONTROL) == INPUTMGR_KEYDOWN)
-	{
+	if (ZeroInputMgr->GetKey('Z') == INPUTMGR_KEYDOWN)
 		isAttack = true;
-	}
 }
 
 //void JungWon() {
