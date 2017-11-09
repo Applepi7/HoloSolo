@@ -32,12 +32,6 @@
     <Filter Include="Unit\Enemy\Totem">
       <UniqueIdentifier>{e83263ae-5058-48a7-90f9-f123caba3bbb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Unit\Enemy\Golem">
-      <UniqueIdentifier>{f77ec0ea-bb8b-4f39-a033-f92692ff27b0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Unit\Enemy\Dragon">
-      <UniqueIdentifier>{cce6828f-3853-40aa-8cac-ecef26be6210}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Scenes\Stages">
       <UniqueIdentifier>{6720f770-5787-4568-837e-7e6aeb2c2aa2}</UniqueIdentifier>
     </Filter>
@@ -55,6 +49,15 @@
     </Filter>
     <Filter Include="Scenes\Stages\Fifth">
       <UniqueIdentifier>{d26f80d8-1d0b-4b68-8150-69985e895f13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Unit\Enemy\Boss">
+      <UniqueIdentifier>{3f0333c9-44b8-4288-91fe-62f157038ce7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Unit\Enemy\Boss\Dragon">
+      <UniqueIdentifier>{cce6828f-3853-40aa-8cac-ecef26be6210}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Unit\Enemy\Boss\Golem">
+      <UniqueIdentifier>{f77ec0ea-bb8b-4f39-a033-f92692ff27b0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -82,10 +85,10 @@
       <Filter>Unit\Enemy\Totem</Filter>
     </ClCompile>
     <ClCompile Include="Golem.cpp">
-      <Filter>Unit\Enemy\Golem</Filter>
+      <Filter>Unit\Enemy\Boss\Golem</Filter>
     </ClCompile>
     <ClCompile Include="Dragon.cpp">
-      <Filter>Unit\Enemy\Dragon</Filter>
+      <Filter>Unit\Enemy\Boss\Dragon</Filter>
     </ClCompile>
     <ClCompile Include="FirstStage.cpp">
       <Filter>Scenes\Stages\First</Filter>
@@ -132,13 +135,13 @@
       <Filter>Unit\Player</Filter>
     </ClInclude>
     <ClInclude Include="Golem.h">
-      <Filter>Unit\Enemy\Golem</Filter>
+      <Filter>Unit\Enemy\Boss\Golem</Filter>
     </ClInclude>
     <ClInclude Include="Random.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Dragon.h">
-      <Filter>Unit\Enemy\Dragon</Filter>
+      <Filter>Unit\Enemy\Boss\Dragon</Filter>
     </ClInclude>
     <ClInclude Include="FirstStage.h">
       <Filter>Scenes\Stages\First</Filter>

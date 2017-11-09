@@ -2,7 +2,6 @@
 #include "ZeroIScene.h"
 
 #include "ZeroAnimation.h"
-#include <list>
 
 class PlayerCharacter :
 	public ZeroIScene
@@ -59,7 +58,6 @@ public:
 	ZeroAnimation* playerSattack;
 	ZeroAnimation* playerUattack;
 	ZeroAnimation* playerDattack;
-	std::list<ZeroIScene *> playerList;
 
 	float speed;
 	float health;

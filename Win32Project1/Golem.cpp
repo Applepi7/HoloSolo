@@ -3,7 +3,7 @@
 
 #include "Random.h"
 
-Golem::Golem() : golemCondition(IDLE), attackTimer(0, 5.0f), basicATimer(0, 2.0f), crackATimer(0, 1.0f), isAttack(false)
+Golem::Golem() : golemCondition(IDLE), attackTimer(0, 5.0f), basicATimer(0, 2.0f), crackATimer(0, 1.0f), isAttack(false), index(RandomInt(0, 2))
 {
 	golemIdle = new ZeroAnimation(3.0f);
 	for (int i = 1; i <= 4; i++) {
@@ -79,28 +79,49 @@ void Golem::Attack(float eTime)
 
 	if (attackTimer.first >= attackTimer.second)
 	{
-		SetPos(640 - golemIdle->Width() * 0.5f + 140, 355 - golemIdle->Height() * 0.5f - 40);
 		
-		switch (RandomInt(1, 3))
+		switch (index)
 		{
-		case 1:
+		case 0:
 			golemCondition = RIGHTATTACK;
+			SetPos(640 - golemIdle->Width() * 0.5f + 140, 355 - golemIdle->Height() * 0.5f - 40);
+			basicATimer.first += eTime;
+			if (basicATimer.first >= basicATimer.second)
+			{
+				SetPos(640 - golemIdle->Width() * 0.5f, 355 - golemIdle->Height() * 0.5f - 50);
+				golemCondition = IDLE;
+				basicATimer.first = 0;
+				attackTimer.first = 0;
+				index = RandomInt(0, 2);
+			}
+			break;
+		case 1:
+			golemCondition = LEFTATTACK;
+			SetPos(640 - golemIdle->Width() * 0.5f + 140, 355 - golemIdle->Height() * 0.5f - 40);
+			basicATimer.first += eTime;
+			if (basicATimer.first >= basicATimer.second)
+			{
+				SetPos(640 - golemIdle->Width() * 0.5f, 355 - golemIdle->Height() * 0.5f - 50);
+				golemCondition = IDLE;
+				basicATimer.first = 0;
+				attackTimer.first = 0;
+				index = RandomInt(0, 2);
+			}
 			break;
 		case 2:
-			golemCondition = LEFTATTACK;
-			break;
-		case 3:
 			golemCondition = CRACKATTACK;
+			SetPos(640 - golemIdle->Width() * 0.5f, 355 - golemIdle->Height() * 0.5f - 50);
+			basicATimer.first += eTime;
+			if (basicATimer.first >= basicATimer.second)
+			{
+				golemCondition = IDLE;
+				basicATimer.first = 0;
+				attackTimer.first = 0;
+				index = RandomInt(0, 2);
+			}
 			break;
 		}
 
-		basicATimer.first += eTime;
-		if (basicATimer.first >= basicATimer.second)
-		{
-			SetPos(640 - golemIdle->Width() * 0.5f, 355 - golemIdle->Height() * 0.5f - 50);
-			golemCondition = IDLE;
-			basicATimer.first = 0;
-			attackTimer.first = 0;
-		}
+		
 	}
 }

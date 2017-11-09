@@ -15,6 +15,7 @@ private:
 	};
 
 	bool isAttack;
+	int index;
 
 	pair<float, float> attackTimer;
 	pair<float, float> basicATimer;
