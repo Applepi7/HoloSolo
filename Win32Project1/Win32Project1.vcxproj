@@ -156,13 +156,18 @@
     <ClCompile Include="Dragon.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="ExampleScene.cpp" />
+    <ClCompile Include="FifthStage.cpp" />
+    <ClCompile Include="FirstStage.cpp" />
+    <ClCompile Include="FourthStage.cpp" />
     <ClCompile Include="Golem.cpp" />
     <ClCompile Include="MenuScene.cpp" />
     <ClCompile Include="PlayerCharacter.cpp" />
+    <ClCompile Include="SecondStage.cpp" />
     <ClCompile Include="Slime.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="ThirdStage.cpp" />
     <ClCompile Include="Totem.cpp" />
     <ClCompile Include="WinMain.cpp" />
     <ClCompile Include="Wisp.cpp" />
@@ -171,14 +176,23 @@
     <ClInclude Include="Dragon.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="ExampleScene.h" />
+    <ClInclude Include="FifthStage.h" />
+    <ClInclude Include="FirstStage.h" />
+    <ClInclude Include="FourthStage.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="Golem.h" />
     <ClInclude Include="MenuScene.h" />
     <ClInclude Include="PlayerCharacter.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="SecondStage.h" />
     <ClInclude Include="Slime.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="ThirdStage.h" />
     <ClInclude Include="Totem.h" />
     <ClInclude Include="Wisp.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Win32Project1.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

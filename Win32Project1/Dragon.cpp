@@ -1,8 +1,10 @@
 #include "stdafx.h"
 #include "Dragon.h"
 
+#include "Random.h"
 
-Dragon::Dragon() : dragonCondition(IDLE), attackTimer(0, 3.0f), windTimer(0, 3.0f), wingTimer(0, 3.0f), thunderTimer(0, 3.0f), fireTimer(0, 3.0f), index(0)
+
+Dragon::Dragon() : dragonCondition(IDLE), attackTimer(0, 3.0f), windTimer(0, 3.0f), wingTimer(0, 3.0f), thunderTimer(0, 3.0f), fireTimer(0, 3.0f), index(RandomInt(0, 3))
 {
 	dragonIdle = new ZeroAnimation(2.5f);
 	for (int i = 1; i <= 3; i++)
@@ -68,6 +70,8 @@ Dragon::Dragon() : dragonCondition(IDLE), attackTimer(0, 3.0f), windTimer(0, 3.0
 	PushScene(dFire);
 
 	SetPos(640 - dragonIdle->Width() * 0.5f, 355 - dragonIdle->Height() * 0.5f);
+	dWaveLength->SetPos(0, 0);
+	dThunder->SetPos(50, 50);
 }
 
 void Dragon::Update(float eTime)
@@ -112,7 +116,6 @@ void Dragon::Attack(float eTime)
 	attackTimer.first += eTime;
 	if (attackTimer.first >= attackTimer.second)
 	{
-
 		switch (index)
 		{
 		case 0:
@@ -123,7 +126,7 @@ void Dragon::Attack(float eTime)
 				dragonCondition = IDLE;
 				thunderTimer.first = 0;
 				attackTimer.first = 0;
-				index++;
+				index = RandomInt(0, 3);
 			}
 			break;
 		case 1:
@@ -134,7 +137,7 @@ void Dragon::Attack(float eTime)
 				dragonCondition = IDLE;
 				windTimer.first = 0;
 				attackTimer.first = 0;
-				index++;
+				index = RandomInt(0, 3);
 			}
 			break;
 		case 2:
@@ -145,7 +148,7 @@ void Dragon::Attack(float eTime)
 				dragonCondition = IDLE;
 				wingTimer.first = 0;
 				attackTimer.first = 0;
-				index++;
+				index = RandomInt(0, 3);
 			}
 			break;
 		case 3:
@@ -156,7 +159,7 @@ void Dragon::Attack(float eTime)
 				dragonCondition = IDLE;
 				fireTimer.first = 0;
 				attackTimer.first = 0;
-				index = 0;
+				index = RandomInt(0, 3);
 			}
 		}
 

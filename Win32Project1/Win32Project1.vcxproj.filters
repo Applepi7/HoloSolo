@@ -38,6 +38,24 @@
     <Filter Include="Unit\Enemy\Dragon">
       <UniqueIdentifier>{cce6828f-3853-40aa-8cac-ecef26be6210}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scenes\Stages">
+      <UniqueIdentifier>{6720f770-5787-4568-837e-7e6aeb2c2aa2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Stages\First">
+      <UniqueIdentifier>{0a9d815a-3c89-48dc-9c69-ba770b4e40a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Stages\Second">
+      <UniqueIdentifier>{7a017e78-8564-4862-a3c2-bac95511b956}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Stages\Third">
+      <UniqueIdentifier>{17446c1e-74cd-4e60-a14b-744f4986cef0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Stages\Fourth">
+      <UniqueIdentifier>{fff6e66c-789e-4dd2-8441-211d7f8533a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\Stages\Fifth">
+      <UniqueIdentifier>{d26f80d8-1d0b-4b68-8150-69985e895f13}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
@@ -68,6 +86,21 @@
     </ClCompile>
     <ClCompile Include="Dragon.cpp">
       <Filter>Unit\Enemy\Dragon</Filter>
+    </ClCompile>
+    <ClCompile Include="FirstStage.cpp">
+      <Filter>Scenes\Stages\First</Filter>
+    </ClCompile>
+    <ClCompile Include="FifthStage.cpp">
+      <Filter>Scenes\Stages\Fifth</Filter>
+    </ClCompile>
+    <ClCompile Include="FourthStage.cpp">
+      <Filter>Scenes\Stages\Fourth</Filter>
+    </ClCompile>
+    <ClCompile Include="ThirdStage.cpp">
+      <Filter>Scenes\Stages\Third</Filter>
+    </ClCompile>
+    <ClCompile Include="SecondStage.cpp">
+      <Filter>Scenes\Stages\Second</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -104,5 +137,26 @@
     <ClInclude Include="Dragon.h">
       <Filter>Unit\Enemy\Dragon</Filter>
     </ClInclude>
+    <ClInclude Include="FirstStage.h">
+      <Filter>Scenes\Stages\First</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="FifthStage.h">
+      <Filter>Scenes\Stages\Fifth</Filter>
+    </ClInclude>
+    <ClInclude Include="FourthStage.h">
+      <Filter>Scenes\Stages\Fourth</Filter>
+    </ClInclude>
+    <ClInclude Include="ThirdStage.h">
+      <Filter>Scenes\Stages\Third</Filter>
+    </ClInclude>
+    <ClInclude Include="SecondStage.h">
+      <Filter>Scenes\Stages\Second</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Win32Project1.rc" />
   </ItemGroup>
 </Project>
