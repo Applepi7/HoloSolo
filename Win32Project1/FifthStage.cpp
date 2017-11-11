@@ -20,6 +20,9 @@ void FifthStage::Update(float eTime)
 
 	player->Update(eTime);
 	dragon->Update(eTime);
+
+	CheckOut();
+
 }
 
 void FifthStage::Render()
@@ -30,4 +33,10 @@ void FifthStage::Render()
 
 	dragon->Render();
 	player->Render();
+}
+
+void FifthStage::CheckOut()
+{
+	if (dragon->IsCollision(player) && player->isAttack)
+		dragon->health -= player->attackPower;
 }

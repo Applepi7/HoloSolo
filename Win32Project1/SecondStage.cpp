@@ -4,7 +4,7 @@
 #include "Random.h"
 
 
-SecondStage::SecondStage()
+SecondStage::SecondStage() : damageTimer(0, .25f)
 {
 	background = new ZeroSprite("Resource/UI/Background/background.png");
 
@@ -31,10 +31,14 @@ void SecondStage::Update(float eTime)
 		w->Update(eTime);
 		if (player->Pos().x - w->Pos().x <= 100 && player->Pos().y - w->Pos().y <= 100)
 			w->Follow(player, w, eTime, w->isAlive);
+
+		printf("%.2f\n", w->health);
 	}
 	player->Update(eTime);
 
-	// CheckOut();
+	CheckOut(eTime);
+
+	printf("%d\n", player->health);
 }
 
 void SecondStage::Render()
@@ -49,10 +53,22 @@ void SecondStage::Render()
 	player->Render();
 }
 
-void SecondStage::CheckOut()
+void SecondStage::CheckOut(float eTime)
 {
 	for (auto w = wispList.begin(); w != wispList.end();)
 	{
+		if ((*w)->IsCollision(player)) {
+			damageTimer.first += eTime;
+			if (damageTimer.first >= damageTimer.second)
+			{
+				player->health -= 1;
+				damageTimer.first = 0;
+			}
+		}
+		else if ((*w)->IsCollision(player) && player->isAttack)
+			(*w)->health -= player->attackPower;
+
+
 		if (!(*w)->isAlive)
 		{
 			PopScene(*w);

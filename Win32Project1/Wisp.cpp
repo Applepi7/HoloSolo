@@ -57,13 +57,13 @@ void Wisp::Attack(PlayerCharacter* target, float eTime)
 	}
 }
 
-bool Wisp::IsCollision(PlayerCharacter* player, Wisp* wisp)
+bool Wisp::IsCollision(PlayerCharacter* player)
 {
 	if (
-		(player->Pos().x - wisp->Pos().x <= wisp->wispMove->Width()) &&
-		(wisp->Pos().x - player->Pos().x <= player->playerSidle->Width()) &&
-		(wisp->Pos().y - player->Pos().y <= player->playerSidle->Height()) &&
-		(player->Pos().y - wisp->Pos().y <= wisp->wispMove->Height())
+		(player->Pos().x - Pos().x <= wispMove->Width()) &&
+		(Pos().x - player->Pos().x <= player->playerSidle->Width()) &&
+		(Pos().y - player->Pos().y <= player->playerSidle->Height()) &&
+		(player->Pos().y - Pos().y <= wispMove->Height())
 		)
 		return true;
 	else

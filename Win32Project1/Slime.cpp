@@ -2,8 +2,10 @@
 #include "Slime.h"
 
 
-Slime::Slime() : slimeCondition(MOVE), boomDistance(100), speed(150), health(90), isAlive(true), isPop(false), boomTimer(0, 2), popTimer(0, .5f)
+Slime::Slime() : slimeCondition(MOVE), boomDistance(100), speed(150), isAlive(true), isPop(false), boomTimer(0, 2), popTimer(0, .5f)
 {
+	health = 90;
+
 	slimeMove = new ZeroAnimation(1.5f);
 	for (int i = 1; i <= 3; i++) {
 		slimeMove->PushSprite("Resource/Enemy/Slime/Move/slime_front_%d.png", i);
@@ -47,6 +49,7 @@ void Slime::SelfBoom(PlayerCharacter * target, float eTime)
 		if (boomTimer.first >= boomTimer.second) {
 			slimeCondition = ATTACK;
 			isAlive = false;
+			target->health -= 10;
 		}
 	}
 	if (!isAlive) {
@@ -57,4 +60,17 @@ void Slime::SelfBoom(PlayerCharacter * target, float eTime)
 			isPop = true;
 		}
 	}
+}
+
+bool Slime::IsCollision(PlayerCharacter * player)
+{
+	if (
+		(player->Pos().x - Pos().x <= slimeMove->Width()) &&
+		(Pos().x - player->Pos().x <= player->playerSidle->Width()) &&
+		(Pos().y - player->Pos().y <= player->playerSidle->Height()) &&
+		(player->Pos().y - Pos().y <= slimeMove->Height())
+		)
+		return true;
+	else
+		return false;
 }

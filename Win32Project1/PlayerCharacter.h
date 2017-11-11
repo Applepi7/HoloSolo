@@ -60,7 +60,9 @@ public:
 	ZeroAnimation* playerDattack;
 
 	float speed;
-	float health;
+	float attackPower;
+
+	int health;
 
 	void Update(float eTime) override;
 	void Render() override;

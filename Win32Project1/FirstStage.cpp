@@ -31,10 +31,12 @@ void FirstStage::Update(float eTime)
 		if (player->Pos().x - s->Pos().x <= 100 && player->Pos().y - s->Pos().y <= 100)
 			s->Follow(player, s, eTime, s->isAlive);
 		s->SelfBoom(player, eTime);
+		printf("-------------\n%.2f\n", s->health);
 	}
 	player->Update(eTime);
 
 	CheckOut();
+	printf("%d\n", player->health);
 }
 
 void FirstStage::Render()
@@ -51,7 +53,10 @@ void FirstStage::CheckOut()
 {
 	for (auto s = slimeList.begin(); s != slimeList.end();)
 	{
-		if ((*s)->isPop) 
+		if ((*s)->IsCollision(player) && player->isAttack)
+			(*s)->health -= player->attackPower;
+	
+		if ((*s)->isPop)
 		{
 			(*s)->PopScene(*s);
 			slimeList.erase(s++);

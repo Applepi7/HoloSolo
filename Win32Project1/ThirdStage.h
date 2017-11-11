@@ -15,7 +15,11 @@ private:
 
 	ZeroSprite* background;
 
-	void CheckOut() override;
+	pair<float, float> damageTimer;
+
+	void CheckOut(float eTime) override;
+
+
 public:
 	ThirdStage();
 

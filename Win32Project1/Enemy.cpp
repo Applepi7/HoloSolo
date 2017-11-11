@@ -3,7 +3,7 @@
 
 #include <math.h>
 
-Enemy::Enemy() : speed(150)
+Enemy::Enemy() : speed(150), health(100.0f)
 {
 }
 
@@ -34,4 +34,13 @@ void Enemy::Follow(PlayerCharacter * target, Enemy * enemy, float eTime, bool is
 	if (isMove) {
 		enemy->SetPos(enemy->Pos() += ZeroVec(cos(rot), sin(rot)) * enemy->speed * eTime);
 	}
+}
+
+void Enemy::Damaged(PlayerCharacter * player)
+{
+}
+
+bool Enemy::IsCollision(PlayerCharacter* player)
+{
+	return nullptr;
 }

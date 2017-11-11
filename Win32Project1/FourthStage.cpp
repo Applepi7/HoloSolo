@@ -21,6 +21,9 @@ void FourthStage::Update(float eTime)
 
 	player->Update(eTime);
 	golem->Update(eTime);
+
+	CheckOut();
+	printf("%.2f\n", golem->health);
 }
 
 void FourthStage::Render()
@@ -31,4 +34,10 @@ void FourthStage::Render()
 
 	golem->Render();
 	player->Render();
+}
+
+void FourthStage::CheckOut()
+{
+	if (golem->IsCollision(player) && player->isAttack)
+		golem->health -= player->attackPower;
 }

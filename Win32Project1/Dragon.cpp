@@ -6,6 +6,8 @@
 
 Dragon::Dragon() : dragonCondition(IDLE), attackTimer(0, 3.0f), windTimer(0, 3.0f), wingTimer(0, 3.0f), thunderTimer(0, 3.0f), fireTimer(0, 3.0f), index(RandomInt(0, 3))
 {
+	health = 500;
+
 	dragonIdle = new ZeroAnimation(2.5f);
 	for (int i = 1; i <= 3; i++)
 	{
@@ -79,8 +81,6 @@ void Dragon::Update(float eTime)
 	ZeroIScene::Update(eTime);
 
 	Attack(eTime);
-
-	printf("%d", index);
 }
 
 void Dragon::Render()
@@ -165,4 +165,17 @@ void Dragon::Attack(float eTime)
 
 
 	}
+}
+
+bool Dragon::IsCollision(PlayerCharacter * player)
+{
+	if (
+		(player->Pos().x - Pos().x <= dragonIdle->Width()) &&
+		(Pos().x - player->Pos().x <= player->playerSidle->Width()) &&
+		(Pos().y - player->Pos().y <= player->playerSidle->Height()) &&
+		(player->Pos().y - Pos().y <= dragonIdle->Height())
+		)
+		return true;
+	else
+		return false;
 }

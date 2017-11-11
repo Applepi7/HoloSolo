@@ -3,7 +3,7 @@
 
 #include "ZeroInputManager.h"
 
-PlayerCharacter::PlayerCharacter() : isMove(false), isRoll(false), isAttack(false), speed(100), health(100), playerCondition(LEFTIDLE), prevKey(NULL), rollTimer(0, .7f), attackTimer(0, .7f)
+PlayerCharacter::PlayerCharacter() : isMove(false), isRoll(false), isAttack(false), speed(100), health(100), playerCondition(LEFTIDLE), prevKey(VK_LEFT), rollTimer(0, .7f), attackTimer(0, .7f), attackPower(.5f)
 {
 
 	playerSrun = new ZeroAnimation(3.0f);
@@ -104,9 +104,6 @@ void PlayerCharacter::Update(float eTime)
 	Move(eTime);
 	Attack(eTime);
 	Idle();
-
-	if (ZeroInputMgr->GetKey(VK_CONTROL) == INPUTMGR_KEYDOWN)
-		isAttack = true;
 }
 
 void PlayerCharacter::Render()
@@ -250,6 +247,8 @@ void PlayerCharacter::Move(float eTime)
 
 void PlayerCharacter::Attack(float eTime)
 {
+	if (ZeroInputMgr->GetKey('Z') == INPUTMGR_KEYDOWN)
+		isAttack = true;
 
 	if (isAttack) {
 
@@ -299,14 +298,10 @@ void PlayerCharacter::Idle()
 			playerCondition = DOWNIDLE;
 			break;
 		}
+
+		
 	}
 
-	if (ZeroInputMgr->GetKey('Z') == INPUTMGR_KEYDOWN)
-		isAttack = true;
+	/*if (ZeroInputMgr->GetKey('Z') == INPUTMGR_KEYDOWN)
+		isAttack = true;*/
 }
-
-//void JungWon() {
-//	for (auto &iter = playerList.begin; iter != playerList.end; iter++) {
-//		(*iter)->
-//	}
-//}

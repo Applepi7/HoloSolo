@@ -5,6 +5,8 @@
 
 Golem::Golem() : golemCondition(IDLE), attackTimer(0, 5.0f), basicATimer(0, 2.0f), crackATimer(0, 1.0f), isAttack(false), index(RandomInt(0, 2))
 {
+	health = 400;
+
 	golemIdle = new ZeroAnimation(3.0f);
 	for (int i = 1; i <= 4; i++) {
 		golemIdle->PushSprite("Resource/Enemy/Golem/Idle/golemIdle_%d.png", i);
@@ -124,4 +126,17 @@ void Golem::Attack(float eTime)
 
 		
 	}
+}
+
+bool Golem::IsCollision(PlayerCharacter * player)
+{
+	if (
+		(player->Pos().x - Pos().x <= golemIdle->Width()) &&
+		(Pos().x - player->Pos().x <= player->playerSidle->Width()) &&
+		(Pos().y - player->Pos().y <= player->playerSidle->Height()) &&
+		(player->Pos().y - Pos().y <= golemIdle->Height())
+		)
+		return true;
+	else
+		return false;
 }

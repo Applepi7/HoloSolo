@@ -25,7 +25,6 @@ public:
 	};
 
 	int speed;
-	int health;
 
 	bool isAlive;
 	bool isPop;
@@ -37,5 +36,7 @@ public:
 	void Render() override;
 
 	void SelfBoom(PlayerCharacter* target, float eTime);
+
+	bool IsCollision(PlayerCharacter* player) override;
 };
 

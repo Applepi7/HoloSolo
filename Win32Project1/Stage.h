@@ -9,5 +9,6 @@ public:
 	Stage();
 
 	virtual void CheckOut();
+	virtual void CheckOut(float eTime);
 };
 

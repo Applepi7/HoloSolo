@@ -31,6 +31,8 @@ public:
 	
 	void Attack(float eTime);
 
+	bool IsCollision(PlayerCharacter* player) override;
+
 	ZeroAnimation* golemIdle;
 	ZeroAnimation* golemAttack;
 	ZeroAnimation* golemCAttack;

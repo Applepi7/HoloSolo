@@ -22,10 +22,15 @@ protected:
 public:
 
 	int speed;
+	
+	float health;
 
 	void Update(float eTime) override;
 	void Render() override;
 
 	void Follow(PlayerCharacter* target, Enemy* enemy, float eTime, bool isMove);
+
+	virtual void Damaged(PlayerCharacter* player);
+	virtual bool IsCollision(PlayerCharacter* player);
 };
 

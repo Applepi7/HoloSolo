@@ -45,12 +45,12 @@ void ExampleScene::Update(float eTime)
 
 	wisp->Follow(player, wisp, eTime, true);
 	wisp->Attack(player, eTime);
-	if (wisp->IsCollision(player, wisp))
+	if (wisp->IsCollision(player))
 	{
 		wisp->isAttack = true;
 	}
 	
-	if (player->isAttack && wisp->IsCollision(player, wisp))
+	if (player->isAttack && wisp->IsCollision(player))
 	{
 		wisp->health -= 1;
 	}

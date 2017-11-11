@@ -33,6 +33,9 @@ public:
 	void Render() override;
 	void Attack(float eTime);
 
+	bool IsCollision(PlayerCharacter* player) override;
+
+
 	ZeroAnimation* dragonIdle;
 	ZeroAnimation* dragonWing;
 	ZeroAnimation* dragonThunder;

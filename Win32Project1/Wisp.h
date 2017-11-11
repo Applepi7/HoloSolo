@@ -23,7 +23,7 @@ public:
 	void Render() override;
 	
 	void Attack(PlayerCharacter* target, float eTime);
-	bool IsCollision(PlayerCharacter* player, Wisp* wisp);
+	bool IsCollision(PlayerCharacter* player) override;
 
 	ZeroAnimation* wispMove;
 	ZeroAnimation* wispAttack;

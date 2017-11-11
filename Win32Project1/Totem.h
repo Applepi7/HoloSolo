@@ -23,9 +23,13 @@ public:
 	ZeroAnimation* totemIdle;
 	ZeroAnimation* lazer;
 
+	bool isAttack;
+
 	void Update(float eTime) override;
 	void Render() override;
+	
+	void Damaged(PlayerCharacter* player) override;
 
-	// bool IsCollision();
+	bool IsCollision(PlayerCharacter* player) override;
 };
 
