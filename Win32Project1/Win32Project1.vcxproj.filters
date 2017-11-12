@@ -59,6 +59,9 @@
     <Filter Include="Unit\Enemy\Boss\Golem">
       <UniqueIdentifier>{f77ec0ea-bb8b-4f39-a033-f92692ff27b0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Item">
+      <UniqueIdentifier>{87997ff3-a295-4ff3-a104-c119b01569d8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
@@ -108,7 +111,9 @@
     <ClCompile Include="Stage.cpp">
       <Filter>Scenes\Stages</Filter>
     </ClCompile>
-    <ClCompile Include="Item.cpp" />
+    <ClCompile Include="Item.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -163,7 +168,7 @@
       <Filter>Scenes\Stages</Filter>
     </ClInclude>
     <ClInclude Include="Item.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>Item</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

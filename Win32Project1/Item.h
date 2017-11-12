@@ -1,6 +1,7 @@
 #pragma once
 #include "ZeroIScene.h"
 #include "ZeroSprite.h"
+#include "ZeroFont.h"
 
 #include "PlayerCharacter.h"
 
@@ -27,6 +28,7 @@ public:
 	void Render() override;
 
 	ZeroSprite* itemImage;
+	ZeroFont* effectText;
 
 	bool IsCollision(PlayerCharacter* player);
 

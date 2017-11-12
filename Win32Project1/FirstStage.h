@@ -14,8 +14,6 @@ private:
 
 	ZeroSprite* background;
 
-	Item* item;
-
 	void CheckOut() override;
 	void SpawnItem();
 
@@ -26,5 +24,7 @@ public:
 
 	void Update(float eTime) override;
 	void Render() override;
+
+	void PopStage() override;
 };
 

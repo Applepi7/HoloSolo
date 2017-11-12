@@ -12,7 +12,10 @@ class Stage :
 public:
 	Stage();
 
+	Item* item;
+
 	virtual void CheckOut();
 	virtual void CheckOut(float eTime);
+	virtual void PopStage();
 };
 

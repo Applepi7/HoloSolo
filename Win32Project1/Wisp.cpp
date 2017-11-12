@@ -69,3 +69,11 @@ bool Wisp::IsCollision(PlayerCharacter* player)
 	else
 		return false;
 }
+
+void Wisp::Damage(PlayerCharacter * player)
+{
+	if (IsCollision(player) && player->isAttack)
+		health -= player->attackPower;	
+
+	if (health <= 0) isAlive = false;
+}

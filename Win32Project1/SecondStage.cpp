@@ -3,6 +3,7 @@
 
 #include "Random.h"
 
+#include "ThirdStage.h"
 
 SecondStage::SecondStage() : damageTimer(0, .25f), wispNum(10)
 {
@@ -34,9 +35,11 @@ void SecondStage::Update(float eTime)
 
 		printf("%.2f\n", w->health);
 	}
+	item->Update(eTime);
 	player->Update(eTime);
 
 	CheckOut(eTime);
+
 
 	printf("%d\n", player->health);
 }
@@ -50,7 +53,16 @@ void SecondStage::Render()
 	{
 		w->Render();
 	}
+
+	if (wispNum == 0)
+		item->Render();
+
 	player->Render();
+}
+
+void SecondStage::PopStage()
+{
+	PopScene(player);
 }
 
 void SecondStage::CheckOut(float eTime)
@@ -58,16 +70,9 @@ void SecondStage::CheckOut(float eTime)
 	for (auto w = wispList.begin(); w != wispList.end();)
 	{
 		if ((*w)->IsCollision(player)) {
-			damageTimer.first += eTime;
-			if (damageTimer.first >= damageTimer.second)
-			{
-				player->health -= 1;
-				damageTimer.first = 0;
-			}
+			(*w)->Attack(player, eTime);
 		}
-		else if ((*w)->IsCollision(player) && player->isAttack)
-			(*w)->health -= player->attackPower;
-
+		(*w)->Damage(player);
 
 		if (!(*w)->isAlive)
 		{
@@ -76,5 +81,12 @@ void SecondStage::CheckOut(float eTime)
 			wispList.erase(w++);
 		}
 		w++;
+	}
+
+	if (wispNum == 0) {
+		if (item->IsCollision(player)) {
+			PopStage();
+			ZeroSceneMgr->ChangeScene(new ThirdStage());
+		}
 	}
 }

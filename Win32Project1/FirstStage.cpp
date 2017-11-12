@@ -9,8 +9,6 @@ FirstStage::FirstStage() : slimeNum(10)
 {
 	background = new ZeroSprite("Resource/UI/Background/background.png");
 
-	item = new Item();
-
 	for (int i = 0; i < 10; i++)
 	{
 		Slime* slime = new Slime();
@@ -60,8 +58,13 @@ void FirstStage::Render()
 		item->Render();
 }
 
+void FirstStage::PopStage()
+{
+}
+
 void FirstStage::SpawnItem()
 {
+	PopScene(player);
 }
 
 void FirstStage::CheckOut()
@@ -77,7 +80,10 @@ void FirstStage::CheckOut()
 		s++;
 	}
 
-	if (slimeNum == 0)
-		if (item->IsCollision(player))
+	if (slimeNum == 0) {
+		if (item->IsCollision(player)) {
+			PopStage();
 			ZeroSceneMgr->ChangeScene(new SecondStage());
+		}
+	}
 }
