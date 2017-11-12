@@ -8,28 +8,33 @@ class Totem :
 	public Enemy
 {
 private:
+
 	pair<float, float> attackTimer;
 	pair<float, float> lazerTimer;
+	pair<float, float> damageTimer;
 	
 	int totemCondition;
 
 	void Attack(float eTime);
 
 public:
-	Totem();
-	~Totem();
+	Totem(int pos);
 
 	ZeroSprite* totemAttack;
 	ZeroAnimation* totemIdle;
 	ZeroAnimation* lazer;
 
+	int pos;
+
 	bool isAttack;
+	bool isAlive;
 
 	void Update(float eTime) override;
 	void Render() override;
 	
-	void Damage(PlayerCharacter* player) override;
+	void Damage(PlayerCharacter* player, float eTime) override;
 
 	bool IsCollision(PlayerCharacter* player) override;
+	bool IsCollision(PlayerCharacter* player, ZeroAnimation* sprite);
 };
 

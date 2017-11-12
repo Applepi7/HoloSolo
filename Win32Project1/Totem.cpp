@@ -2,7 +2,7 @@
 #include "Totem.h"
 
 
-Totem::Totem() : totemCondition(2), attackTimer(0, 5), lazerTimer(0, 1), isAttack(false)
+Totem::Totem(int pos) : totemCondition(IDLE), attackTimer(0, 1), lazerTimer(0, 1), damageTimer(0, .1f), isAttack(false), isAlive(true)
 									// attackTimer : 5초동안 가만히 있다가
 									// lazerTimer : 1초동안 레이저 파바ㅏㅏ바ㅏ박
 {
@@ -19,21 +19,29 @@ Totem::Totem() : totemCondition(2), attackTimer(0, 5), lazerTimer(0, 1), isAttac
 	for (int i = 1; i <= 4; i++) {
 		lazer->PushSprite("Resource/Enemy/Totem/Lazer/lazer_%d.png", i);
 	}
-	
+
+	if (pos % 2 == 0)
+	{
+		totemIdle->SetScalingCenter(totemIdle->Width() * .5f);
+		totemAttack->SetScalingCenter(totemIdle->Width() * .5f);
+		lazer->SetScalingCenter(lazer->Width() * .5f);
+
+		totemIdle->SetScale(-1, 1);
+		totemAttack->SetScale(-1, 1);
+		lazer->SetScale(-0.9, 0.9);
+		lazer->SetPosX(-totemAttack->Width() + 50);
+	}
+	else {
+		lazer->SetPosX(totemAttack->Width() - 50);
+		lazer->SetScale(0.9, 0.9);
+	}
+
 	PushScene(totemAttack);
 	PushScene(totemIdle);
 	PushScene(lazer);
 
-	SetPos(100, 200);
-	lazer->SetPosX(totemAttack->Width() - 50);
 	lazer->SetScalingCenter(1, lazer->Height() * 2.0f);
-	lazer->SetScale(0.9, 0.9);
 	
-}
-
-
-Totem::~Totem()
-{
 }
 
 void Totem::Update(float eTime)
@@ -41,6 +49,8 @@ void Totem::Update(float eTime)
 	ZeroIScene::Update(eTime);
 
 	Attack(eTime);
+
+	if (health <= 0) isAlive = false;
 }
 
 void Totem::Render()
@@ -59,8 +69,20 @@ void Totem::Render()
 	}
 }
 
-void Totem::Damage(PlayerCharacter * player)
+void Totem::Damage(PlayerCharacter * player, float eTime)
 {
+	if (IsCollision(player) && isAttack)
+	{
+		damageTimer.first += eTime;
+		if (damageTimer.first >= damageTimer.second)
+		{
+			player->health -= 1;
+			damageTimer.first = 0;
+		}
+	}
+
+	else if (IsCollision(player, totemIdle) && player->isAttack)
+		health -= player->attackPower;
 }
 
 bool Totem::IsCollision(PlayerCharacter* player)
@@ -70,6 +92,19 @@ bool Totem::IsCollision(PlayerCharacter* player)
 		(Pos().x - player->Pos().x <= player->playerSidle->Width()) &&
 		(Pos().y - player->Pos().y <= player->playerSidle->Height()) &&
 		(player->Pos().y - Pos().y <= lazer->Height())
+		)
+		return true;
+	else
+		return false;
+}
+
+bool Totem::IsCollision(PlayerCharacter* player, ZeroAnimation* sprite)
+{
+	if (
+		(player->Pos().x - Pos().x <= sprite->Width()) &&
+		(Pos().x - player->Pos().x <= player->playerSidle->Width()) &&
+		(Pos().y - player->Pos().y <= player->playerSidle->Height()) &&
+		(player->Pos().y - Pos().y <= sprite->Height())
 		)
 		return true;
 	else

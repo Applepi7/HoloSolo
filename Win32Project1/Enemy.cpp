@@ -41,6 +41,10 @@ void Enemy::Damage(PlayerCharacter * player)
 {
 }
 
+void Enemy::Damage(PlayerCharacter * player, float eTime)
+{
+}
+
 bool Enemy::IsCollision(PlayerCharacter* player)
 {
 	return false;

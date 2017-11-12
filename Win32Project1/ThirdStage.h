@@ -15,15 +15,16 @@ private:
 
 	ZeroSprite* background;
 
-	pair<float, float> damageTimer;
-
 	void CheckOut(float eTime) override;
 
+	int totemNum;
 
 public:
 	ThirdStage();
 
 	void Update(float eTime) override;
 	void Render() override;
+
+	void PopStage() override;
 };
 

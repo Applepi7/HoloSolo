@@ -34,6 +34,7 @@ public:
 	void Follow(PlayerCharacter* target, Enemy* enemy, float eTime, bool isMove);
 
 	virtual void Damage(PlayerCharacter* player);
+	virtual void Damage(PlayerCharacter* player, float eTime);
 	virtual bool IsCollision(PlayerCharacter* player);
 };
 

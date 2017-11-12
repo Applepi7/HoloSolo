@@ -13,7 +13,7 @@ ExampleScene::ExampleScene()
 	player = new PlayerCharacter();
 	slime = new Slime();
 	wisp = new Wisp();
-	totem = new Totem();
+	totem = new Totem(1);
 	golem = new Golem();
 	dragon = new Dragon();
 
