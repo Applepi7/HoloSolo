@@ -3,6 +3,9 @@
 
 #include "PlayerCharacter.h"
 
+#include "ZeroSoundManager.h"
+
+
 class Enemy :
 	public ZeroIScene
 {
@@ -30,7 +33,7 @@ public:
 
 	void Follow(PlayerCharacter* target, Enemy* enemy, float eTime, bool isMove);
 
-	virtual void Damaged(PlayerCharacter* player);
+	virtual void Damage(PlayerCharacter* player);
 	virtual bool IsCollision(PlayerCharacter* player);
 };
 

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Enemy.h"
 
+
 #include <math.h>
 
 Enemy::Enemy() : speed(150), health(100.0f)
@@ -36,11 +37,11 @@ void Enemy::Follow(PlayerCharacter * target, Enemy * enemy, float eTime, bool is
 	}
 }
 
-void Enemy::Damaged(PlayerCharacter * player)
+void Enemy::Damage(PlayerCharacter * player)
 {
 }
 
 bool Enemy::IsCollision(PlayerCharacter* player)
 {
-	return nullptr;
+	return false;
 }

@@ -40,7 +40,7 @@ INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR, INT)
 		ShowWindow(hWnd, SW_SHOWDEFAULT);
 		UpdateWindow(hWnd);
 
-		//여기서 처음 시작하는 Scene을 정한다
+		//여기서 처음 시작하는 Scene을 정한다x
 		ZeroSceneMgr->ChangeScene(new FirstStage());
 
 

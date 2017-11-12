@@ -59,7 +59,7 @@ void Totem::Render()
 	}
 }
 
-void Totem::Damaged(PlayerCharacter * player)
+void Totem::Damage(PlayerCharacter * player)
 {
 }
 

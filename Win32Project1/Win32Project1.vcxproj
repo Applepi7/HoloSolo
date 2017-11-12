@@ -160,6 +160,7 @@
     <ClCompile Include="FirstStage.cpp" />
     <ClCompile Include="FourthStage.cpp" />
     <ClCompile Include="Golem.cpp" />
+    <ClCompile Include="Item.cpp" />
     <ClCompile Include="MenuScene.cpp" />
     <ClCompile Include="PlayerCharacter.cpp" />
     <ClCompile Include="SecondStage.cpp" />
@@ -180,6 +181,7 @@
     <ClInclude Include="FifthStage.h" />
     <ClInclude Include="FirstStage.h" />
     <ClInclude Include="FourthStage.h" />
+    <ClInclude Include="Item.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="Golem.h" />
     <ClInclude Include="MenuScene.h" />

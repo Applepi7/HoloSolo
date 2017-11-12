@@ -28,7 +28,7 @@ public:
 	void Update(float eTime) override;
 	void Render() override;
 	
-	void Damaged(PlayerCharacter* player) override;
+	void Damage(PlayerCharacter* player) override;
 
 	bool IsCollision(PlayerCharacter* player) override;
 };

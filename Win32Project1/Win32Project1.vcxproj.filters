@@ -108,6 +108,7 @@
     <ClCompile Include="Stage.cpp">
       <Filter>Scenes\Stages</Filter>
     </ClCompile>
+    <ClCompile Include="Item.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -160,6 +161,9 @@
     </ClInclude>
     <ClInclude Include="Stage.h">
       <Filter>Scenes\Stages</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

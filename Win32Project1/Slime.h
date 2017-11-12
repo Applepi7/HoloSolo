@@ -15,6 +15,10 @@ private:
 
 	pair<float, float> boomTimer;
 	pair<float, float> popTimer;
+		
+	void PlayDamageSound();
+	void PlayBoomSound();
+	void PlayMoveSound();
 
 public:
 	Slime();
@@ -38,5 +42,6 @@ public:
 	void SelfBoom(PlayerCharacter* target, float eTime);
 
 	bool IsCollision(PlayerCharacter* player) override;
+	void Damage(PlayerCharacter* player) override;
 };
 

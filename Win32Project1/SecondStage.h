@@ -14,6 +14,7 @@ private:
 
 	ZeroSprite* background;
 
+	int wispNum;
 
 	pair<float, float> damageTimer;
 

@@ -14,10 +14,15 @@ private:
 
 	ZeroSprite* background;
 
+	Item* item;
+
 	void CheckOut() override;
+	void SpawnItem();
 
 public:
 	FirstStage();
+
+	int slimeNum;
 
 	void Update(float eTime) override;
 	void Render() override;

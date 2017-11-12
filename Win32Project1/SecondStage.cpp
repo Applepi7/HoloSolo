@@ -4,7 +4,7 @@
 #include "Random.h"
 
 
-SecondStage::SecondStage() : damageTimer(0, .25f)
+SecondStage::SecondStage() : damageTimer(0, .25f), wispNum(10)
 {
 	background = new ZeroSprite("Resource/UI/Background/background.png");
 
@@ -71,6 +71,7 @@ void SecondStage::CheckOut(float eTime)
 
 		if (!(*w)->isAlive)
 		{
+			wispNum--;
 			PopScene(*w);
 			wispList.erase(w++);
 		}

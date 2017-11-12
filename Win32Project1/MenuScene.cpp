@@ -2,7 +2,7 @@
 #include "MenuScene.h"
 
 #include "ZeroSceneManager.h"
-#include "ExampleScene.h"
+#include "FirstStage.h"
 
 MenuScene::MenuScene()
 {
@@ -25,7 +25,7 @@ void MenuScene::Update(float eTime)
 	if (ZeroInputMgr->GetKey(VK_LBUTTON) == INPUTMGR_KEYUP) {
 		if (btn->IsOverlapped(ZeroInputMgr->GetClientPoint()))
 		{
-			ZeroSceneMgr->ChangeScene(new ExampleScene());
+			ZeroSceneMgr->ChangeScene(new FirstStage());
 		}
 	}
 }
