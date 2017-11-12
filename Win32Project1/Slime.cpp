@@ -48,7 +48,9 @@ void Slime::Render()
 
 void Slime::SelfBoom(PlayerCharacter * target, float eTime)
 {
-	if (target->Pos().x - Pos().x <= boomDistance && target->Pos().y - Pos().y <= boomDistance) {
+	if (target->Pos().x - Pos().x <= boomDistance || target->Pos().x - Pos().x >= -boomDistance
+		&& target->Pos().y - Pos().y <= boomDistance || target->Pos().y - Pos().y >= -boomDistance
+		) {
 		boomTimer.first += eTime;
 		if (boomTimer.first >= boomTimer.second) {
 			slimeCondition = ATTACK;

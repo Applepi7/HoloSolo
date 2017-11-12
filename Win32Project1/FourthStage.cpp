@@ -3,6 +3,9 @@
 
 #include "Random.h"
 
+#include "FifthStage.h"
+
+
 FourthStage::FourthStage()
 {
 	background = new ZeroSprite("Resource/UI/Background/background.png");
@@ -19,11 +22,12 @@ void FourthStage::Update(float eTime)
 {
 	ZeroIScene::Update(eTime);
 
+	item->Update(eTime);
 	player->Update(eTime);
-	golem->Update(eTime);
+	if (golem->isAlive)
+		golem->Update(eTime);
 
 	CheckOut();
-	printf("%.2f\n", golem->health);
 }
 
 void FourthStage::Render()
@@ -32,12 +36,25 @@ void FourthStage::Render()
 
 	background->Render();
 
-	golem->Render();
+	if(golem->isAlive)
+		golem->Render();
+
 	player->Render();
+
+	if (!golem->isAlive)
+		item->Render();
+}
+
+void FourthStage::PopStage()
+{
+	PopScene(player);
 }
 
 void FourthStage::CheckOut()
 {
-	if (golem->IsCollision(player) && player->isAttack)
-		golem->health -= player->attackPower;
+	golem->Damage(player);
+	if (!golem->isAlive && item->IsCollision(player)) {
+		PopStage();
+		ZeroSceneMgr->ChangeScene(new FifthStage());
+	}
 }

@@ -3,7 +3,7 @@
 
 #include "Random.h"
 
-Golem::Golem() : golemCondition(IDLE), attackTimer(0, 5.0f), basicATimer(0, 2.0f), crackATimer(0, 1.0f), isAttack(false), index(RandomInt(0, 2))
+Golem::Golem() : golemCondition(IDLE), attackTimer(0, 3.0f), basicATimer(0, 2.0f), crackATimer(0, 1.0f), isAttack(false), isAlive(true), index(RandomInt(0, 2))
 {
 	health = 400;
 
@@ -38,7 +38,7 @@ Golem::Golem() : golemCondition(IDLE), attackTimer(0, 5.0f), basicATimer(0, 2.0f
 	golemAttack->SetScalingCenter(golemAttack->Width() * 0.28f);
 
 	SetPos(640 - golemIdle->Width() * 0.5f, 355 - golemIdle->Height() * 0.5f - 50);
-	groundCrack->SetPos(640 - groundCrack->Width() * 0.5f, 355 - groundCrack->Height() * 0.5f);
+	groundCrack->SetPos(Pos().x - groundCrack->Width(), Pos().y + 100);
 }
 
 
@@ -46,7 +46,7 @@ void Golem::Update(float eTime)
 {
 	ZeroIScene::Update(eTime);
 
-	Attack(eTime);
+	Attack(eTime, isAlive);
 }
 
 void Golem::Render()
@@ -64,67 +64,66 @@ void Golem::Render()
 		groundFragment->Render();
 		break;
 	case LEFTATTACK:
-		golemAttack->SetScale(-1, 1);
-		golemAttack->Render();
 		groundFragment->Render();
+			golemAttack->SetScale(-1, 1);
+		golemAttack->Render();
 		break;
 	case CRACKATTACK:
-		golemCAttack->Render();
 		groundCrack->Render();
+		golemCAttack->Render();
 		break;
 	}
 }
 
-void Golem::Attack(float eTime)
+void Golem::Attack(float eTime, bool isAttack)
 {
 	attackTimer.first += eTime;
 
-	if (attackTimer.first >= attackTimer.second)
-	{
-		
-		switch (index)
+	if(isAttack){
+		if (attackTimer.first >= attackTimer.second)
 		{
-		case 0:
-			golemCondition = RIGHTATTACK;
-			SetPos(640 - golemIdle->Width() * 0.5f + 140, 355 - golemIdle->Height() * 0.5f - 40);
-			basicATimer.first += eTime;
-			if (basicATimer.first >= basicATimer.second)
+			switch (index)
 			{
+			case 0:
+				golemCondition = RIGHTATTACK;
+				SetPos(640 - golemIdle->Width() * 0.5f + 140, 355 - golemIdle->Height() * 0.5f - 40);
+				basicATimer.first += eTime;
+				if (basicATimer.first >= basicATimer.second)
+				{
+					SetPos(640 - golemIdle->Width() * 0.5f, 355 - golemIdle->Height() * 0.5f - 50);
+					golemCondition = IDLE;
+					basicATimer.first = 0;
+					attackTimer.first = 0;
+					index = RandomInt(0, 2);
+				}
+				break;
+			case 1:
+				golemCondition = LEFTATTACK;
+				SetPos(640 - golemIdle->Width() * 0.5f + 140, 355 - golemIdle->Height() * 0.5f - 40);
+				basicATimer.first += eTime;
+				if (basicATimer.first >= basicATimer.second)
+				{
+					SetPos(640 - golemIdle->Width() * 0.5f, 355 - golemIdle->Height() * 0.5f - 50);
+					golemCondition = IDLE;
+					basicATimer.first = 0;
+					attackTimer.first = 0;
+					index = RandomInt(0, 2);
+				}
+				break;
+			case 2:
+				golemCondition = CRACKATTACK;
 				SetPos(640 - golemIdle->Width() * 0.5f, 355 - golemIdle->Height() * 0.5f - 50);
-				golemCondition = IDLE;
-				basicATimer.first = 0;
-				attackTimer.first = 0;
-				index = RandomInt(0, 2);
+				basicATimer.first += eTime;
+				if (basicATimer.first >= basicATimer.second)
+				{
+					golemCondition = IDLE;
+					basicATimer.first = 0;
+					attackTimer.first = 0;
+					index = RandomInt(0, 2);
+				}
+				break;
 			}
-			break;
-		case 1:
-			golemCondition = LEFTATTACK;
-			SetPos(640 - golemIdle->Width() * 0.5f + 140, 355 - golemIdle->Height() * 0.5f - 40);
-			basicATimer.first += eTime;
-			if (basicATimer.first >= basicATimer.second)
-			{
-				SetPos(640 - golemIdle->Width() * 0.5f, 355 - golemIdle->Height() * 0.5f - 50);
-				golemCondition = IDLE;
-				basicATimer.first = 0;
-				attackTimer.first = 0;
-				index = RandomInt(0, 2);
-			}
-			break;
-		case 2:
-			golemCondition = CRACKATTACK;
-			SetPos(640 - golemIdle->Width() * 0.5f, 355 - golemIdle->Height() * 0.5f - 50);
-			basicATimer.first += eTime;
-			if (basicATimer.first >= basicATimer.second)
-			{
-				golemCondition = IDLE;	
-				basicATimer.first = 0;
-				attackTimer.first = 0;
-				index = RandomInt(0, 2);
-			}
-			break;
 		}
-
-		
 	}
 }
 
@@ -139,4 +138,15 @@ bool Golem::IsCollision(PlayerCharacter * player)
 		return true;
 	else
 		return false;
+}
+
+void Golem::Damage(PlayerCharacter * player)
+{
+	if (IsCollision(player) && player->isAttack) {
+		health -= player->attackPower;
+
+		if (health <= 0) {
+			isAlive = false;
+		}
+	}
 }

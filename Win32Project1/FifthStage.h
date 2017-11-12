@@ -15,6 +15,8 @@ private:
 
 	ZeroSprite* background;
 
+	void CheckOut(float eTime) override;
+
 public:
 	FifthStage();
 
@@ -22,6 +24,5 @@ public:
 	void Render() override;
 
 
-	void CheckOut() override;
 };
 

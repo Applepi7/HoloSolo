@@ -68,7 +68,6 @@ void ThirdStage::CheckOut(float eTime)
 	for (auto t : totemList)
 	{
 		t->Damage(player, eTime);
-		printf("%.2f\n", t->health);
 	}
 
 	for (auto t = totemList.begin(); t != totemList.end();)

@@ -4,7 +4,7 @@
 
 #include <math.h>
 
-Enemy::Enemy() : speed(150), health(100.0f)
+Enemy::Enemy() : speed(100)
 {
 }
 

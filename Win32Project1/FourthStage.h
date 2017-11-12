@@ -14,6 +14,8 @@ private:
 
 	ZeroSprite* background;
 
+	void PopStage() override;
+
 public:
 	FourthStage();
 

@@ -33,7 +33,7 @@ void FirstStage::Update(float eTime)
 		s->Update(eTime);
 		if (player->Pos().x - s->Pos().x <= 100 && player->Pos().y - s->Pos().y <= 100)
 			s->Follow(player, s, eTime, s->isAlive);
-		s->SelfBoom(player, eTime);
+		// s->SelfBoom(player, eTime);
 
 	}
 	player->Update(eTime);

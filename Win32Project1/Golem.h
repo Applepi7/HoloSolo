@@ -26,12 +26,15 @@ private:
 public:
 	Golem();
 
+	bool isAlive;
+
 	void Update(float eTime) override;
 	void Render() override;
 	
-	void Attack(float eTime);
+	void Attack(float eTime, bool isAttack);
 
 	bool IsCollision(PlayerCharacter* player) override;
+	void Damage(PlayerCharacter* player) override;
 
 	ZeroAnimation* golemIdle;
 	ZeroAnimation* golemAttack;

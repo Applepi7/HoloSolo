@@ -4,7 +4,7 @@
 #include "Random.h"
 
 
-Dragon::Dragon() : dragonCondition(IDLE), attackTimer(0, 3.0f), windTimer(0, 3.0f), wingTimer(0, 3.0f), thunderTimer(0, 3.0f), fireTimer(0, 3.0f), index(RandomInt(0, 3))
+Dragon::Dragon() : isAlive(true), dragonCondition(IDLE), attackTimer(0, 3), windTimer(0, 30.0f), wingTimer(0, 1.0f), thunderTimer(0, 3.0f), fireTimer(0, 3.0f), damageTimer(0, .2f), index(RandomInt(0, 3))
 {
 	health = 500;
 
@@ -72,15 +72,16 @@ Dragon::Dragon() : dragonCondition(IDLE), attackTimer(0, 3.0f), windTimer(0, 3.0
 	PushScene(dFire);
 
 	SetPos(640 - dragonIdle->Width() * 0.5f, 355 - dragonIdle->Height() * 0.5f);
-	dWaveLength->SetPos(0, 0);
-	dThunder->SetPos(50, 50);
+	dWaveLength->SetPos(-dWaveLength->Width() * 0.2f, 0);
+	dBreath->SetPos(-280, 100);
+	dThunder->SetPos(Pos().x - dThunder->Width() * 0.8f , dThunder->Height() * 2.5);
+	dFire->SetPos(dFire->Width() * 0.5f + 30, 80);
 }
 
 void Dragon::Update(float eTime)
 {
 	ZeroIScene::Update(eTime);
 
-	Attack(eTime);
 }
 
 void Dragon::Render()
@@ -97,12 +98,12 @@ void Dragon::Render()
 		dBreath->Render();
 		break;
 	case WING:
-		dragonWing->Render();
 		dWaveLength->Render();
+		dragonWing->Render();
 		break;
 	case THUNDER:
-		dragonThunder->Render();
 		dThunder->Render();
+		dragonThunder->Render();
 		break;
 	case FIRE:
 		dragonFire->Render();
@@ -111,16 +112,25 @@ void Dragon::Render()
 	}
 }
 
-void Dragon::Attack(float eTime)
+void Dragon::Attack(PlayerCharacter* player, float eTime)
 {
 	attackTimer.first += eTime;
 	if (attackTimer.first >= attackTimer.second)
 	{
-		switch (index)
+		switch (2)
 		{
 		case 0:
 			dragonCondition = THUNDER;
 			thunderTimer.first += eTime;
+			if (IsCollision(player, dThunder))
+			{
+				damageTimer.first += eTime;
+				if (damageTimer.first >= damageTimer.second)
+				{
+					player->health -= .5f;
+					damageTimer.first = 0;
+				}
+			}
 			if (thunderTimer.first >= thunderTimer.second)
 			{
 				dragonCondition = IDLE;
@@ -143,6 +153,23 @@ void Dragon::Attack(float eTime)
 		case 2:
 			dragonCondition = WING;
 			wingTimer.first += eTime;
+			if (IsCollision(player, dWaveLength))
+			{
+
+				damageTimer.first += eTime;
+				if (damageTimer.first <= damageTimer.second)
+				{
+					if (player->Pos().x >= 640 && player->Pos().x <= 1280 - (player->playerSrun->Width() * 2.0f))
+						player->AddPosX(800 * eTime);
+					else if (player->Pos().x <= 640 && player->Pos().x >= player->playerSrun->Width())
+						player->AddPosX(-800 * eTime);
+				}
+				else
+				{
+					damageTimer.first = 0;
+					damageTimer.second = 0.5f;
+				}
+			}
 			if (wingTimer.first >= wingTimer.second)
 			{
 				dragonCondition = IDLE;
@@ -154,6 +181,15 @@ void Dragon::Attack(float eTime)
 		case 3:
 			dragonCondition = FIRE;
 			fireTimer.first += eTime;
+			if (IsCollision(player, dFire) && dragonCondition == FIRE)
+			{
+				damageTimer.first += eTime;
+				if (damageTimer.first >= damageTimer.second)
+				{
+					player->health -= 1;
+					damageTimer.first = 0;
+				}
+			}
 			if (fireTimer.first >= fireTimer.second)
 			{
 				dragonCondition = IDLE;
@@ -167,6 +203,14 @@ void Dragon::Attack(float eTime)
 	}
 }
 
+void Dragon::Damage(PlayerCharacter* player, float eTime)
+{
+	if (IsCollision(player) && player->isAttack)
+	{
+		health -= player->attackPower;
+	}
+}
+
 bool Dragon::IsCollision(PlayerCharacter * player)
 {
 	if (
@@ -174,6 +218,19 @@ bool Dragon::IsCollision(PlayerCharacter * player)
 		(Pos().x - player->Pos().x <= player->playerSidle->Width()) &&
 		(Pos().y - player->Pos().y <= player->playerSidle->Height()) &&
 		(player->Pos().y - Pos().y <= dragonIdle->Height())
+		)
+		return true;
+	else
+		return false;
+}
+
+bool Dragon::IsCollision(PlayerCharacter* player, ZeroAnimation* anim) 
+{
+	if (
+		(player->Pos().x - Pos().x <= anim->Width()) &&
+		(Pos().x - player->Pos().x <= player->playerSidle->Width()) &&
+		(Pos().y - player->Pos().y <= player->playerSidle->Height()) &&
+		(player->Pos().y - Pos().y <= anim->Height())
 		)
 		return true;
 	else

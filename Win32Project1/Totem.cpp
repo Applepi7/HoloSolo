@@ -29,7 +29,7 @@ Totem::Totem(int pos) : totemCondition(IDLE), attackTimer(0, 1), lazerTimer(0, 1
 		totemIdle->SetScale(-1, 1);
 		totemAttack->SetScale(-1, 1);
 		lazer->SetScale(-0.9, 0.9);
-		lazer->SetPosX(-totemAttack->Width() + 50);
+		lazer->SetPosX(-totemAttack->Width() + 100);
 	}
 	else {
 		lazer->SetPosX(totemAttack->Width() - 50);
@@ -98,13 +98,13 @@ bool Totem::IsCollision(PlayerCharacter* player)
 		return false;
 }
 
-bool Totem::IsCollision(PlayerCharacter* player, ZeroAnimation* sprite)
+bool Totem::IsCollision(PlayerCharacter* player, ZeroAnimation* anim)
 {
 	if (
-		(player->Pos().x - Pos().x <= sprite->Width()) &&
+		(player->Pos().x - Pos().x <= anim->Width()) &&
 		(Pos().x - player->Pos().x <= player->playerSidle->Width()) &&
 		(Pos().y - player->Pos().y <= player->playerSidle->Height()) &&
-		(player->Pos().y - Pos().y <= sprite->Height())
+		(player->Pos().y - Pos().y <= anim->Height())
 		)
 		return true;
 	else

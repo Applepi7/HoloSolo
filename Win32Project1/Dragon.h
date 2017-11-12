@@ -21,6 +21,7 @@ private:
 	pair<float, float> wingTimer;
 	pair<float, float> thunderTimer;
 	pair<float, float> fireTimer;
+	pair<float, float> damageTimer;
 
 	int index;
 
@@ -29,11 +30,15 @@ public:
 
 	DragonCondition dragonCondition;
 
+	bool isAlive;
+
 	void Update(float eTime) override;
 	void Render() override;
-	void Attack(float eTime);
+	void Attack(PlayerCharacter* player, float eTime);
 
+	void Damage(PlayerCharacter* player, float eTime) override;
 	bool IsCollision(PlayerCharacter* player) override;
+	bool IsCollision(PlayerCharacter* player, ZeroAnimation* anim);
 
 
 	ZeroAnimation* dragonIdle;

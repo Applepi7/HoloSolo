@@ -12,6 +12,7 @@ FifthStage::FifthStage()
 	PushScene(player);
 
 	background->SetPos(640 - background->Width() * 0.5f, 355 - background->Height() * 0.5f);
+
 }
 
 void FifthStage::Update(float eTime)
@@ -21,7 +22,7 @@ void FifthStage::Update(float eTime)
 	player->Update(eTime);
 	dragon->Update(eTime);
 
-	CheckOut();
+	CheckOut(eTime);
 
 }
 
@@ -35,8 +36,17 @@ void FifthStage::Render()
 	player->Render();
 }
 
-void FifthStage::CheckOut()
+void FifthStage::CheckOut(float eTime)
 {
+	if (dragon->isAlive)
+	{
+		dragon->Attack(player, eTime);
+		dragon->Damage(player, eTime);
+	}
+
 	if (dragon->IsCollision(player) && player->isAttack)
 		dragon->health -= player->attackPower;
+
+	printf("player health : %d\n", player->health);
+	printf("dragon health : %.2f\n", dragon->health);
 }

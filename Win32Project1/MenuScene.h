@@ -12,6 +12,7 @@ public:
 	~MenuScene();
 
 	ZeroSprite* btn;
+	ZeroSprite* background;
 
 	void Update(float eTime) override;
 	void Render() override;

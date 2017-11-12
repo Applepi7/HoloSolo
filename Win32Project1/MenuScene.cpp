@@ -6,7 +6,10 @@
 
 MenuScene::MenuScene()
 {
-	btn = new ZeroSprite("Resource/UI/Button/bt_gamestart_click.png");
+	background = new ZeroSprite("Resource/UI/Menu/background.png");
+	btn = new ZeroSprite("Resource/UI/Menu/Button/bt_gamestart_click.png");
+	
+
 	PushScene(btn);
 
 	btn->SetPos(500, 500);
@@ -33,5 +36,7 @@ void MenuScene::Update(float eTime)
 void MenuScene::Render()
 {
 	ZeroIScene::Render();
+
+	background->Render();
 	btn->Render();
 }

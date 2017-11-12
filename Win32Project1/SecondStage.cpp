@@ -12,7 +12,7 @@ SecondStage::SecondStage() : damageTimer(0, .25f), wispNum(10)
 	for (int i = 0; i < 10; i++)
 	{
 		Wisp* wisp = new Wisp();
-		wisp->SetPos(RandomInt(background->Pos().x, background->Pos().x + background->Width()), RandomInt(background->Pos().y, background->Pos().y + background->Height()));
+		wisp->SetPos(RandomInt(background->Pos().x + 150, background->Pos().x + background->Width()), RandomInt(background->Pos().y + 150, background->Pos().y + background->Height()));
 		wispList.push_back(wisp);
 		PushScene(wisp);
 	}
