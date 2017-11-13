@@ -62,6 +62,9 @@
     <Filter Include="Item">
       <UniqueIdentifier>{87997ff3-a295-4ff3-a104-c119b01569d8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scenes\MenuScene\CartoonScene">
+      <UniqueIdentifier>{ac999c34-b85f-4660-a2de-72eb3fe58bda}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
@@ -113,6 +116,9 @@
     </ClCompile>
     <ClCompile Include="Item.cpp">
       <Filter>Item</Filter>
+    </ClCompile>
+    <ClCompile Include="CartoonScene.cpp">
+      <Filter>Scenes\MenuScene\CartoonScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -169,6 +175,9 @@
     </ClInclude>
     <ClInclude Include="Item.h">
       <Filter>Item</Filter>
+    </ClInclude>
+    <ClInclude Include="CartoonScene.h">
+      <Filter>Scenes\MenuScene\CartoonScene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

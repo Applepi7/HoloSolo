@@ -7,11 +7,20 @@
 class MenuScene :
 	public ZeroIScene
 {
+private:
+	
+	void ShowHowTo();
+
 public:
 	MenuScene();
-	~MenuScene();
 
-	ZeroSprite* btn;
+	ZeroSprite* startBtn;
+	ZeroSprite* howtoBtn;
+	ZeroSprite* prolBtn;
+
+	ZeroSprite* howToPage1;
+	ZeroSprite* howToPage2;
+
 	ZeroSprite* background;
 
 	void Update(float eTime) override;

@@ -153,6 +153,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CartoonScene.cpp" />
     <ClCompile Include="Dragon.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="ExampleScene.cpp" />
@@ -175,6 +176,7 @@
     <ClCompile Include="Wisp.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CartoonScene.h" />
     <ClInclude Include="Dragon.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="ExampleScene.h" />
