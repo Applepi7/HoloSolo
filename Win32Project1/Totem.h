@@ -13,6 +13,7 @@ private:
 	pair<float, float> lazerTimer;
 	pair<float, float> damageTimer;
 	
+	int i;
 	int totemCondition;
 
 	void Attack(float eTime);

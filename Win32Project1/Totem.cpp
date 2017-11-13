@@ -2,7 +2,7 @@
 #include "Totem.h"
 
 
-Totem::Totem(int pos) : totemCondition(IDLE), attackTimer(0, 1), lazerTimer(0, 1), damageTimer(0, .1f), isAttack(false), isAlive(true)
+Totem::Totem(int pos) : totemCondition(IDLE), attackTimer(0, 3), lazerTimer(0, 1), damageTimer(0, .1f), isAttack(false), isAlive(true), i(1)
 									// attackTimer : 5초동안 가만히 있다가
 									// lazerTimer : 1초동안 레이저 파바ㅏㅏ바ㅏ박
 {
@@ -42,6 +42,8 @@ Totem::Totem(int pos) : totemCondition(IDLE), attackTimer(0, 1), lazerTimer(0, 1
 
 	lazer->SetScalingCenter(1, lazer->Height() * 2.0f);
 	
+	this->pos = pos % 2;
+
 }
 
 void Totem::Update(float eTime)
@@ -51,6 +53,7 @@ void Totem::Update(float eTime)
 	Attack(eTime);
 
 	if (health <= 0) isAlive = false;
+
 }
 
 void Totem::Render()
@@ -113,18 +116,41 @@ bool Totem::IsCollision(PlayerCharacter* player, ZeroAnimation* anim)
 
 void Totem::Attack(float eTime)
 {
-	attackTimer.first += eTime;
-	if (attackTimer.first >= attackTimer.second) {
-		isAttack = true;
+	printf("%d\n", i);
 
-		totemCondition = ATTACK;
+	attackTimer.first += eTime;
+	if (attackTimer.first >= attackTimer.second)
+	{
+		isAttack = true;
 		lazerTimer.first += eTime;
-		if (lazerTimer.first >= lazerTimer.second) {
-			lazerTimer.first = 0;
-			attackTimer.first = 0;
-			totemCondition = IDLE;
-			
-			isAttack = false;
+
+		switch (i)
+		{
+		case 0:
+			if(pos == 0)
+				totemCondition = ATTACK;
+			if (lazerTimer.first >= lazerTimer.second)
+			{
+				isAttack = false;
+				lazerTimer.first = 0;
+				attackTimer.first = 0;
+				totemCondition = IDLE;
+				i = 1;
+			}
+		break;
+		case 1:
+			if(pos == 1)
+				totemCondition = ATTACK;
+
+			if (lazerTimer.first >= lazerTimer.second)
+			{
+				isAttack = false;
+				lazerTimer.first = 0;
+				attackTimer.first = 0;
+				totemCondition = IDLE;
+				i = 0;
+			}
+
 		}
 	}
 }

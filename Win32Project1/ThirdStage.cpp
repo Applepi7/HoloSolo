@@ -13,11 +13,11 @@ ThirdStage::ThirdStage() : totemNum(5)
 	{
 		Totem* totem = new Totem(i);
 		if (i % 2 == 1) {
-			totem->pos = 1;
-			totem->SetPos(background->Pos().x + 100, background->Pos().y + 100 * i);
+			totem->SetPos(background->Pos().x + 100, background->Pos().y + 85 * i);
 		}
-		else
-			totem->SetPos(background->Pos().x + background->Width() - 100, background->Pos().y + 100 * i);
+		else {
+			totem->SetPos(background->Pos().x + background->Width() - 100, background->Pos().y + 85 * i);
+		}
 
 		totemList.push_back(totem);
 		PushScene(totem);
@@ -39,7 +39,6 @@ void ThirdStage::Update(float eTime)
 
 	CheckOut(eTime);
 
-	printf("(%d)\n", player->health);
 
 }
 

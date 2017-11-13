@@ -4,7 +4,7 @@
 #include "Random.h"
 
 
-Dragon::Dragon() : isAlive(true), dragonCondition(IDLE), attackTimer(0, 3), windTimer(0, 30.0f), wingTimer(0, 1.0f), thunderTimer(0, 3.0f), fireTimer(0, 3.0f), damageTimer(0, .2f), index(RandomInt(0, 3))
+Dragon::Dragon() : isAlive(true), dragonCondition(FIRE), attackTimer(0, 3), windTimer(0, 30.0f), wingTimer(0, 1.0f), thunderTimer(0, .5f), fireTimer(0, 3.0f), damageTimer(0, .2f), index(RandomInt(0, 3))
 {
 	health = 500;
 
@@ -117,7 +117,7 @@ void Dragon::Attack(PlayerCharacter* player, float eTime)
 	attackTimer.first += eTime;
 	if (attackTimer.first >= attackTimer.second)
 	{
-		switch (2)
+		switch (index)
 		{
 		case 0:
 			dragonCondition = THUNDER;
@@ -136,10 +136,10 @@ void Dragon::Attack(PlayerCharacter* player, float eTime)
 				dragonCondition = IDLE;
 				thunderTimer.first = 0;
 				attackTimer.first = 0;
-				index = RandomInt(0, 3);
+				index = RandomInt(0, 2);
 			}
 			break;
-		case 1:
+		/*case 1:
 			dragonCondition = WIND;
 			windTimer.first += eTime;
 			if (windTimer.first >= windTimer.second)
@@ -149,8 +149,8 @@ void Dragon::Attack(PlayerCharacter* player, float eTime)
 				attackTimer.first = 0;
 				index = RandomInt(0, 3);
 			}
-			break;
-		case 2:
+			break;*/
+		case 1:
 			dragonCondition = WING;
 			wingTimer.first += eTime;
 			if (IsCollision(player, dWaveLength))
@@ -175,10 +175,10 @@ void Dragon::Attack(PlayerCharacter* player, float eTime)
 				dragonCondition = IDLE;
 				wingTimer.first = 0;
 				attackTimer.first = 0;
-				index = RandomInt(0, 3);
+				index = RandomInt(0, 2);
 			}
 			break;
-		case 3:
+		case 2:
 			dragonCondition = FIRE;
 			fireTimer.first += eTime;
 			if (IsCollision(player, dFire) && dragonCondition == FIRE)
@@ -195,7 +195,7 @@ void Dragon::Attack(PlayerCharacter* player, float eTime)
 				dragonCondition = IDLE;
 				fireTimer.first = 0;
 				attackTimer.first = 0;
-				index = RandomInt(0, 3);
+				index = RandomInt(0, 2);
 			}
 		}
 

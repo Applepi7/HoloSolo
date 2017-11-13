@@ -12,7 +12,7 @@ SecondStage::SecondStage() : damageTimer(0, .25f), wispNum(10)
 	for (int i = 0; i < 10; i++)
 	{
 		Wisp* wisp = new Wisp();
-		wisp->SetPos(RandomInt(background->Pos().x + 150, background->Pos().x + background->Width()), RandomInt(background->Pos().y + 150, background->Pos().y + background->Height()));
+		wisp->SetPos(RandomInt(background->Pos().x + 130, background->Pos().x + background->Width() - 130), RandomInt(background->Pos().y + 130, background->Pos().y + background->Height() - 130));
 		wispList.push_back(wisp);
 		PushScene(wisp);
 	}
@@ -30,8 +30,7 @@ void SecondStage::Update(float eTime)
 	for (auto w : wispList)
 	{
 		w->Update(eTime);
-		if (player->Pos().x - w->Pos().x <= 100 && player->Pos().y - w->Pos().y <= 100)
-			w->Follow(player, w, eTime, w->isAlive);
+		w->Follow(player, w, w->speed, eTime, w->isAlive);
 
 		printf("%.2f\n", w->health);
 	}

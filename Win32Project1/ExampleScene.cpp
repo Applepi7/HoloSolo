@@ -34,13 +34,13 @@ void ExampleScene::Update(float eTime)
 {
 	ZeroIScene::Update(eTime);
 
-	player->Update(eTime);
+	/*player->Update(eTime);
 	slime->Update(eTime);
 	wisp->Update(eTime);
 	golem->Update(eTime);
 	dragon->Update(eTime);
 	
-	slime->Follow(player, slime, eTime, slime->isAlive);
+	slime->Follow(player, slime, slimeTime, slime->isAlive);
 	slime->SelfBoom(player, eTime);
 
 	wisp->Follow(player, wisp, eTime, true);
@@ -53,7 +53,7 @@ void ExampleScene::Update(float eTime)
 	if (player->isAttack && wisp->IsCollision(player))
 	{
 		wisp->health -= 1;
-	}
+	}*/
 }
 
 void ExampleScene::Render()

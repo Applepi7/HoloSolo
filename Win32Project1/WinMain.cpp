@@ -35,13 +35,13 @@ INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR, INT)
 	ZeroApp->SetHwnd(hWnd);
 
 	if (SUCCEEDED(ZeroApp->InitD3D(hWnd, false))) //전체화면을 하려면 true로
-	{
+	{	
 
 		ShowWindow(hWnd, SW_SHOWDEFAULT);
 		UpdateWindow(hWnd);
 
 		//여기서 처음 시작하는 Scene을 정한다x
-		ZeroSceneMgr->ChangeScene(new FifthStage());
+		ZeroSceneMgr->ChangeScene(new ThirdStage());
 
 
 		MSG msg;

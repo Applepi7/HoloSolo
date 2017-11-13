@@ -3,7 +3,7 @@
 
 
 
-Slime::Slime() : slimeCondition(MOVE), boomDistance(100), speed(150), isAlive(true), isPop(false), boomTimer(0, 2), popTimer(0, .5f)
+Slime::Slime() : slimeCondition(MOVE), boomDistance(100), speed(25), isAlive(true), isPop(false), boomTimer(0, 2), popTimer(0, .5f)
 {
 	health = 90;
 
@@ -48,8 +48,11 @@ void Slime::Render()
 
 void Slime::SelfBoom(PlayerCharacter * target, float eTime)
 {
-	if (target->Pos().x - Pos().x <= boomDistance || target->Pos().x - Pos().x >= -boomDistance
-		&& target->Pos().y - Pos().y <= boomDistance || target->Pos().y - Pos().y >= -boomDistance
+	if (
+		(target->Pos().x - Pos().x <= boomDistance) &&
+		(Pos().x - target->Pos().x <= boomDistance) &&
+		(Pos().y - target->Pos().y <= boomDistance) &&
+		(target->Pos().y - Pos().y <= boomDistance)
 		) {
 		boomTimer.first += eTime;
 		if (boomTimer.first >= boomTimer.second) {

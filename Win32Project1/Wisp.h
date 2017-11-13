@@ -15,7 +15,8 @@ private:
 public:
 	Wisp();
 
-	float health;
+	int speed;
+
 	bool isAttack;
 	bool isAlive;
 

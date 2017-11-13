@@ -13,6 +13,10 @@ public:
 	Enemy();
 	~Enemy();
 
+private:
+	int followDistanceX;
+	int followDistanceY;
+
 protected:
 	void FollowPlayer();
 
@@ -23,15 +27,12 @@ protected:
 	};
 
 public:
-
-	int speed;
-	
 	float health;
 
 	void Update(float eTime) override;
 	void Render() override;
 
-	void Follow(PlayerCharacter* target, Enemy* enemy, float eTime, bool isMove);
+	void Follow(PlayerCharacter* target, Enemy* enemy, int speed, float eTime, bool isMove);
 
 	virtual void Damage(PlayerCharacter* player);
 	virtual void Damage(PlayerCharacter* player, float eTime);

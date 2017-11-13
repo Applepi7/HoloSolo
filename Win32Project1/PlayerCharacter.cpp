@@ -3,7 +3,7 @@
 
 #include "ZeroInputManager.h"
 
-PlayerCharacter::PlayerCharacter() : isMove(false), isRoll(false), isAttack(false), speed(100), health(100), playerCondition(LEFTIDLE), prevKey(VK_LEFT), rollTimer(0, .7f), attackTimer(0, .7f), attackPower(50.0f)
+PlayerCharacter::PlayerCharacter() : isMove(false), isRoll(false), isAttack(false), speed(100), health(100), stamina(100), playerCondition(LEFTIDLE), prevKey(VK_LEFT), rollTimer(0, .7f), attackTimer(0, .7f), attackPower(50.0f)
 {
 
 	playerSrun = new ZeroAnimation(3.0f);
@@ -217,15 +217,11 @@ void PlayerCharacter::Move(float eTime)
 	if (ZeroInputMgr->GetKey('X') == INPUTMGR_KEYDOWN)
 		isRoll = true;
 	
-	if (isRoll) {
+	if (isRoll && stamina > 0) {
 		rollTimer.first += eTime;
-		
-		if (rollTimer.first >= rollTimer.second) {
-			isRoll = false;
-			rollTimer.first = 0;
-		}
 
-		speed = 300;
+		speed = 250;
+
 		switch (prevKey)
 		{
 		case VK_RIGHT:
@@ -241,8 +237,14 @@ void PlayerCharacter::Move(float eTime)
 			playerCondition = DOWNROLL;
 			break;
 		}
+
+		if (rollTimer.first >= rollTimer.second) {
+			isRoll = false;
+			speed = 100;
+			stamina -= 20;
+			rollTimer.first = 0;
+		}
 	}
-	else speed = 100;
 }
 
 void PlayerCharacter::Attack(float eTime)
@@ -250,14 +252,9 @@ void PlayerCharacter::Attack(float eTime)
 	if (ZeroInputMgr->GetKey('Z') == INPUTMGR_KEYDOWN)
 		isAttack = true;
 
-	if (isAttack) {
-
+	if (isAttack)
+	{
 		attackTimer.first += eTime;
-		if (attackTimer.first >= attackTimer.second)
-		{
-			isAttack = false;
-			attackTimer.first = 0;
-		}
 
 		speed = 0;
 
@@ -276,13 +273,20 @@ void PlayerCharacter::Attack(float eTime)
 			playerCondition = DOWNATTACK;
 			break;
 		}
+
+		if (attackTimer.first >= attackTimer.second)
+		{
+			isAttack = false;
+			speed = 100;
+			attackTimer.first = 0;
+		}
 	}
-	else speed = 100;
 }
 
 void PlayerCharacter::Idle()
 {
-	if (!isMove && !isAttack) {
+	if (!isMove && !isAttack) 
+	{
 		switch (prevKey)
 		{
 		case VK_RIGHT:
@@ -299,9 +303,7 @@ void PlayerCharacter::Idle()
 			break;
 		}
 
-		
+		if(stamina <= 100)
+			stamina += 0.0001f;
 	}
-
-	/*if (ZeroInputMgr->GetKey('Z') == INPUTMGR_KEYDOWN)
-		isAttack = true;*/
 }

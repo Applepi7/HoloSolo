@@ -2,8 +2,10 @@
 #include "Wisp.h"
 
 
-Wisp::Wisp() : wispCondition(MOVE), attackTimer(0, .5f), health(90), isAlive(true)
+Wisp::Wisp() : wispCondition(MOVE), attackTimer(0, .5f), isAlive(true), speed(40)
 {
+	health = 90;
+
 	wispMove = new ZeroAnimation(3.0f);
 	for (int i = 1; i <= 2; i++) {
 		wispMove->PushSprite("Resource/Enemy/Wisp/Move/wisp_move_%d.png", i);

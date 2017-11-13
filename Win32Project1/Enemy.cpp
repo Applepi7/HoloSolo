@@ -4,7 +4,7 @@
 
 #include <math.h>
 
-Enemy::Enemy() : speed(100)
+Enemy::Enemy() : followDistanceX(300), followDistanceY(200)
 {
 }
 
@@ -19,9 +19,7 @@ void Enemy::FollowPlayer()
 
 void Enemy::Update(float eTime)
 {
-	ZeroIScene::Update(eTime);
-
-	
+	ZeroIScene::Update(eTime);	
 }
 
 void Enemy::Render()
@@ -29,12 +27,13 @@ void Enemy::Render()
 	ZeroIScene::Render();
 }
 
-void Enemy::Follow(PlayerCharacter * target, Enemy * enemy, float eTime, bool isMove)
+void Enemy::Follow(PlayerCharacter * target, Enemy * enemy, int speed, float eTime, bool isMove)
 {
 	float rot = atan2(target->Pos().y - enemy->Pos().y, target->Pos().x - enemy->Pos().x);
-	if (isMove) {
-		enemy->SetPos(enemy->Pos() += ZeroVec(cos(rot), sin(rot)) * enemy->speed * eTime);
-	}
+
+	if(isMove)
+		enemy->AddPos(cos(rot), sin(rot) * speed * eTime);
+
 }
 
 void Enemy::Damage(PlayerCharacter * player)
