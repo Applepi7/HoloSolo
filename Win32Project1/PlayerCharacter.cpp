@@ -174,7 +174,7 @@ void PlayerCharacter::Render()
 void PlayerCharacter::Move(float eTime)
 {
 	if (ZeroInputMgr->GetKey(VK_RIGHT) == INPUTMGR_KEYON) {
-		if (Pos().x <= 1280 - (playerSrun->Width() * 2.0f) ) {
+		if (Pos().x <= 1280 - (playerSrun->Width() * 2.5f) ) {
 			AddPosX(speed * eTime);
 			playerCondition = RIGHTRUN;
 
@@ -185,7 +185,7 @@ void PlayerCharacter::Move(float eTime)
 	else isMove = false;
 
 	if (ZeroInputMgr->GetKey(VK_LEFT) == INPUTMGR_KEYON) {
-		if (Pos().x >= playerSrun->Width()) {
+		if (Pos().x >= playerSrun->Width() * 1.5f) {
 			AddPosX(-speed * eTime);
 			playerCondition = LEFTRUN;
 
@@ -195,7 +195,7 @@ void PlayerCharacter::Move(float eTime)
 	}
 
 	if (ZeroInputMgr->GetKey(VK_UP) == INPUTMGR_KEYON) {
-		if (Pos().y >= playerSrun->Height() - 20) {
+		if (Pos().y >= playerSrun->Height() - 100) {
 			AddPosY(-speed * eTime);
 			playerCondition = UPRUN;
 
@@ -205,7 +205,7 @@ void PlayerCharacter::Move(float eTime)
 	}
 
 	if (ZeroInputMgr->GetKey(VK_DOWN) == INPUTMGR_KEYON) {
-		if (Pos().y <= 720 - playerSrun->Height() * 2.0f) {
+		if (Pos().y <= 720 - playerSrun->Height() * 2.1f) {
 			AddPosY(speed * eTime);
 			playerCondition = DOWNRUN;
 

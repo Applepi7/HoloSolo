@@ -13,11 +13,14 @@ FifthStage::FifthStage()
 
 	background->SetPos(640 - background->Width() * 0.5f, 355 - background->Height() * 0.5f);
 
+	damageText->SetString("Damage : " + to_string((int)player->attackPower));
+	healthText->SetString("Health: " + to_string((int)player->health));
+	staminaText->SetString("Stamina : " + to_string((int)player->stamina));
 }
 
 void FifthStage::Update(float eTime)
 {
-	ZeroIScene::Update(eTime);
+	Stage::Update(eTime);
 
 	player->Update(eTime);
 	dragon->Update(eTime);
@@ -28,12 +31,16 @@ void FifthStage::Update(float eTime)
 
 void FifthStage::Render()
 {
-	ZeroIScene::Render();
+	Stage::Render();
 
 	background->Render();
 
 	dragon->Render();
 	player->Render();
+
+	damageText->Render();
+	healthText->Render();
+	staminaText->Render();
 }
 
 void FifthStage::CheckOut(float eTime)

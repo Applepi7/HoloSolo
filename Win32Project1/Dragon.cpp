@@ -71,7 +71,7 @@ Dragon::Dragon() : isAlive(true), dragonCondition(FIRE), attackTimer(0, 3), wind
 	PushScene(dWaveLength);
 	PushScene(dFire);
 
-	SetPos(640 - dragonIdle->Width() * 0.5f, 355 - dragonIdle->Height() * 0.5f);
+	SetPos(640 - dragonIdle->Width() * 0.5f, 355 - dragonIdle->Height());
 	dWaveLength->SetPos(-dWaveLength->Width() * 0.2f, 0);
 	dBreath->SetPos(-280, 100);
 	dThunder->SetPos(Pos().x - dThunder->Width() * 0.8f , dThunder->Height() * 2.5);
@@ -209,6 +209,7 @@ void Dragon::Damage(PlayerCharacter* player, float eTime)
 	{
 		health -= player->attackPower;
 	}
+
 }
 
 bool Dragon::IsCollision(PlayerCharacter * player)

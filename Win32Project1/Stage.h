@@ -14,6 +14,10 @@ public:
 
 	Item* item;
 
+	ZeroFont* damageText;
+	ZeroFont* healthText;
+	ZeroFont* staminaText;
+
 	virtual void CheckOut();
 	virtual void CheckOut(float eTime);
 	virtual void PopStage();

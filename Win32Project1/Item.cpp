@@ -64,32 +64,32 @@ void Item::GiveAbility(PlayerCharacter * player)
 	switch (type)
 	{
 	case SHOES:
-		player->speed = 150;
+		player->speed = 500;
 		player->health = 100;
 		player->attackPower = 50;
 		break;
 	case DUMBBELL:
-		player->speed = 100;
+		player->speed = 500;
 		player->health = 150;
 		player->attackPower = 50;
 		break;
 	case ROCK:
-		player->speed = 100;
+		player->speed = 500;
 		player->health = 100;
 		player->attackPower = 100;
 		break;
 	case GLOVE:
-		player->speed = 125;
+		player->speed = 500;
 		player->health = 100;
 		player->attackPower = 125;
 		break;
 	case CLOAK:
-		player->speed = 100;
+		player->speed = 500;
 		player->health = 125;
 		player->attackPower = 75;
 		break;
 	case HELMET:
-		player->speed = 150;
+		player->speed = 500;
 		player->health = 125;
 		player->attackPower = 75;
 		break;

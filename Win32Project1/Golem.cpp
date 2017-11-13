@@ -3,20 +3,20 @@
 
 #include "Random.h"
 
-Golem::Golem() : golemCondition(IDLE), attackTimer(0, 3.0f), basicATimer(0, 2.0f), crackATimer(0, 1.0f), isAttack(false), isAlive(true), index(RandomInt(0, 2))
+Golem::Golem() : golemCondition(IDLE), attackTimer(0, 3.0f), basicATimer(0, 1.3f), crackATimer(0, 1.0f), isAttack(false), isAlive(true), index(RandomInt(0, 2))
 {
 	health = 400;
 
-	golemIdle = new ZeroAnimation(3.0f);
+	golemIdle = new ZeroAnimation(3.5f);
 	for (int i = 1; i <= 4; i++) {
 		golemIdle->PushSprite("Resource/Enemy/Golem/Idle/golemIdle_%d.png", i);
 	}
 
-	golemAttack = new ZeroAnimation(6.0f);
+	golemAttack = new ZeroAnimation(3.5f);
 	for (int i = 1; i <= 6; i++) {
 		golemAttack->PushSprite("Resource/Enemy/Golem/Attack/Basic/golemAttack_%d.png", i);
 	} 
-
+															
 	golemCAttack = new ZeroAnimation(5.0f);	
 	for (int i = 1; i <= 5; i++) {
 		golemCAttack->PushSprite("Resource/Enemy/Golem/Attack/Crack/golemCrackAttack_%d.png", i);
@@ -27,18 +27,23 @@ Golem::Golem() : golemCondition(IDLE), attackTimer(0, 3.0f), basicATimer(0, 2.0f
 		groundCrack->PushSprite("Resource/Enemy/Golem/Attack/Crack/groundCrack_%d.png", i);
 	}
 
-	groundFragment = new ZeroSprite("Resource/Enemy/Golem/Attack/Basic/groundFragment.png");
+	groundFragmentL = new ZeroSprite("Resource/Enemy/Golem/Attack/Basic/groundFragment.png");
+	groundFragmentR = new ZeroSprite("Resource/Enemy/Golem/Attack/Basic/groundFragment.png");
+
 
 	PushScene(golemIdle);
 	PushScene(golemAttack);
 	PushScene(golemCAttack);
 	PushScene(groundCrack);
-	PushScene(groundFragment);
+	PushScene(groundFragmentL);
+	PushScene(groundFragmentR);
 
 	golemAttack->SetScalingCenter(golemAttack->Width() * 0.28f);
 
-	SetPos(640 - golemIdle->Width() * 0.5f, 355 - golemIdle->Height() * 0.5f - 50);
-	groundCrack->SetPos(Pos().x - groundCrack->Width(), Pos().y + 100);
+	SetPos(640 - golemIdle->Width() * 0.5f, 355 - golemIdle->Height());
+	groundCrack->SetPos(Pos().x - 470, Pos().y + 220);
+	groundFragmentL->SetPos(Pos().x - groundCrack->Width(), Pos().y + 150);
+	groundFragmentR->SetPos(Pos().x - groundFragmentR->Width() * 0.6f, Pos().y + 150);
 }
 
 
@@ -59,13 +64,13 @@ void Golem::Render()
 		golemIdle->Render();
 		break;
 	case RIGHTATTACK:
+		groundFragmentR->Render();
 		golemAttack->SetScale(1, 1);
 		golemAttack->Render();
-		groundFragment->Render();
 		break;
 	case LEFTATTACK:
-		groundFragment->Render();
-			golemAttack->SetScale(-1, 1);
+		groundFragmentL->Render();
+		golemAttack->SetScale(-1, 1);
 		golemAttack->Render();
 		break;
 	case CRACKATTACK:
@@ -86,33 +91,39 @@ void Golem::Attack(float eTime, bool isAttack)
 			{
 			case 0:
 				golemCondition = RIGHTATTACK;
-				SetPos(640 - golemIdle->Width() * 0.5f + 140, 355 - golemIdle->Height() * 0.5f - 40);
+				SetPos(640 - golemIdle->Width() * 0.5f + 140, 355 - golemIdle->Height());
 				basicATimer.first += eTime;
+				groundFragmentR->AddPosY(300 * eTime);
 				if (basicATimer.first >= basicATimer.second)
 				{
-					SetPos(640 - golemIdle->Width() * 0.5f, 355 - golemIdle->Height() * 0.5f - 50);
+					SetPos(640 - golemIdle->Width() * 0.5f, 355 - golemIdle->Height());
+					groundFragmentR->SetPos(Pos().x - groundFragmentR->Width() * 0.6f, Pos().y + 150);
+					
 					golemCondition = IDLE;
 					basicATimer.first = 0;
 					attackTimer.first = 0;
-					index = RandomInt(0, 2);
+					index = RandomInt(0, 1);
 				}
 				break;
 			case 1:
 				golemCondition = LEFTATTACK;
-				SetPos(640 - golemIdle->Width() * 0.5f + 140, 355 - golemIdle->Height() * 0.5f - 40);
+				SetPos(640 - golemIdle->Width() * 0.5f + 140, 355 - golemIdle->Height() + 10);
 				basicATimer.first += eTime;
+				groundFragmentL->AddPosY(300 * eTime);
 				if (basicATimer.first >= basicATimer.second)
 				{
-					SetPos(640 - golemIdle->Width() * 0.5f, 355 - golemIdle->Height() * 0.5f - 50);
+					SetPos(640 - golemIdle->Width() * 0.5f, 355 - golemIdle->Height());
+					groundFragmentL->SetPos(Pos().x - groundCrack->Width(), Pos().y + 150);
+					
 					golemCondition = IDLE;
 					basicATimer.first = 0;
 					attackTimer.first = 0;
-					index = RandomInt(0, 2);
+					index = RandomInt(0, 1);
 				}
 				break;
 			case 2:
 				golemCondition = CRACKATTACK;
-				SetPos(640 - golemIdle->Width() * 0.5f, 355 - golemIdle->Height() * 0.5f - 50);
+				SetPos(640 - golemIdle->Width() * 0.5f, 355 - golemIdle->Height());
 				basicATimer.first += eTime;
 				if (basicATimer.first >= basicATimer.second)
 				{
@@ -140,13 +151,34 @@ bool Golem::IsCollision(PlayerCharacter * player)
 		return false;
 }
 
+bool Golem::IsCollision(PlayerCharacter* player, ZeroAnimation* anim)
+{
+	if (
+		(player->Pos().x - Pos().x <= anim->Width()) &&
+		(Pos().x - player->Pos().x <= player->playerSidle->Width()) &&
+		(Pos().y - player->Pos().y <= player->playerSidle->Height()) &&
+		(player->Pos().y - Pos().y <= anim->Height())
+		)
+		return true;
+	else
+		return false;
+}
+
 void Golem::Damage(PlayerCharacter * player)
 {
-	if (IsCollision(player) && player->isAttack) {
+	if (IsCollision(player) && player->isAttack) 
+	{
 		health -= player->attackPower;
 
-		if (health <= 0) {
+		if (health <= 0) 
+		{
 			isAlive = false;
 		}
 	}
+
+	if (IsCollision(player, groundCrack))
+	{
+
+	}
+
 }

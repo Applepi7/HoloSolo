@@ -34,6 +34,7 @@ public:
 	void Attack(float eTime, bool isAttack);
 
 	bool IsCollision(PlayerCharacter* player) override;
+	bool IsCollision(PlayerCharacter* player, ZeroAnimation* anim);
 	void Damage(PlayerCharacter* player) override;
 
 	ZeroAnimation* golemIdle;
@@ -42,6 +43,7 @@ public:
 
 	ZeroAnimation* groundCrack;
 
-	ZeroSprite* groundFragment;
+	ZeroSprite* groundFragmentL;
+	ZeroSprite* groundFragmentR;
 };
 

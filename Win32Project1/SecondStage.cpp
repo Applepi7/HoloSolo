@@ -61,7 +61,6 @@ void SecondStage::Render()
 
 void SecondStage::PopStage()
 {
-	PopScene(player);
 }
 
 void SecondStage::CheckOut(float eTime)
