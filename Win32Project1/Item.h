@@ -9,20 +9,22 @@
 class Item :
 	public ZeroIScene
 {
+private:
+	int type;
+
 public:
 
 	enum ITEM 
 	{
 		SHOES,
-		DUMBEL,
+		DUMBBELL,	
 		ROCK,
-		GLOBE,
-		CLOCK,
+		GLOVE,
+		CLOAK,
 		HELMET
 	};
 
 	Item();
-	~Item();
 
 	void Update(float eTime) override;
 	void Render() override;
@@ -31,6 +33,8 @@ public:
 	ZeroFont* effectText;
 
 	bool IsCollision(PlayerCharacter* player);
+
+	void GiveAbility(PlayerCharacter* player);
 
 
 		/*

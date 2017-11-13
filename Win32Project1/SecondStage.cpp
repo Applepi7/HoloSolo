@@ -84,6 +84,7 @@ void SecondStage::CheckOut(float eTime)
 
 	if (wispNum == 0) {
 		if (item->IsCollision(player)) {
+			item->GiveAbility(player);
 			PopStage();
 			ZeroSceneMgr->ChangeScene(new ThirdStage());
 		}
