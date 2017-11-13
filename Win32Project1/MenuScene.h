@@ -8,7 +8,10 @@ class MenuScene :
 	public ZeroIScene
 {
 private:
-	
+	int page;
+
+	bool isStart;
+
 	void ShowHowTo();
 
 public:
@@ -20,6 +23,9 @@ public:
 
 	ZeroSprite* howToPage1;
 	ZeroSprite* howToPage2;
+	ZeroSprite* nextPageBtn;
+	ZeroSprite* prevPageBtn;
+	ZeroSprite* startGameBtn;
 
 	ZeroSprite* background;
 
