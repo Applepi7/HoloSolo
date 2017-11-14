@@ -82,7 +82,7 @@ void FirstStage::CheckOut()
 
 	if (slimeNum == 0) {
 		if (IsCollision(player, item)) {
-			// GameManager::GetInstance()->itemType = item->type;
+			GameManager::GetInstance()->itemType = item->type;
 			PopStage();
 			ZeroSceneMgr->ChangeScene(new SecondStage());
 		}

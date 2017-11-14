@@ -4,6 +4,7 @@
 #include "Item.h"
 
 class GameManager
+	: public ZeroIScene
 {
 private:
 	static GameManager* instance;

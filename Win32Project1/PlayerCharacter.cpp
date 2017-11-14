@@ -80,6 +80,11 @@ PlayerCharacter::PlayerCharacter() : isMove(false), isRoll(false), isAttack(fals
 	ZeroSoundMgr->PushSound("Resource/Sound/Player/Player_roll.wav", "rollSound");
 	ZeroSoundMgr->PushSound("Resource/Sound/Player/Player_move.wav", "moveSound");
 
+	ZeroSoundMgr->PushChannel("attackSound", "PlayerChannel", true);
+	ZeroSoundMgr->PushChannel("illSound", "PlayerChannel", true);
+	ZeroSoundMgr->PushChannel("rollSound", "PlayerChannel", true);
+	ZeroSoundMgr->PushChannel("moveSound", "PlayerChannel", true);
+
 	playerSrun->SetScalingCenter(playerSrun->Width() * 0.5f);
 	playerSidle->SetScalingCenter(playerSidle->Width() * 0.5f);
 	playerSroll->SetScalingCenter(playerSroll->Width() * 0.5f);
@@ -191,8 +196,8 @@ void PlayerCharacter::Move(float eTime)
 			prevKey = VK_RIGHT;
 			isMove = true;
 
-			ZeroSoundMgr->PlayChannel("moveSound");
 		}
+		ZeroSoundMgr->PlayChannel("moveSound", "PlayerChannel");
 	}
 	else isMove = false;
 
@@ -204,8 +209,8 @@ void PlayerCharacter::Move(float eTime)
 			prevKey = VK_LEFT;
 			isMove = true;
 
-			ZeroSoundMgr->PlayChannel("moveSound");
 		}
+		ZeroSoundMgr->PlayChannel("moveSound", "PlayerChannel");
 	}
 
 	if (ZeroInputMgr->GetKey(VK_UP) == INPUTMGR_KEYON) {
@@ -216,8 +221,8 @@ void PlayerCharacter::Move(float eTime)
 			prevKey = VK_UP;
 			isMove = true;
 
-			ZeroSoundMgr->PlayChannel("moveSound");
 		}
+		ZeroSoundMgr->PlayChannel("moveSound", "PlayerChannel");
 	}
 
 	if (ZeroInputMgr->GetKey(VK_DOWN) == INPUTMGR_KEYON) {
@@ -228,8 +233,8 @@ void PlayerCharacter::Move(float eTime)
 			prevKey = VK_DOWN;
 			isMove = true;
 
-			ZeroSoundMgr->PlayChannel("moveSound");
 		}
+		ZeroSoundMgr->PlayChannel("moveSound", "PlayerChannel");
 	}
 
 	if (ZeroInputMgr->GetKey('X') == INPUTMGR_KEYDOWN)
@@ -239,7 +244,7 @@ void PlayerCharacter::Move(float eTime)
 		rollTimer.first += eTime;
 
 		speed = 250;
-		ZeroSoundMgr->PlayChannel("rollSound");
+		ZeroSoundMgr->PlayChannel("rollSound", "PlayerChannel");
 
 		switch (prevKey)
 		{
@@ -274,7 +279,7 @@ void PlayerCharacter::Attack(float eTime)
 	if (isAttack)
 	{
 		attackTimer.first += eTime;
-		ZeroSoundMgr->PlayChannel("attackSound");
+		ZeroSoundMgr->PlayChannel("attackSound", "PlayerChannel");
 
 		speed = 0;
 

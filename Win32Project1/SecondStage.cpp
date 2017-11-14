@@ -91,7 +91,7 @@ void SecondStage::CheckOut(float eTime)
 
 	if (wispNum == 0) {
 		if (IsCollision(player, item)) {
-			GameManager::GetInstance()->itemType = item->type;
+			//GameManager::GetInstance()->itemType = item->type;
 			PopStage();
 			ZeroSceneMgr->ChangeScene(new ThirdStage()); 
 		}
