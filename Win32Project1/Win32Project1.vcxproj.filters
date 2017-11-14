@@ -120,6 +120,7 @@
     <ClCompile Include="CartoonScene.cpp">
       <Filter>Scenes\MenuScene\CartoonScene</Filter>
     </ClCompile>
+    <ClCompile Include="GameManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -145,9 +146,6 @@
     </ClInclude>
     <ClInclude Include="PlayerCharacter.h">
       <Filter>Unit\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Golem.h">
-      <Filter>Unit\Enemy\Boss\Golem</Filter>
     </ClInclude>
     <ClInclude Include="Random.h">
       <Filter>헤더 파일</Filter>
@@ -178,6 +176,12 @@
     </ClInclude>
     <ClInclude Include="CartoonScene.h">
       <Filter>Scenes\MenuScene\CartoonScene</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Golem.h">
+      <Filter>Unit\Enemy\Boss\Golem</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

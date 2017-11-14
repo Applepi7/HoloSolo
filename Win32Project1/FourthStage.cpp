@@ -17,7 +17,7 @@ FourthStage::FourthStage()
 
 	damageText->SetString("Damage : " + to_string((int)player->attackPower));
 	healthText->SetString("Health: " + to_string((int)player->health));
-	staminaText->SetString("Stamina : " + to_string((int)player->stamina));
+	speedText->SetString("Speed : " + to_string((int)player->speed));
 
 	background->SetPos(640 - background->Width() * 0.5f, 355 - background->Height() * 0.5f);
 }
@@ -42,15 +42,14 @@ void FourthStage::Render()
 
 	if(golem->isAlive)
 		golem->Render();
+	else
+		item->Render();
 
 	player->Render();
 
-	if (!golem->isAlive)
-		item->Render();
-
 	damageText->Render();
 	healthText->Render();
-	staminaText->Render();
+	speedText->Render();
 }
 
 void FourthStage::PopStage()
@@ -60,9 +59,8 @@ void FourthStage::PopStage()
 void FourthStage::CheckOut()
 {
 	golem->Damage(player);
-	if (!golem->isAlive && item->IsCollision(player)) {
+	/*if (!golem->isAlive && item->IsCollision(player)) {
 		PopStage();
-		item->GiveAbility(player);
 		ZeroSceneMgr->ChangeScene(new FifthStage());
-	}
+	}*/
 }

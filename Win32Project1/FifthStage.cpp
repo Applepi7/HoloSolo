@@ -15,7 +15,7 @@ FifthStage::FifthStage()
 
 	damageText->SetString("Damage : " + to_string((int)player->attackPower));
 	healthText->SetString("Health: " + to_string((int)player->health));
-	staminaText->SetString("Stamina : " + to_string((int)player->stamina));
+	speedText->SetString("Speed: " + to_string((int)player->speed));
 }
 
 void FifthStage::Update(float eTime)
@@ -40,7 +40,7 @@ void FifthStage::Render()
 
 	damageText->Render();
 	healthText->Render();
-	staminaText->Render();
+	speedText->Render();
 }
 
 void FifthStage::CheckOut(float eTime)

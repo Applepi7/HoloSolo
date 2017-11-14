@@ -3,6 +3,10 @@
 
 #include "Random.h"
 
+#include "GameManager.h"
+#include "PlayerCharacter.h"
+
+
 Item::Item() : type(RandomInt(0, 5))
 {
 	switch (type)
@@ -44,54 +48,4 @@ void Item::Render()
 	ZeroIScene::Render();
 
 	itemImage->Render();
-}
-
-bool Item::IsCollision(PlayerCharacter * player)
-{
-	if (
-		(player->Pos().x - Pos().x <= itemImage->Width()) &&
-		(Pos().x - player->Pos().x <= player->playerSidle->Width()) &&
-		(Pos().y - player->Pos().y <= player->playerSidle->Height()) &&
-		(player->Pos().y - Pos().y <= itemImage->Height())
-	   )
-		return true;
-	else
-		return false;
-}
-
-void Item::GiveAbility(PlayerCharacter * player)
-{
-	switch (type)
-	{
-	case SHOES:
-		player->speed = 500;
-		player->health = 100;
-		player->attackPower = 50;
-		break;
-	case DUMBBELL:
-		player->speed = 500;
-		player->health = 150;
-		player->attackPower = 50;
-		break;
-	case ROCK:
-		player->speed = 500;
-		player->health = 100;
-		player->attackPower = 100;
-		break;
-	case GLOVE:
-		player->speed = 500;
-		player->health = 100;
-		player->attackPower = 125;
-		break;
-	case CLOAK:
-		player->speed = 500;
-		player->health = 125;
-		player->attackPower = 75;
-		break;
-	case HELMET:
-		player->speed = 500;
-		player->health = 125;
-		player->attackPower = 75;
-		break;
-	}
 }

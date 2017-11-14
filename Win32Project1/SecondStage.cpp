@@ -4,6 +4,7 @@
 #include "Random.h"
 
 #include "ThirdStage.h"
+#include "GameManager.h"
 
 SecondStage::SecondStage() : damageTimer(0, .25f), wispNum(10)
 {
@@ -19,6 +20,10 @@ SecondStage::SecondStage() : damageTimer(0, .25f), wispNum(10)
 
 	player = new PlayerCharacter();
 	PushScene(player);
+
+	damageText->SetString("Damage : " + to_string((int)player->attackPower));
+	healthText->SetString("Health: " + to_string((int)player->health));
+	speedText->SetString("Speed : " + to_string((int)player->speed));
 
 	background->SetPos(640 - background->Width() * 0.5f, 355 - background->Height() * 0.5f);
 }
@@ -39,7 +44,6 @@ void SecondStage::Update(float eTime)
 
 	CheckOut(eTime);
 
-
 	printf("%d\n", player->health);
 }
 
@@ -57,6 +61,10 @@ void SecondStage::Render()
 		item->Render();
 
 	player->Render();
+
+	damageText->Render();
+	healthText->Render();
+	speedText->Render();
 }
 
 void SecondStage::PopStage()
@@ -82,10 +90,10 @@ void SecondStage::CheckOut(float eTime)
 	}
 
 	if (wispNum == 0) {
-		if (item->IsCollision(player)) {
-			item->GiveAbility(player);
+		if (IsCollision(player, item)) {
+			GameManager::GetInstance()->itemType = item->type;
 			PopStage();
-			ZeroSceneMgr->ChangeScene(new ThirdStage());
+			ZeroSceneMgr->ChangeScene(new ThirdStage()); 
 		}
 	}
 }

@@ -16,10 +16,13 @@ public:
 
 	ZeroFont* damageText;
 	ZeroFont* healthText;
-	ZeroFont* staminaText;
+	ZeroFont* speedText;
 
 	virtual void CheckOut();
 	virtual void CheckOut(float eTime);
 	virtual void PopStage();
+
+	bool IsCollision(PlayerCharacter* player, Item* item);
+
 };
 

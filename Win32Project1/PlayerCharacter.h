@@ -1,7 +1,8 @@
 #pragma once
 #include "ZeroIScene.h"
-
 #include "ZeroAnimation.h"
+
+#include "Item.h"
 
 class PlayerCharacter :
 	public ZeroIScene
@@ -17,10 +18,15 @@ private:
 
 	int playerCondition;
 	int prevKey;
+	int defaultSpeed;
+	int defaultHealth;
+	int defaultDamage;
 
 	void Move(float eTime);
 	void Attack(float eTime);
 	void Idle();
+
+	void SetAbility(int type);
 
 public:
 	PlayerCharacter();
@@ -59,7 +65,8 @@ public:
 	ZeroAnimation* playerUattack;
 	ZeroAnimation* playerDattack;
 
-	float speed;
+	int speed;
+
 	float stamina;
 	float attackPower;
 	float health;

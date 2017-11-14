@@ -102,7 +102,7 @@ void Golem::Attack(float eTime, bool isAttack)
 					golemCondition = IDLE;
 					basicATimer.first = 0;
 					attackTimer.first = 0;
-					index = RandomInt(0, 1);
+					index = RandomInt(0, 2);
 				}
 				break;
 			case 1:
@@ -118,7 +118,7 @@ void Golem::Attack(float eTime, bool isAttack)
 					golemCondition = IDLE;
 					basicATimer.first = 0;
 					attackTimer.first = 0;
-					index = RandomInt(0, 1);
+					index = RandomInt(0, 2);
 				}
 				break;
 			case 2:

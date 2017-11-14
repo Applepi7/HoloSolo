@@ -2,10 +2,13 @@
 #include "PlayerCharacter.h"
 
 #include "ZeroInputManager.h"
+#include "ZeroSoundManager.h"
+#include "GameManager.h"
 
-PlayerCharacter::PlayerCharacter() : isMove(false), isRoll(false), isAttack(false), speed(100), health(100), stamina(100), playerCondition(LEFTIDLE), prevKey(VK_LEFT), rollTimer(0, .7f), attackTimer(0, .7f), attackPower(50.0f)
+#include "Random.h"
+
+PlayerCharacter::PlayerCharacter() : isMove(false), isRoll(false), isAttack(false),health(100), speed(100), attackPower(50), stamina(100), playerCondition(LEFTIDLE), prevKey(VK_LEFT), rollTimer(0, .7f), attackTimer(0, .7f)
 {
-
 	playerSrun = new ZeroAnimation(3.0f);
 	for (int i = 1; i <= 4; i++) {
 		playerSrun->PushSprite("Resource/Run/run_side_%d.png", i);
@@ -72,6 +75,11 @@ PlayerCharacter::PlayerCharacter() : isMove(false), isRoll(false), isAttack(fals
 		playerDattack->PushSprite("Resource/Attack/attack_front_%d.png", i);
 	}
 
+	ZeroSoundMgr->PushSound("Resource/Sound/Player/Player_attack.wav", "attackSound");
+	ZeroSoundMgr->PushSound("Resource/Sound/Player/Player_ill.wav", "illSound");
+	ZeroSoundMgr->PushSound("Resource/Sound/Player/Player_roll.wav", "rollSound");
+	ZeroSoundMgr->PushSound("Resource/Sound/Player/Player_move.wav", "moveSound");
+
 	playerSrun->SetScalingCenter(playerSrun->Width() * 0.5f);
 	playerSidle->SetScalingCenter(playerSidle->Width() * 0.5f);
 	playerSroll->SetScalingCenter(playerSroll->Width() * 0.5f);
@@ -95,6 +103,8 @@ PlayerCharacter::PlayerCharacter() : isMove(false), isRoll(false), isAttack(fals
 	PushScene(playerDattack);
 
 	SetPos(600, 350);
+
+	SetAbility(/*GameManager::GetInstance()->itemType*/ RandomInt(0, 5));
 }
 
 void PlayerCharacter::Update(float eTime)
@@ -180,6 +190,8 @@ void PlayerCharacter::Move(float eTime)
 
 			prevKey = VK_RIGHT;
 			isMove = true;
+
+			ZeroSoundMgr->PlayChannel("moveSound");
 		}
 	}
 	else isMove = false;
@@ -191,6 +203,8 @@ void PlayerCharacter::Move(float eTime)
 
 			prevKey = VK_LEFT;
 			isMove = true;
+
+			ZeroSoundMgr->PlayChannel("moveSound");
 		}
 	}
 
@@ -201,6 +215,8 @@ void PlayerCharacter::Move(float eTime)
 
 			prevKey = VK_UP;
 			isMove = true;
+
+			ZeroSoundMgr->PlayChannel("moveSound");
 		}
 	}
 
@@ -211,6 +227,8 @@ void PlayerCharacter::Move(float eTime)
 
 			prevKey = VK_DOWN;
 			isMove = true;
+
+			ZeroSoundMgr->PlayChannel("moveSound");
 		}
 	}
 
@@ -221,6 +239,7 @@ void PlayerCharacter::Move(float eTime)
 		rollTimer.first += eTime;
 
 		speed = 250;
+		ZeroSoundMgr->PlayChannel("rollSound");
 
 		switch (prevKey)
 		{
@@ -240,7 +259,7 @@ void PlayerCharacter::Move(float eTime)
 
 		if (rollTimer.first >= rollTimer.second) {
 			isRoll = false;
-			speed = 100;
+			speed = defaultSpeed;
 			stamina -= 20;
 			rollTimer.first = 0;
 		}
@@ -255,6 +274,7 @@ void PlayerCharacter::Attack(float eTime)
 	if (isAttack)
 	{
 		attackTimer.first += eTime;
+		ZeroSoundMgr->PlayChannel("attackSound");
 
 		speed = 0;
 
@@ -277,7 +297,7 @@ void PlayerCharacter::Attack(float eTime)
 		if (attackTimer.first >= attackTimer.second)
 		{
 			isAttack = false;
-			speed = 100;
+			speed = defaultSpeed;
 			attackTimer.first = 0;
 		}
 	}
@@ -307,3 +327,63 @@ void PlayerCharacter::Idle()
 			stamina += 0.0001f;
 	}
 }
+
+void PlayerCharacter::SetAbility(int type)
+{
+	switch (type)
+	{
+	case Item::ITEM::SHOES:
+		speed = 150;
+		defaultSpeed = speed;
+		health = 100;
+		defaultHealth = health;
+		attackPower = 50;
+		defaultDamage = attackPower;
+		break;
+	case Item::ITEM::DUMBBELL:
+		speed = 100;
+		defaultSpeed = speed;
+		health = 150;
+		attackPower = 50;
+		break;
+	case Item::ITEM::ROCK:
+		speed = 100;
+		defaultSpeed = speed;
+		health = 100;
+		attackPower = 100;
+		break;
+	case Item::ITEM::GLOVE:
+		speed = 125;
+		defaultSpeed = speed;
+		health = 100;
+		attackPower = 75;
+		break;
+	case Item::ITEM::CLOAK:
+		speed = 125;
+		defaultSpeed = speed;
+		health = 125;
+		attackPower = 50;
+		break;
+	case Item::ITEM::HELMET:
+		speed = 100;
+		defaultSpeed = speed;
+		health = 125;
+		attackPower = 75;
+		break;
+	default:
+		speed = 100;
+		defaultSpeed = speed;
+		health = 100;
+		attackPower = 50;
+	}
+}
+
+
+/*
+Çì¸£¸Þ½º ½Å¹ß [SPEED +2]
+´ýº§ [HEALTH +2]
+Â¯µ¹ [DAMAGE +2]
+±Û·Îºê [DAMAGE +1 / SPEED +1]
+¸ÁÅä [SPEED +1 / HEALTH +1]
+Çï¸ä [HEALTH +1/DAMAGE +1]
+*/

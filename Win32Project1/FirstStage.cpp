@@ -4,6 +4,7 @@
 #include "Random.h"
 
 #include "SecondStage.h"
+#include "GameManager.h"
 
 FirstStage::FirstStage() : slimeNum(10)
 {
@@ -16,9 +17,13 @@ FirstStage::FirstStage() : slimeNum(10)
 		slimeList.push_back(slime);
 		PushScene(slime);
 	}
-	
+
 	player = new PlayerCharacter();
 	PushScene(player);
+
+	damageText->SetString("Damage : " + to_string((int)player->attackPower));
+	healthText->SetString("Health: " + to_string((int)player->health));
+	speedText->SetString("Speed: " + to_string((int)player->speed));
 
 	background->SetPos(640 - background->Width() * 0.5f, 355 - background->Height() * 0.5f);
 
@@ -39,8 +44,6 @@ void FirstStage::Update(float eTime)
 	item->Update(eTime);
 
 	CheckOut();
-	// SpawnItem();
-
 }
 
 void FirstStage::Render()
@@ -54,15 +57,14 @@ void FirstStage::Render()
 
 	if (slimeNum == 0)
 		item->Render();
+
+	damageText->Render();
+	healthText->Render();
+	speedText->Render();
 }
 
 void FirstStage::PopStage()
 {
-}
-
-void FirstStage::SpawnItem()
-{
-	PopScene(player);
 }
 
 void FirstStage::CheckOut()
@@ -79,7 +81,8 @@ void FirstStage::CheckOut()
 	}
 
 	if (slimeNum == 0) {
-		if (item->IsCollision(player)) {
+		if (IsCollision(player, item)) {
+			// GameManager::GetInstance()->itemType = item->type;
 			PopStage();
 			ZeroSceneMgr->ChangeScene(new SecondStage());
 		}

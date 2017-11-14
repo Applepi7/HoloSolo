@@ -28,7 +28,7 @@ ThirdStage::ThirdStage() : totemNum(5)
 
 	damageText->SetString("Damage : " + to_string((int)player->attackPower));
 	healthText->SetString("Health: " + to_string((int)player->health));
-	staminaText->SetString("Stamina : " + to_string((int)player->stamina));
+	speedText->SetString("Speed : " + to_string((int)player->speed));
 
 	background->SetPos(640 - background->Width() * 0.5f, 355 - background->Height() * 0.5f);
 }
@@ -62,7 +62,7 @@ void ThirdStage::Render()
 
 	damageText->Render();
 	healthText->Render();
-	staminaText->Render();
+	speedText->Render();
 }
 
 void ThirdStage::PopStage()
@@ -87,10 +87,9 @@ void ThirdStage::CheckOut(float eTime)
 	}
 
 	if (totemNum == 0) {
-		if (item->IsCollision(player)) {
+		/*if (item->IsCollision(player)) {
 			PopStage();
-			item->GiveAbility(player);
 			ZeroSceneMgr->ChangeScene(new FourthStage());
-		}
+		}*/
 	}
 }

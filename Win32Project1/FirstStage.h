@@ -15,7 +15,6 @@ private:
 	ZeroSprite* background;
 
 	void CheckOut() override;
-	void SpawnItem();
 
 public:
 	FirstStage();
