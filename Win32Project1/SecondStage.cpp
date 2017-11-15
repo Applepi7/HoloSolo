@@ -21,6 +21,9 @@ SecondStage::SecondStage() : damageTimer(0, .25f), wispNum(10)
 	player = new PlayerCharacter();
 	PushScene(player);
 
+	failBackground->SetColorA(0);
+	failSprite->SetColorA(0);
+
 	damageText->SetString("Damage : " + to_string((int)player->attackPower));
 	healthText->SetString("Health: " + to_string((int)player->health));
 	speedText->SetString("Speed : " + to_string((int)player->speed));
@@ -36,8 +39,11 @@ void SecondStage::Update(float eTime)
 	{
 		w->Update(eTime);
 		w->Follow(player, w, w->speed, eTime, w->isAlive);
+		if (w->IsCollision(player)) {
+			w->Attack(player, eTime);
+		}
 
-		printf("%.2f\n", w->health);
+		printf("wisp health : %.2f\n", w->health);
 	}
 	item->Update(eTime);
 	player->Update(eTime);
@@ -52,6 +58,7 @@ void SecondStage::Render()
 	ZeroIScene::Render();
 
 	background->Render();
+	player->Render();
 	for (auto w : wispList)
 	{
 		w->Render();
@@ -60,11 +67,13 @@ void SecondStage::Render()
 	if (wispNum == 0)
 		item->Render();
 
-	player->Render();
 
 	damageText->Render();
 	healthText->Render();
 	speedText->Render();
+
+	failBackground->Render();
+	failSprite->Render();
 }
 
 void SecondStage::PopStage()
@@ -75,9 +84,7 @@ void SecondStage::CheckOut(float eTime)
 {
 	for (auto w = wispList.begin(); w != wispList.end();)
 	{
-		if ((*w)->IsCollision(player)) {
-			(*w)->Attack(player, eTime);
-		}
+		
 		(*w)->Damage(player);
 
 		if (!(*w)->isAlive)
@@ -96,4 +103,7 @@ void SecondStage::CheckOut(float eTime)
 			ZeroSceneMgr->ChangeScene(new ThirdStage()); 
 		}
 	}
+
+	ShowResult(player, eTime);
+	printf("player health : %.2f", player->health);
 }

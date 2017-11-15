@@ -42,8 +42,6 @@ void ThirdStage::Update(float eTime)
 	player->Update(eTime);
 
 	CheckOut(eTime);
-
-
 }
 
 void ThirdStage::Render()
@@ -63,6 +61,8 @@ void ThirdStage::Render()
 	damageText->Render();
 	healthText->Render();
 	speedText->Render();
+
+	failBackground->Render();
 }
 
 void ThirdStage::PopStage()
@@ -74,6 +74,7 @@ void ThirdStage::CheckOut(float eTime)
 	for (auto t : totemList)
 	{
 		t->Damage(player, eTime);
+		printf("totem health : %.2f\n", t->health);
 	}
 
 	for (auto t = totemList.begin(); t != totemList.end();)
@@ -87,9 +88,11 @@ void ThirdStage::CheckOut(float eTime)
 	}
 
 	if (totemNum == 0) {
-		/*if (item->IsCollision(player)) {
+		if (IsCollision(player, item)) {
 			PopStage();
 			ZeroSceneMgr->ChangeScene(new FourthStage());
-		}*/
+		}
 	}
+
+	printf("player health : %.2f", player->health);
 }

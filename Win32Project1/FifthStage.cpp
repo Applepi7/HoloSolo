@@ -5,6 +5,9 @@
 FifthStage::FifthStage()
 {
 	background = new ZeroSprite("Resource/UI/Background/background.png");
+	clearSprite = new ZeroSprite("Resource/UI/Result/clear.png");
+	clearSprite->SetColorA(0);
+	PushScene(clearSprite);
 
 	dragon = new Dragon();
 	player = new PlayerCharacter();
@@ -41,6 +44,8 @@ void FifthStage::Render()
 	damageText->Render();
 	healthText->Render();
 	speedText->Render();
+
+	clearSprite->Render();
 }
 
 void FifthStage::CheckOut(float eTime)

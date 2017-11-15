@@ -7,7 +7,7 @@
 
 #include "Random.h"
 
-PlayerCharacter::PlayerCharacter() : isMove(false), isRoll(false), isAttack(false),health(100), speed(100), attackPower(50), stamina(100), playerCondition(LEFTIDLE), prevKey(VK_LEFT), rollTimer(0, .7f), attackTimer(0, .7f)
+PlayerCharacter::PlayerCharacter() : isAlive(true), isMove(false), isRoll(false), isAttack(false),health(100), speed(100), attackPower(50), stamina(100), playerCondition(LEFTIDLE), prevKey(VK_LEFT), rollTimer(0, .7f), attackTimer(0, .7f)
 {
 	playerSrun = new ZeroAnimation(3.0f);
 	for (int i = 1; i <= 4; i++) {
@@ -75,6 +75,9 @@ PlayerCharacter::PlayerCharacter() : isMove(false), isRoll(false), isAttack(fals
 		playerDattack->PushSprite("Resource/Attack/attack_front_%d.png", i);
 	}
 
+	/*-------------------------------------------------------------------------*/
+
+
 	ZeroSoundMgr->PushSound("Resource/Sound/Player/Player_attack.wav", "attackSound");
 	ZeroSoundMgr->PushSound("Resource/Sound/Player/Player_ill.wav", "illSound");
 	ZeroSoundMgr->PushSound("Resource/Sound/Player/Player_roll.wav", "rollSound");
@@ -107,9 +110,11 @@ PlayerCharacter::PlayerCharacter() : isMove(false), isRoll(false), isAttack(fals
 	PushScene(playerUattack);
 	PushScene(playerDattack);
 
+	
+
 	SetPos(600, 350);
 
-	SetAbility(/*GameManager::GetInstance()->itemType*/ RandomInt(0, 5));
+	SetAbility(/*GameManager::GetInstance()->itemType*/ 6);
 }
 
 void PlayerCharacter::Update(float eTime)
@@ -119,6 +124,9 @@ void PlayerCharacter::Update(float eTime)
 	Move(eTime);
 	Attack(eTime);
 	Idle();
+
+	if (health <= 90)
+		isAlive = false;
 }
 
 void PlayerCharacter::Render()
@@ -184,6 +192,8 @@ void PlayerCharacter::Render()
 		playerDattack->Render();
 		break;
 	}
+
+
 }
 
 void PlayerCharacter::Move(float eTime)
@@ -349,37 +359,37 @@ void PlayerCharacter::SetAbility(int type)
 		speed = 100;
 		defaultSpeed = speed;
 		health = 150;
-		attackPower = 50;
+		attackPower = 1.3f;
 		break;
 	case Item::ITEM::ROCK:
 		speed = 100;
 		defaultSpeed = speed;
 		health = 100;
-		attackPower = 100;
+		attackPower = 2.5f;
 		break;
 	case Item::ITEM::GLOVE:
 		speed = 125;
 		defaultSpeed = speed;
 		health = 100;
-		attackPower = 75;
+		attackPower = 2.0f;
 		break;
 	case Item::ITEM::CLOAK:
 		speed = 125;
 		defaultSpeed = speed;
 		health = 125;
-		attackPower = 50;
+		attackPower = 1.3f;
 		break;
 	case Item::ITEM::HELMET:
 		speed = 100;
 		defaultSpeed = speed;
 		health = 125;
-		attackPower = 75;
+		attackPower = 2.0f;
 		break;
 	default:
 		speed = 100;
 		defaultSpeed = speed;
 		health = 100;
-		attackPower = 50;
+		attackPower = 1.3f;
 	}
 }
 

@@ -32,7 +32,8 @@ void Enemy::Follow(PlayerCharacter * target, Enemy * enemy, int speed, float eTi
 	float rot = atan2(target->Pos().y - enemy->Pos().y, target->Pos().x - enemy->Pos().x);
 	// 아크 탄잰트를 사용하여 타겟의 위치로 각도를 잡는다
 	if(abs(target->Pos().x - enemy->Pos().x) <= followDistanceX && abs(target->Pos().y - enemy->Pos().y) <= followDistanceY)
-		enemy->AddPos(cos(rot), sin(rot) * speed * eTime);
+		if(isMove)
+			enemy->AddPos(cos(rot), sin(rot) * speed * eTime);
 
 }
 

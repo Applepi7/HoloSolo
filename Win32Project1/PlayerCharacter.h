@@ -11,6 +11,7 @@ private:
 
 	pair<float, float> rollTimer;
 	pair<float, float> attackTimer;
+	pair<float, float> alphaTimer;
 
 	bool isMove;
 	bool isRoll;
@@ -70,6 +71,8 @@ public:
 	float stamina;
 	float attackPower;
 	float health;
+
+	bool isAlive;
 
 	void Update(float eTime) override;
 	void Render() override;

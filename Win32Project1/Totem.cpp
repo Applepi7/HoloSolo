@@ -91,10 +91,10 @@ void Totem::Damage(PlayerCharacter * player, float eTime)
 bool Totem::IsCollision(PlayerCharacter* player)
 {
 	if (
-		(player->Pos().x - Pos().x <= lazer->Width()) &&
+		(player->Pos().x - lazer->Pos().x <= lazer->Width()) &&
 		(Pos().x - player->Pos().x <= player->playerSidle->Width()) &&
 		(Pos().y - player->Pos().y <= player->playerSidle->Height()) &&
-		(player->Pos().y - Pos().y <= lazer->Height())
+		(player->Pos().y - lazer->Pos().y <= lazer->Height())
 		)
 		return true;
 	else

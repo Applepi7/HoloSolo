@@ -38,6 +38,9 @@ void FirstStage::Update(float eTime)
 		s->Update(eTime);
 		s->Follow(player, s, s->speed, eTime, s->isAlive);
 		s->SelfBoom(player, eTime);
+		s->Damage(player);
+
+		printf("slime health : %.2f\n", s->health);
 
 	}
 	player->Update(eTime);
@@ -87,4 +90,6 @@ void FirstStage::CheckOut()
 			ZeroSceneMgr->ChangeScene(new SecondStage());
 		}
 	}
+
+	printf("player health : %.2f\n", player->health);
 }

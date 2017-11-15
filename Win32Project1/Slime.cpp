@@ -48,18 +48,12 @@ void Slime::Render()
 
 void Slime::SelfBoom(PlayerCharacter * target, float eTime)
 {
-	if (
-		(target->Pos().x - Pos().x <= boomDistance) &&
-		(Pos().x - target->Pos().x <= boomDistance) &&
-		(Pos().y - target->Pos().y <= boomDistance) &&
-		(target->Pos().y - Pos().y <= boomDistance)
-		) {
+	if (abs(target->Pos().x - Pos().x) <= boomDistance && abs(target->Pos().y - Pos().y) <= boomDistance) {
 		boomTimer.first += eTime;
 		if (boomTimer.first >= boomTimer.second) {
 			slimeCondition = ATTACK;
 			isAlive = false;
 
-			target->health -= 10;
 		}
 	}
 	if (!isAlive) {
@@ -67,6 +61,7 @@ void Slime::SelfBoom(PlayerCharacter * target, float eTime)
 		if (popTimer.first >= popTimer.second) {
 			PopScene(slimeMove);
 			PopScene(slimeBoom);
+			target->health -= 10;
 			isPop = true;
 		}
 	}
@@ -87,8 +82,10 @@ bool Slime::IsCollision(PlayerCharacter * player)
 
 void Slime::Damage(PlayerCharacter* player)
 {
-	if(IsCollision(player) && player->isAttack)
-		health -= player->attackPower;	
+	if (IsCollision(player) && player->isAttack)
+		health -= player->attackPower;
+
+	if (health <= 0) isPop = true;
 }
 
 void Slime::PlayDamageSound()

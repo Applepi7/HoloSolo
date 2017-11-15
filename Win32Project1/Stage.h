@@ -18,6 +18,14 @@ public:
 	ZeroFont* healthText;
 	ZeroFont* speedText;
 
+	ZeroSprite*	failSprite;
+	ZeroSprite* failBackground;
+
+	void Update(float eTime) override;
+	void Render() override;
+
+	void ShowResult(PlayerCharacter* player, float eTime);
+
 	virtual void CheckOut();
 	virtual void CheckOut(float eTime);
 	virtual void PopStage();

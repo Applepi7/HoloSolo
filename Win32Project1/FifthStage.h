@@ -14,6 +14,7 @@ private:
 	Dragon* dragon;
 
 	ZeroSprite* background;
+	ZeroSprite* clearSprite;
 
 	void CheckOut(float eTime) override;
 
