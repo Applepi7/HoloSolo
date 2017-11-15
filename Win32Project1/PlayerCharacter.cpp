@@ -77,7 +77,10 @@ PlayerCharacter::PlayerCharacter() : isAlive(true), canInput(true), isMove(false
 
 	/*-------------------------------------------------------------------------*/
 
+
 	collider = new ZeroSprite("Resource/Player/playerCollider.png");
+
+
 
 	ZeroSoundMgr->PushSound("Resource/Sound/Player/Player_attack.wav", "attackSound");
 	ZeroSoundMgr->PushSound("Resource/Sound/Player/Player_ill.wav", "illSound");
@@ -111,9 +114,12 @@ PlayerCharacter::PlayerCharacter() : isAlive(true), canInput(true), isMove(false
 	PushScene(playerUattack);
 	PushScene(playerDattack);
 
+
 	PushScene(collider);
 
 	SetPos(600, 350);
+
+	
 
 	SetAbility(/*GameManager::GetInstance()->itemType*/ RandomInt(0, 5));
 }
@@ -195,6 +201,7 @@ void PlayerCharacter::Render()
 	}
 
 	collider->Render();
+
 }
 
 void PlayerCharacter::Move(float eTime)
@@ -342,7 +349,7 @@ void PlayerCharacter::Idle()
 		}
 
 		if(stamina <= 100)
-			stamina += 0.0001f;
+			stamina += 0.001f;
 	}
 }
 
@@ -356,42 +363,47 @@ void PlayerCharacter::SetAbility(int type)
 		health = 100;
 		defaultHealth = health;
 		attackPower = 1.3;
-		defaultDamage = attackPower;
 		break;
 	case Item::ITEM::DUMBBELL:
 		speed = 100;
 		defaultSpeed = speed;
 		health = 150;
+		defaultHealth = health;
 		attackPower = 1.3f;
 		break;
 	case Item::ITEM::ROCK:
 		speed = 100;
 		defaultSpeed = speed;
 		health = 100;
+		defaultHealth = health;
 		attackPower = 2.5f;
 		break;
 	case Item::ITEM::GLOVE:
 		speed = 125;
 		defaultSpeed = speed;
 		health = 100;
+		defaultHealth = health;
 		attackPower = 2.0f;
 		break;
 	case Item::ITEM::CLOAK:
 		speed = 125;
 		defaultSpeed = speed;
 		health = 125;
+		defaultHealth = health;
 		attackPower = 1.3f;
 		break;
 	case Item::ITEM::HELMET:
 		speed = 100;
 		defaultSpeed = speed;
 		health = 125;
+		defaultHealth = health;
 		attackPower = 2.0f;
 		break;
 	default:
 		speed = 100;
 		defaultSpeed = speed;
 		health = 100;
+		defaultHealth = health;
 		attackPower = 1.3f;
 	}
 }

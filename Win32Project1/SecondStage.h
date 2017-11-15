@@ -12,6 +12,8 @@ private:
 	PlayerCharacter* player;
 	list<Wisp*> wispList;
 
+	UIManager* ui;
+
 	ZeroSprite* background;
 
 	int wispNum;

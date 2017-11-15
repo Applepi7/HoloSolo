@@ -11,9 +11,9 @@ Stage::Stage()
 {
 	item = new Item();
 
-	healthText = new ZeroFont(30, "", "LuckiestGuy");
-	damageText = new ZeroFont(30, "", "LuckiestGuy");
-	speedText = new ZeroFont(30, "", "LuckiestGuy");
+	healthText = new ZeroFont(30, "", "Luckiest Guy");
+	damageText = new ZeroFont(30, "", "Luckiest Guy");
+	speedText = new ZeroFont(30, "", "Luckiest Guy");
 
 
 	failSprite = new ZeroSprite("Resource/UI/Result/fail.png");

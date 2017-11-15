@@ -173,6 +173,7 @@
     </ClCompile>
     <ClCompile Include="ThirdStage.cpp" />
     <ClCompile Include="Totem.cpp" />
+    <ClCompile Include="UIManager.cpp" />
     <ClCompile Include="WinMain.cpp" />
     <ClCompile Include="Wisp.cpp" />
   </ItemGroup>
@@ -196,6 +197,7 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="ThirdStage.h" />
     <ClInclude Include="Totem.h" />
+    <ClInclude Include="UIManager.h" />
     <ClInclude Include="Wisp.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

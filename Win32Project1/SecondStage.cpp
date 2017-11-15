@@ -8,6 +8,8 @@
 
 SecondStage::SecondStage() : damageTimer(0, .25f), wispNum(10)
 {
+	ui = new UIManager();
+
 	background = new ZeroSprite("Resource/UI/Background/background.png");
 
 	for (int i = 0; i < 10; i++)
@@ -48,6 +50,26 @@ void SecondStage::Update(float eTime)
 	item->Update(eTime);
 	player->Update(eTime);
 
+	if (player->health >= 0) {
+		switch (player->defaultHealth)
+		{
+		case 100:
+			ui->healthFill->SetScale(player->health * 0.01, 1);
+			break;
+		case 125:
+			ui->healthFill->SetScale(player->health * 0.008, 1);
+			break;
+		case 150:
+			ui->healthFill->SetScale(player->health * 0.0067, 1);
+			break;
+		}
+	}
+	else
+		ui->healthFill->SetScale(0, 1);
+
+	ui->staminaFill->SetScale(player->stamina * 0.01, 1);
+
+
 	CheckOut(eTime);
 
 	printf("%d\n", player->health);
@@ -72,6 +94,11 @@ void SecondStage::Render()
 	damageText->Render();
 	healthText->Render();
 	speedText->Render();
+
+	ui->healthBar->Render();
+	ui->healthFill->Render();
+	ui->staminaBar->Render();
+	ui->staminaFill->Render();
 
 	failBackground->Render();
 	failSprite->Render();

@@ -126,7 +126,7 @@ void Dragon::Attack(PlayerCharacter* player, float eTime)
 			windTimer.first += eTime;
 			if (dBreath->IsOverlapped(player->collider))
 			{
-				static float rot = atan2(Pos().y + 200 - player->Pos().y, Pos().x + 100 - player->Pos().x);
+				static float rot = atan2((Pos().y + 200) - player->Pos().y, (Pos().x + 100) - player->Pos().x);
 				player->AddPos(cos(rot), sin(rot) * 150 * eTime);
 			}
 		    if (windTimer.first >= windTimer.second)

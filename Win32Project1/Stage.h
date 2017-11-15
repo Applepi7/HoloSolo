@@ -4,6 +4,7 @@
 #include "ZeroSceneManager.h"
 
 #include "Item.h"
+#include "UIManager.h"
 
 #include <list>
 class Stage :

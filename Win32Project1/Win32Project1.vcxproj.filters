@@ -121,6 +121,7 @@
       <Filter>Scenes\MenuScene\CartoonScene</Filter>
     </ClCompile>
     <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="UIManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -182,6 +183,9 @@
     </ClInclude>
     <ClInclude Include="Golem.h">
       <Filter>Unit\Enemy\Boss\Golem</Filter>
+    </ClInclude>
+    <ClInclude Include="UIManager.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

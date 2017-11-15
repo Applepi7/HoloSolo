@@ -20,7 +20,6 @@ private:
 	int playerCondition;
 	int prevKey;
 	int defaultSpeed;
-	int defaultHealth;
 	int defaultDamage;
 
 	void Move(float eTime);
@@ -66,9 +65,12 @@ public:
 	ZeroAnimation* playerUattack;
 	ZeroAnimation* playerDattack;
 
+	
 	ZeroSprite* collider;
 
+
 	int speed;
+	int defaultHealth;
 
 	float stamina;
 	float attackPower;
