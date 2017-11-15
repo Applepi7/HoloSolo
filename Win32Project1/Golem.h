@@ -14,7 +14,9 @@ private:
 		CRACKATTACK
 	};
 
-	bool isAttack;
+	bool isShowCrack;
+	bool isDamage;
+
 	int index;
 
 	pair<float, float> attackTimer;
@@ -27,11 +29,12 @@ public:
 	Golem();
 
 	bool isAlive;
+	bool isAttack;
 
 	void Update(float eTime) override;
 	void Render() override;
 	
-	void Attack(float eTime, bool isAttack);
+	void Attack(PlayerCharacter* player, float eTime);
 
 	bool IsCollision(PlayerCharacter* player) override;
 	bool IsCollision(PlayerCharacter* player, ZeroAnimation* anim);

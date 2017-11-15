@@ -58,11 +58,12 @@ void SecondStage::Render()
 	ZeroIScene::Render();
 
 	background->Render();
-	player->Render();
+
 	for (auto w : wispList)
 	{
 		w->Render();
-	}
+	}player->Render();
+	
 
 	if (wispNum == 0)
 		item->Render();

@@ -31,8 +31,10 @@ void FourthStage::Update(float eTime)
 
 	item->Update(eTime);
 	player->Update(eTime);
-	if (golem->isAlive)
+	if (golem->isAlive) {
 		golem->Update(eTime);
+		golem->Attack(player, eTime);
+	}
 
 	CheckOut(eTime);
 }

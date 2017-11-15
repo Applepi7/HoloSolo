@@ -31,10 +31,12 @@ Totem::Totem(int pos) : totemCondition(IDLE), attackTimer(0, 3), lazerTimer(0, 1
 		lazer->SetScale(-0.9, 0.9);
 		lazer->SetPosX(-totemAttack->Width() + 100);
 	}
-	else {
+	else
+	{
 		lazer->SetPosX(totemAttack->Width() - 50);
 		lazer->SetScale(0.9, 0.9);
 	}
+
 
 	PushScene(totemAttack);
 	PushScene(totemIdle);
@@ -52,7 +54,8 @@ void Totem::Update(float eTime)
 
 	Attack(eTime);
 
-	if (health <= 0) isAlive = false;
+	if (health <= 0)
+		isAlive = false;
 
 }
 
@@ -70,11 +73,12 @@ void Totem::Render()
 		totemAttack->Render();
 		break;
 	}
+
 }
 
 void Totem::Damage(PlayerCharacter * player, float eTime)
 {
-	if (IsCollision(player) && isAttack)
+	if (lazer->IsOverlapped(player->collider) && isAttack)
 	{
 		damageTimer.first += eTime;
 		if (damageTimer.first >= damageTimer.second)
@@ -84,40 +88,12 @@ void Totem::Damage(PlayerCharacter * player, float eTime)
 		}
 	}
 
-	else if (IsCollision(player, totemIdle) && player->isAttack)
+	else if ((totemIdle->IsOverlapped(player->collider) || totemAttack->IsOverlapped(player->collider)) && player->isAttack)
 		health -= player->attackPower;
-}
-
-bool Totem::IsCollision(PlayerCharacter* player)
-{
-	if (
-		(player->Pos().x - lazer->Pos().x <= lazer->Width()) &&
-		(Pos().x - player->Pos().x <= player->playerSidle->Width()) &&
-		(Pos().y - player->Pos().y <= player->playerSidle->Height()) &&
-		(player->Pos().y - lazer->Pos().y <= lazer->Height())
-		)
-		return true;
-	else
-		return false;
-}
-
-bool Totem::IsCollision(PlayerCharacter* player, ZeroAnimation* anim)
-{
-	if (
-		(player->Pos().x - Pos().x <= anim->Width()) &&
-		(Pos().x - player->Pos().x <= player->playerSidle->Width()) &&
-		(Pos().y - player->Pos().y <= player->playerSidle->Height()) &&
-		(player->Pos().y - Pos().y <= anim->Height())
-		)
-		return true;
-	else
-		return false;
 }
 
 void Totem::Attack(float eTime)
 {
-	printf("%d\n", i);
-
 	attackTimer.first += eTime;
 	if (attackTimer.first >= attackTimer.second)
 	{

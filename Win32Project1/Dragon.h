@@ -25,6 +25,8 @@ private:
 
 	int index;
 
+	bool isDown;
+
 public:
 	Dragon();
 

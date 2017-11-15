@@ -54,6 +54,8 @@ void MenuScene::Update(float eTime)
 	}
 
 	ShowHowTo();
+
+	printf("%d\n", page);
 }
 
 void MenuScene::Render()
@@ -99,6 +101,7 @@ void MenuScene::ShowHowTo()
 		if (prevPageBtn->IsOverlapped(ZeroInputMgr->GetClientPoint()))
 		{
 			page -= 1;
+			isStart = false;
 		}
 
 		if (startGameBtn->IsOverlapped(ZeroInputMgr->GetClientPoint()) && isStart)

@@ -66,6 +66,8 @@ public:
 	ZeroAnimation* playerUattack;
 	ZeroAnimation* playerDattack;
 
+	ZeroSprite* collider;
+
 	int speed;
 
 	float stamina;

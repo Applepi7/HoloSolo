@@ -22,6 +22,7 @@ public:
 	Totem(int pos);
 
 	ZeroSprite* totemAttack;
+
 	ZeroAnimation* totemIdle;
 	ZeroAnimation* lazer;
 
@@ -35,7 +36,5 @@ public:
 	
 	void Damage(PlayerCharacter* player, float eTime) override;
 
-	bool IsCollision(PlayerCharacter* player) override;
-	bool IsCollision(PlayerCharacter* player, ZeroAnimation* sprite);
 };
 

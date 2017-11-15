@@ -11,72 +11,73 @@ PlayerCharacter::PlayerCharacter() : isAlive(true), canInput(true), isMove(false
 {
 	playerSrun = new ZeroAnimation(3.0f);
 	for (int i = 1; i <= 4; i++) {
-		playerSrun->PushSprite("Resource/Run/run_side_%d.png", i);
+		playerSrun->PushSprite("Resource/Player/Run/run_side_%d.png", i);
 	}
 
 	playerUrun = new ZeroAnimation(3.0f);
 	for (int i = 1; i <= 2; i++) {
-		playerUrun->PushSprite("Resource/Run/run_back_%d.png", i);
+		playerUrun->PushSprite("Resource/Player/Run/run_back_%d.png", i);
 	}
 
 	playerDrun = new ZeroAnimation(3.0f);
 	for (int i = 1; i <= 2; i++) {
-		playerDrun->PushSprite("Resource/Run/run_front_%d.png", i);
+		playerDrun->PushSprite("Resource/Player/Run/run_front_%d.png", i);
 	}
 
 	/*-------------------------------------------------------------------------*/
 
 	playerSidle = new ZeroAnimation(3.0f);
 	for (int i = 1; i <= 2; i++) {
-		playerSidle->PushSprite("Resource/Idle/idle_side_%d.png", i);
+		playerSidle->PushSprite("Resource/Player/Idle/idle_side_%d.png", i);
 	}
 
 	playerUidle = new ZeroAnimation(3.0f);
 	for (int i = 1; i <= 2; i++) {
-		playerUidle->PushSprite("Resource/Idle/idle_back_%d.png", i);
+		playerUidle->PushSprite("Resource/Player/Idle/idle_back_%d.png", i);
 	}
 
 	playerDidle = new ZeroAnimation(3.0f);
 	for (int i = 1; i <= 2; i++) {
-		playerDidle->PushSprite("Resource/Idle/idle_front_%d.png", i);
+		playerDidle->PushSprite("Resource/Player/Idle/idle_front_%d.png", i);
 	}
 
 	/*-------------------------------------------------------------------------*/
 
 	playerSroll = new ZeroAnimation(6.0f);
 	for (int i = 1; i <= 4; i++) {
-		playerSroll->PushSprite("Resource/Roll/roll_side_%d.png", i);
+		playerSroll->PushSprite("Resource/Player/Roll/roll_side_%d.png", i);
 	}
 
 	playerUroll = new ZeroAnimation(6.0f);
 	for (int i = 1; i <= 4; i++) {
-		playerUroll->PushSprite("Resource/Roll/roll_back_%d.png", i);
+		playerUroll->PushSprite("Resource/Player/Roll/roll_back_%d.png", i);
 	}
 	
 	playerDroll = new ZeroAnimation(6.0f);
 	for (int i = 1; i <= 4; i++) {
-		playerDroll->PushSprite("Resource/Roll/roll_front_%d.png", i);
+		playerDroll->PushSprite("Resource/Player/Roll/roll_front_%d.png", i);
 	}
 
 	/*-------------------------------------------------------------------------*/
 	
 	playerSattack = new ZeroAnimation(3.0f);
 	for (int i = 1; i <= 2; i++) {
-		playerSattack->PushSprite("Resource/Attack/attack_side_%d.png", i);
+		playerSattack->PushSprite("Resource/Player/Attack/attack_side_%d.png", i);
 	}
 
 	playerUattack = new ZeroAnimation(3.0f);
 	for (int i = 1; i <= 2; i++) {
-		playerUattack->PushSprite("Resource/Attack/attack_back_%d.png", i);
+		playerUattack->PushSprite("Resource/Player/Attack/attack_back_%d.png", i);
 	}
 
 	playerDattack = new ZeroAnimation(3.0f);
 	for (int i = 1; i <= 2; i++) {
-		playerDattack->PushSprite("Resource/Attack/attack_front_%d.png", i);
+		playerDattack->PushSprite("Resource/Player/Attack/attack_front_%d.png", i);
 	}
 
 	/*-------------------------------------------------------------------------*/
 
+	collider = new ZeroSprite("Resource/Player/playerCollider.png");
 
 	ZeroSoundMgr->PushSound("Resource/Sound/Player/Player_attack.wav", "attackSound");
 	ZeroSoundMgr->PushSound("Resource/Sound/Player/Player_ill.wav", "illSound");
@@ -110,7 +111,7 @@ PlayerCharacter::PlayerCharacter() : isAlive(true), canInput(true), isMove(false
 	PushScene(playerUattack);
 	PushScene(playerDattack);
 
-	
+	PushScene(collider);
 
 	SetPos(600, 350);
 
@@ -193,7 +194,7 @@ void PlayerCharacter::Render()
 		break;
 	}
 
-
+	collider->Render();
 }
 
 void PlayerCharacter::Move(float eTime)
@@ -254,7 +255,7 @@ void PlayerCharacter::Move(float eTime)
 		if (isRoll && stamina > 0) {
 			rollTimer.first += eTime;
 
-			speed = 250;
+			speed = 450;
 			ZeroSoundMgr->PlayChannel("rollSound", "PlayerChannel");
 
 			switch (prevKey)
@@ -354,7 +355,7 @@ void PlayerCharacter::SetAbility(int type)
 		defaultSpeed = speed;
 		health = 100;
 		defaultHealth = health;
-		attackPower = 50;
+		attackPower = 1.3;
 		defaultDamage = attackPower;
 		break;
 	case Item::ITEM::DUMBBELL:

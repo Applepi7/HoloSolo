@@ -3,7 +3,7 @@
 
 
 
-Slime::Slime() : slimeCondition(MOVE), boomDistance(100), speed(25), isAlive(true), isPop(false), boomTimer(0, 2), popTimer(0, .5f)
+Slime::Slime() : slimeCondition(MOVE), boomDistance(100), speed(25), isAlive(true), isPop(false), boomTimer(0, 3), popTimer(0, .5f)
 {
 	health = 90;
 
