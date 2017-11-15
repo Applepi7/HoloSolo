@@ -26,6 +26,9 @@ ThirdStage::ThirdStage() : totemNum(5)
 	player = new PlayerCharacter();
 	PushScene(player);
 
+	failBackground->SetColorA(0);
+	failSprite->SetColorA(0);
+
 	damageText->SetString("Damage : " + to_string((int)player->attackPower));
 	healthText->SetString("Health: " + to_string((int)player->health));
 	speedText->SetString("Speed : " + to_string((int)player->speed));
@@ -63,6 +66,7 @@ void ThirdStage::Render()
 	speedText->Render();
 
 	failBackground->Render();
+	failSprite->Render();
 }
 
 void ThirdStage::PopStage()
@@ -93,6 +97,8 @@ void ThirdStage::CheckOut(float eTime)
 			ZeroSceneMgr->ChangeScene(new FourthStage());
 		}
 	}
+
+	ShowResult(player, eTime);
 
 	printf("player health : %.2f", player->health);
 }

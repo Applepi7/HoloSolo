@@ -82,6 +82,8 @@ void Dragon::Update(float eTime)
 {
 	ZeroIScene::Update(eTime);
 
+	if (health <= 0)
+		isAlive = false;
 }
 
 void Dragon::Render()

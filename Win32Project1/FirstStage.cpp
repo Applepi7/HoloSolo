@@ -21,6 +21,9 @@ FirstStage::FirstStage() : slimeNum(10)
 	player = new PlayerCharacter();
 	PushScene(player);
 
+	failBackground->SetColorA(0);
+	failSprite->SetColorA(0);
+
 	damageText->SetString("Damage : " + to_string((int)player->attackPower));
 	healthText->SetString("Health: " + to_string((int)player->health));
 	speedText->SetString("Speed: " + to_string((int)player->speed));
@@ -64,6 +67,9 @@ void FirstStage::Render()
 	damageText->Render();
 	healthText->Render();
 	speedText->Render();
+
+	failBackground->Render();
+	failSprite->Render();
 }
 
 void FirstStage::PopStage()

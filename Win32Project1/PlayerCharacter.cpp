@@ -7,7 +7,7 @@
 
 #include "Random.h"
 
-PlayerCharacter::PlayerCharacter() : isAlive(true), isMove(false), isRoll(false), isAttack(false),health(100), speed(100), attackPower(50), stamina(100), playerCondition(LEFTIDLE), prevKey(VK_LEFT), rollTimer(0, .7f), attackTimer(0, .7f)
+PlayerCharacter::PlayerCharacter() : isAlive(true), canInput(true), isMove(false), isRoll(false), isAttack(false),health(100), speed(100), attackPower(50), stamina(100), playerCondition(LEFTIDLE), prevKey(VK_LEFT), rollTimer(0, .7f), attackTimer(0, .7f)
 {
 	playerSrun = new ZeroAnimation(3.0f);
 	for (int i = 1; i <= 4; i++) {
@@ -114,7 +114,7 @@ PlayerCharacter::PlayerCharacter() : isAlive(true), isMove(false), isRoll(false)
 
 	SetPos(600, 350);
 
-	SetAbility(/*GameManager::GetInstance()->itemType*/ 6);
+	SetAbility(/*GameManager::GetInstance()->itemType*/ RandomInt(0, 5));
 }
 
 void PlayerCharacter::Update(float eTime)
@@ -125,7 +125,7 @@ void PlayerCharacter::Update(float eTime)
 	Attack(eTime);
 	Idle();
 
-	if (health <= 90)
+	if (health <= 0)
 		isAlive = false;
 }
 
@@ -198,85 +198,87 @@ void PlayerCharacter::Render()
 
 void PlayerCharacter::Move(float eTime)
 {
-	if (ZeroInputMgr->GetKey(VK_RIGHT) == INPUTMGR_KEYON) {
-		if (Pos().x <= 1280 - (playerSrun->Width() * 2.5f) ) {
-			AddPosX(speed * eTime);
-			playerCondition = RIGHTRUN;
+	if (canInput) {
+		if (ZeroInputMgr->GetKey(VK_RIGHT) == INPUTMGR_KEYON) {
+			if (Pos().x <= 1280 - (playerSrun->Width() * 2.5f)) {
+				AddPosX(speed * eTime);
+				playerCondition = RIGHTRUN;
 
-			prevKey = VK_RIGHT;
-			isMove = true;
+				prevKey = VK_RIGHT;
+				isMove = true;
 
+			}
+			ZeroSoundMgr->PlayChannel("moveSound", "PlayerChannel");
 		}
-		ZeroSoundMgr->PlayChannel("moveSound", "PlayerChannel");
-	}
-	else isMove = false;
+		else isMove = false;
 
-	if (ZeroInputMgr->GetKey(VK_LEFT) == INPUTMGR_KEYON) {
-		if (Pos().x >= playerSrun->Width() * 1.5f) {
-			AddPosX(-speed * eTime);
-			playerCondition = LEFTRUN;
+		if (ZeroInputMgr->GetKey(VK_LEFT) == INPUTMGR_KEYON) {
+			if (Pos().x >= playerSrun->Width() * 1.5f) {
+				AddPosX(-speed * eTime);
+				playerCondition = LEFTRUN;
 
-			prevKey = VK_LEFT;
-			isMove = true;
+				prevKey = VK_LEFT;
+				isMove = true;
 
-		}
-		ZeroSoundMgr->PlayChannel("moveSound", "PlayerChannel");
-	}
-
-	if (ZeroInputMgr->GetKey(VK_UP) == INPUTMGR_KEYON) {
-		if (Pos().y >= playerSrun->Height() - 100) {
-			AddPosY(-speed * eTime);
-			playerCondition = UPRUN;
-
-			prevKey = VK_UP;
-			isMove = true;
-
-		}
-		ZeroSoundMgr->PlayChannel("moveSound", "PlayerChannel");
-	}
-
-	if (ZeroInputMgr->GetKey(VK_DOWN) == INPUTMGR_KEYON) {
-		if (Pos().y <= 720 - playerSrun->Height() * 2.1f) {
-			AddPosY(speed * eTime);
-			playerCondition = DOWNRUN;
-
-			prevKey = VK_DOWN;
-			isMove = true;
-
-		}
-		ZeroSoundMgr->PlayChannel("moveSound", "PlayerChannel");
-	}
-
-	if (ZeroInputMgr->GetKey('X') == INPUTMGR_KEYDOWN)
-		isRoll = true;
-	
-	if (isRoll && stamina > 0) {
-		rollTimer.first += eTime;
-
-		speed = 250;
-		ZeroSoundMgr->PlayChannel("rollSound", "PlayerChannel");
-
-		switch (prevKey)
-		{
-		case VK_RIGHT:
-			playerCondition = RIGHTROLL;
-			break;
-		case VK_LEFT:
-			playerCondition = LEFTROLL;
-			break;
-		case VK_UP:
-			playerCondition = UPROLL;
-			break;
-		case VK_DOWN:
-			playerCondition = DOWNROLL;
-			break;
+			}
+			ZeroSoundMgr->PlayChannel("moveSound", "PlayerChannel");
 		}
 
-		if (rollTimer.first >= rollTimer.second) {
-			isRoll = false;
-			speed = defaultSpeed;
-			stamina -= 20;
-			rollTimer.first = 0;
+		if (ZeroInputMgr->GetKey(VK_UP) == INPUTMGR_KEYON) {
+			if (Pos().y >= playerSrun->Height() - 100) {
+				AddPosY(-speed * eTime);
+				playerCondition = UPRUN;
+
+				prevKey = VK_UP;
+				isMove = true;
+
+			}
+			ZeroSoundMgr->PlayChannel("moveSound", "PlayerChannel");
+		}
+
+		if (ZeroInputMgr->GetKey(VK_DOWN) == INPUTMGR_KEYON) {
+			if (Pos().y <= 720 - playerSrun->Height() * 2.1f) {
+				AddPosY(speed * eTime);
+				playerCondition = DOWNRUN;
+
+				prevKey = VK_DOWN;
+				isMove = true;
+
+			}
+			ZeroSoundMgr->PlayChannel("moveSound", "PlayerChannel");
+		}
+
+		if (ZeroInputMgr->GetKey('X') == INPUTMGR_KEYDOWN)
+			isRoll = true;
+
+		if (isRoll && stamina > 0) {
+			rollTimer.first += eTime;
+
+			speed = 250;
+			ZeroSoundMgr->PlayChannel("rollSound", "PlayerChannel");
+
+			switch (prevKey)
+			{
+			case VK_RIGHT:
+				playerCondition = RIGHTROLL;
+				break;
+			case VK_LEFT:
+				playerCondition = LEFTROLL;
+				break;
+			case VK_UP:
+				playerCondition = UPROLL;
+				break;
+			case VK_DOWN:
+				playerCondition = DOWNROLL;
+				break;
+			}
+
+			if (rollTimer.first >= rollTimer.second) {
+				isRoll = false;
+				speed = defaultSpeed;
+				stamina -= 20;
+				rollTimer.first = 0;
+			}
 		}
 	}
 }

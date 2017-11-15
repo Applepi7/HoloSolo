@@ -62,6 +62,7 @@ void Stage::ShowResult(PlayerCharacter* player, float eTime)
 	
 	if (!player->isAlive) {
 		a += eTime * 120;
+		player->canInput = false;
 		if (a <= 255)
 			failBackground->SetColorA((int)a);
 		else

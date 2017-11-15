@@ -73,6 +73,7 @@ public:
 	float health;
 
 	bool isAlive;
+	bool canInput;
 
 	void Update(float eTime) override;
 	void Render() override;
