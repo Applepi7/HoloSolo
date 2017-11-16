@@ -29,21 +29,21 @@ Stage::Stage()
 	PushScene(failSprite);
 	PushScene(failBackground);
 
-	damageText->SetPos(100, 670);
-	healthText->SetPos(300, 670);
+	healthText->SetPos(100, 670);
+	damageText->SetPos(300, 670);
 	speedText->SetPos(500, 670);
 
-	damageText->SetColorR(0);
-	damageText->SetColorG(0);
+	damageText->SetColorR(32);
+	damageText->SetColorG(164);
 	damageText->SetColorB(0);
 
-	healthText->SetColorR(0);
+	healthText->SetColorR(199);
 	healthText->SetColorG(0);
 	healthText->SetColorB(0);
 
 	speedText->SetColorR(0);
 	speedText->SetColorG(0);
-	speedText->SetColorB(0);
+	speedText->SetColorB(168);
 
 }
 

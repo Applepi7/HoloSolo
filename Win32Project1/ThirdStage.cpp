@@ -78,7 +78,7 @@ void ThirdStage::Render()
 
 	for (auto t : totemList)
 	{
-		if (t->isDamaged && t->health < 90)
+		if (t->isDamaged && t->health < 150)
 		{
 			ui->enemyHealthBar->Render();
 			ui->enemyHealthFill->Render();
@@ -118,6 +118,7 @@ void ThirdStage::CheckOut(float eTime)
 
 	if (totemNum == 0) {
 		if (IsCollision(player, item)) {
+			//GameManager::GetInstance()->itemType = item->type;
 			PopStage();
 			ZeroSceneMgr->ChangeScene(new FourthStage());
 		}

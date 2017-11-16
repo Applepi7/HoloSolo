@@ -8,6 +8,9 @@
 
 FirstStage::FirstStage() : slimeNum(10)
 {
+	game = new GameManager();
+	PushScene(game);
+
 	background = new ZeroSprite("Resource/UI/Background/background.png");
 	ui = new UIManager();
 
@@ -112,7 +115,7 @@ void FirstStage::CheckOut(float eTime)
 
 	if (slimeNum == 0) {
 		if (IsCollision(player, item)) {
-			GameManager::GetInstance()->itemType = item->type;
+			//GameManager::GetInstance()->itemType = item->type;
 			PopStage();
 			ZeroSceneMgr->ChangeScene(new SecondStage());
 		}

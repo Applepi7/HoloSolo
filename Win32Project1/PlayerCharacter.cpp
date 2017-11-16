@@ -5,10 +5,13 @@
 #include "ZeroSoundManager.h"
 #include "GameManager.h"
 
+#include "FirstStage.h"
+
 #include "Random.h"
 
-PlayerCharacter::PlayerCharacter() : isAlive(true), canInput(true), isMove(false), isRoll(false), isAttack(false),health(100), speed(100), attackPower(50), stamina(100), playerCondition(LEFTIDLE), prevKey(VK_LEFT), rollTimer(0, .7f), attackTimer(0, .7f)
+PlayerCharacter::PlayerCharacter() : isAlive(true), canInput(true), canAttack(true), isMove(false), isRoll(false), isAttack(false),health(100), speed(100), stamina(100), playerCondition(LEFTIDLE), prevKey(VK_LEFT), rollTimer(0, .7f), attackTimer(0, .7f)
 {
+
 	playerSrun = new ZeroAnimation(3.0f);
 	for (int i = 1; i <= 4; i++) {
 		playerSrun->PushSprite("Resource/Player/Run/run_side_%d.png", i);
@@ -80,17 +83,15 @@ PlayerCharacter::PlayerCharacter() : isAlive(true), canInput(true), isMove(false
 
 	collider = new ZeroSprite("Resource/Player/playerCollider.png");
 
-
-
-	ZeroSoundMgr->PushSound("Resource/Sound/Player/Player_attack.wav", "attackSound");
 	ZeroSoundMgr->PushSound("Resource/Sound/Player/Player_ill.wav", "illSound");
 	ZeroSoundMgr->PushSound("Resource/Sound/Player/Player_roll.wav", "rollSound");
+	ZeroSoundMgr->PushSound("Resource/Sound/Player/Player_attack.wav", "attackSound");
 	ZeroSoundMgr->PushSound("Resource/Sound/Player/Player_move.wav", "moveSound");
 
-	ZeroSoundMgr->PushChannel("attackSound", "PlayerChannel", true);
-	ZeroSoundMgr->PushChannel("illSound", "PlayerChannel", true);
-	ZeroSoundMgr->PushChannel("rollSound", "PlayerChannel", true);
-	ZeroSoundMgr->PushChannel("moveSound", "PlayerChannel", true);
+	ZeroSoundMgr->PushChannel("attackSound", "AttackChannel", true);
+	ZeroSoundMgr->PushChannel("illSound", "IllChannel", true);
+	ZeroSoundMgr->PushChannel("rollSound", "RollChannel", true);
+	ZeroSoundMgr->PushChannel("moveSound", "MoveChannel", true);
 
 	playerSrun->SetScalingCenter(playerSrun->Width() * 0.5f);
 	playerSidle->SetScalingCenter(playerSidle->Width() * 0.5f);
@@ -121,7 +122,7 @@ PlayerCharacter::PlayerCharacter() : isAlive(true), canInput(true), isMove(false
 
 	
 
-	SetAbility(/*GameManager::GetInstance()->itemType*/ RandomInt(0, 5));
+	SetAbility(RandomInt(0, 5));
 }
 
 void PlayerCharacter::Update(float eTime)
@@ -133,7 +134,10 @@ void PlayerCharacter::Update(float eTime)
 	Idle();
 
 	if (health <= 0)
+	{
 		isAlive = false;
+		canInput = false;
+	}
 }
 
 void PlayerCharacter::Render()
@@ -206,6 +210,9 @@ void PlayerCharacter::Render()
 
 void PlayerCharacter::Move(float eTime)
 {
+	if(isMove)
+		ZeroSoundMgr->PlayChannel("MoveChannel");
+
 	if (canInput) {
 		if (ZeroInputMgr->GetKey(VK_RIGHT) == INPUTMGR_KEYON) {
 			if (Pos().x <= 1280 - (playerSrun->Width() * 2.5f)) {
@@ -214,9 +221,8 @@ void PlayerCharacter::Move(float eTime)
 
 				prevKey = VK_RIGHT;
 				isMove = true;
-
+				ZeroSoundMgr->PlayChannel("MoveChannel");
 			}
-			ZeroSoundMgr->PlayChannel("moveSound", "PlayerChannel");
 		}
 		else isMove = false;
 
@@ -227,9 +233,7 @@ void PlayerCharacter::Move(float eTime)
 
 				prevKey = VK_LEFT;
 				isMove = true;
-
 			}
-			ZeroSoundMgr->PlayChannel("moveSound", "PlayerChannel");
 		}
 
 		if (ZeroInputMgr->GetKey(VK_UP) == INPUTMGR_KEYON) {
@@ -241,7 +245,6 @@ void PlayerCharacter::Move(float eTime)
 				isMove = true;
 
 			}
-			ZeroSoundMgr->PlayChannel("moveSound", "PlayerChannel");
 		}
 
 		if (ZeroInputMgr->GetKey(VK_DOWN) == INPUTMGR_KEYON) {
@@ -253,7 +256,6 @@ void PlayerCharacter::Move(float eTime)
 				isMove = true;
 
 			}
-			ZeroSoundMgr->PlayChannel("moveSound", "PlayerChannel");
 		}
 
 		if (ZeroInputMgr->GetKey('X') == INPUTMGR_KEYDOWN)
@@ -264,7 +266,7 @@ void PlayerCharacter::Move(float eTime)
 			rollTimer.first += eTime;
 
 			speed = 450;
-			ZeroSoundMgr->PlayChannel("rollSound", "PlayerChannel");
+			ZeroSoundMgr->PlayChannel("RollChannel");
 
 			switch (prevKey)
 			{
@@ -294,15 +296,21 @@ void PlayerCharacter::Move(float eTime)
 
 void PlayerCharacter::Attack(float eTime)
 {
-	if (ZeroInputMgr->GetKey('Z') == INPUTMGR_KEYDOWN)
-		isAttack = true;
+	if (ZeroInputMgr->GetKey('Z') == INPUTMGR_KEYUP)
+	{
+		if (canAttack) 
+		{
+			ZeroSoundMgr->PlayChannel("AttackChannel");
+			isAttack = true;
+		}
+	}
 
 	if (isAttack)
 	{
 		attackTimer.first += eTime;
-		ZeroSoundMgr->PlayChannel("attackSound", "PlayerChannel");
 
 		speed = 0;
+		canAttack = false;
 
 		switch (prevKey)
 		{
@@ -323,8 +331,10 @@ void PlayerCharacter::Attack(float eTime)
 		if (attackTimer.first >= attackTimer.second)
 		{
 			isAttack = false;
+			canAttack = true;
 			speed = defaultSpeed;
 			attackTimer.first = 0;
+			ZeroSoundMgr->PauseChannel("AttackChannel");
 		}
 	}
 }
@@ -363,14 +373,14 @@ void PlayerCharacter::SetAbility(int type)
 		defaultSpeed = speed;
 		health = 100;
 		defaultHealth = health;
-		attackPower = 1.3;
+		attackPower = 1.0f;
 		break;
 	case Item::ITEM::DUMBBELL:
 		speed = 100;
 		defaultSpeed = speed;
 		health = 150;
 		defaultHealth = health;
-		attackPower = 1.3f;
+		attackPower = 1.0f;
 		break;
 	case Item::ITEM::ROCK:
 		speed = 100;
@@ -391,7 +401,7 @@ void PlayerCharacter::SetAbility(int type)
 		defaultSpeed = speed;
 		health = 125;
 		defaultHealth = health;
-		attackPower = 1.3f;
+		attackPower = 1.0f;
 		break;
 	case Item::ITEM::HELMET:
 		speed = 100;
@@ -405,7 +415,7 @@ void PlayerCharacter::SetAbility(int type)
 		defaultSpeed = speed;
 		health = 100;
 		defaultHealth = health;
-		attackPower = 1.3f;
+		attackPower = 1.0f;
 	}
 }
 

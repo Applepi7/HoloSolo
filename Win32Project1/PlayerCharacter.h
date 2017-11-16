@@ -16,6 +16,7 @@ private:
 	bool isMove;
 	bool isRoll;
 	bool isKeydown;
+	bool canAttack;
 
 	int playerCondition;
 	int prevKey;
@@ -26,7 +27,6 @@ private:
 	void Attack(float eTime);
 	void Idle();
 
-	void SetAbility(int type);
 
 public:
 	PlayerCharacter();
@@ -81,6 +81,7 @@ public:
 
 	void Update(float eTime) override;
 	void Render() override;
+	void SetAbility(int type);
 
 };
 

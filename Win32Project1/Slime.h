@@ -16,8 +16,6 @@ private:
 	pair<float, float> boomTimer;
 	pair<float, float> popTimer;
 		
-	void PlayDamageSound();
-	void PlayBoomSound();
 	void PlayMoveSound();
 
 public:

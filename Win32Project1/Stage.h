@@ -3,8 +3,10 @@
 
 #include "ZeroSceneManager.h"
 
-#include "Item.h"
 #include "UIManager.h"
+#include "GameManager.h"
+
+#include "Item.h"
 
 #include <list>
 class Stage :
@@ -15,6 +17,7 @@ public:
 
 	Item* item;
 	UIManager* ui;
+	GameManager* game;
 
 	ZeroFont* damageText;
 	ZeroFont* healthText;

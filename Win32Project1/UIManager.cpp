@@ -74,6 +74,6 @@ void UIManager::PlayerUI(PlayerCharacter * player)
 
 void UIManager::EnemyUI(Enemy* enemy)
 {
-	float enemyHealth[5] = { 0.011, 0.01, 0.0067, 0.0025, 0.002 };
+	float enemyHealth[5] = { 0.011, 0.01, 0.0067, 0.0025, 0.001 };
 	enemyHealthFill->SetScale(enemy->health * enemyHealth[enemy->enemyType], 1);
 }

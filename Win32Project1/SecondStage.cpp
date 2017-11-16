@@ -51,7 +51,6 @@ void SecondStage::Update(float eTime)
 	}
 	item->Update(eTime);
 	player->Update(eTime);
-	//ui->Update(eTime);
 
 	ui->PlayerUI(player);
 
@@ -120,7 +119,7 @@ void SecondStage::CheckOut(float eTime)
 
 	if (wispNum == 0) {
 		if (IsCollision(player, item)) {
-			//GameManager::GetInstance()->itemType = item->type;
+			// GameManager::GetInstance()->itemType = item->type;
 			PopStage();
 			ZeroSceneMgr->ChangeScene(new ThirdStage()); 
 		}

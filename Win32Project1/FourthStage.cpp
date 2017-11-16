@@ -85,6 +85,7 @@ void FourthStage::CheckOut(float eTime)
 {
 	golem->Damage(player);
 	if (!golem->isAlive && IsCollision(player, item)) {
+		//GameManager::GetInstance()->itemType = item->type;
 		PopStage();
 		ZeroSceneMgr->ChangeScene(new FifthStage());
 	}

@@ -23,9 +23,14 @@ private:
 	pair<float, float> fireTimer;
 	pair<float, float> damageTimer;
 
+	pair<float, float> moveTimer;
+	pair<float, float> downTimer;
+
 	int index;
 
 	bool isDown;
+	bool isUp;
+	bool canDown;
 
 public:
 	Dragon();

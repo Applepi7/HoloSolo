@@ -79,12 +79,12 @@ void Totem::Render()
 
 void Totem::Damage(PlayerCharacter * player, float eTime)
 {
-	if (lazer->IsOverlapped(player->collider) && isAttack)
+	if (lazer->IsOverlapped(player->collider) && isAttack && isAlive)
 	{
 		damageTimer.first += eTime;
 		if (damageTimer.first >= damageTimer.second)
 		{
-			player->health -= 1;
+			player->health -= 2;
 			damageTimer.first = 0;
 		}
 	}
@@ -94,7 +94,7 @@ void Totem::Damage(PlayerCharacter * player, float eTime)
 		health -= player->attackPower;
 		isDamaged = true;
 		damagedTimer.first += eTime;
-		if (damagedTimer.first >= damagedTimer.second)
+		if (damagedTimer.first >= damagedTimer.second && !player->isAttack)
 			isDamaged = false;
 	}
 }

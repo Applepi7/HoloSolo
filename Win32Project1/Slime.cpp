@@ -8,9 +8,13 @@ Slime::Slime() : slimeCondition(MOVE), boomDistance(100), speed(25), isAlive(tru
 	health = 90;
 	enemyType = SLIME;
 
-	ZeroSoundMgr->PushSound("Resource/Sound/Slime", "boomSound");
-	ZeroSoundMgr->PushSound("Resource/Sound/Slime", "damageSound");
-	ZeroSoundMgr->PushSound("Resource/Sound/Slime", "moveSound");
+	ZeroSoundMgr->PushSound("Resource/Sound/Slime/Slime_death.wav", "boomSound");
+	ZeroSoundMgr->PushSound("Resource/Sound/Slime/Slime_ill.wav", "damageSound");
+	ZeroSoundMgr->PushSound("Resource/Sound/Slime/Slime_walk.wav", "moveSound");
+
+	ZeroSoundMgr->PushChannel("boomSound", "BoomChannel", true);
+	ZeroSoundMgr->PushChannel("damageSound", "DamageChannel", true);
+	ZeroSoundMgr->PushChannel("moveSound", "MoveChannel", true);
 
 	slimeMove = new ZeroAnimation(1.5f);
 	for (int i = 1; i <= 3; i++) {
@@ -30,7 +34,7 @@ Slime::Slime() : slimeCondition(MOVE), boomDistance(100), speed(25), isAlive(tru
 void Slime::Update(float eTime)
 {
 	ZeroIScene::Update(eTime);
-
+	PlayMoveSound();
 }
 
 void Slime::Render()
@@ -54,7 +58,6 @@ void Slime::SelfBoom(PlayerCharacter * target, float eTime)
 		if (boomTimer.first >= boomTimer.second) {
 			slimeCondition = ATTACK;
 			isAlive = false;
-
 		}
 	}
 	if (!isAlive) {
@@ -63,6 +66,7 @@ void Slime::SelfBoom(PlayerCharacter * target, float eTime)
 			PopScene(slimeMove);
 			PopScene(slimeBoom);
 			target->health -= 20;
+			ZeroSoundMgr->PlayChannel("BoomChannel");
 			isPop = true;
 		}
 	}
@@ -85,39 +89,24 @@ void Slime::Damage(PlayerCharacter* player, float eTime)
 {
 	if (IsCollision(player) && player->isAttack)
 	{
+		ZeroSoundMgr->PlayChannel("DamageChannel");
 		isDamaged = true;
 		health -= player->attackPower;
 		damagedTimer.first += eTime;
 		if (damagedTimer.first >= damagedTimer.second)
+		{
 			isDamaged = false;
+		}
 	}
 
 	if (health <= 0) isPop = true;
 }
 
-void Slime::PlayDamageSound()
-{
-	static bool playSound;
-	if (playSound) {
-		playSound = false;
-		ZeroSoundMgr->PlayAllChannel("damageSound");
-	}
-}
-
-void Slime::PlayBoomSound()
-{
-	static bool playSound;
-	if (playSound) {
-		playSound = false;
-		ZeroSoundMgr->PlayAllChannel("boomSound");
-	}
-}
-
 void Slime::PlayMoveSound()
 {
-	static bool playSound;
-	if (playSound) {
-		playSound = false;
-		ZeroSoundMgr->PlayAllChannel("moveSound");
+	static int i = 0;
+	if (i != 0) {
+		i++;
+		ZeroSoundMgr->PlayChannel("MoveChannel");
 	}
 }

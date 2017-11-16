@@ -4,10 +4,10 @@
 #include "Random.h"
 
 
-Dragon::Dragon() : isAlive(true), isDown(false), dragonCondition(IDLE), attackTimer(0, 3), windTimer(0, .5f), wingTimer(0, 1.0f), thunderTimer(0, 2.0f), fireTimer(0, 2.0f), damageTimer(0, .2f), index(RandomInt(0, 1))
+Dragon::Dragon() : isAlive(true), isUp(true), canDown(true), isDown(true), dragonCondition(IDLE), attackTimer(0, 2), windTimer(0, .5f), wingTimer(0, 1.0f), thunderTimer(0, 2.0f), fireTimer(0, 2.0f), damageTimer(0, .2f), index(RandomInt(0, 1)), moveTimer(0, 1.0f), downTimer(0, .3f)
 {
 	enemyType = DRAGON;
-	health = 500;
+	health = 1000;
 
 	dragonIdle = new ZeroAnimation(2.5f);
 	for (int i = 1; i <= 3; i++)
@@ -75,7 +75,7 @@ Dragon::Dragon() : isAlive(true), isDown(false), dragonCondition(IDLE), attackTi
 	SetPos(640 - dragonIdle->Width() * 0.5f, 355 - dragonIdle->Height());
 	dWaveLength->SetPos(-dWaveLength->Width() * 0.2f, 0);
 	dBreath->SetPos(-280, 100);
-	dThunder->SetPos(Pos().x - dThunder->Width() * 0.8f, 400);
+	dThunder->SetPos(Pos().x - dThunder->Width() * 0.8f, 330);
 	dFire->SetPos(dFire->Width() * 0.5f + 30, 80);
 }
 
@@ -120,15 +120,24 @@ void Dragon::Attack(PlayerCharacter* player, float eTime)
 	attackTimer.first += eTime;
 	if (attackTimer.first >= attackTimer.second)
 	{
-		switch (0)
+		switch (1)
 		{
 		case 0:
 			dragonCondition = WIND;
 			windTimer.first += eTime;
 			if (dBreath->IsOverlapped(player->collider))
 			{
-				static float rot = atan2((Pos().y + 200) - player->Pos().y, (Pos().x + 100) - player->Pos().x);
-				player->AddPos(cos(rot), sin(rot) * 150 * eTime);
+				if (isUp)
+				{
+					static float rot = atan2((Pos().y + 200) - player->Pos().y, (Pos().x + 100) - player->Pos().x);
+					player->AddPos(cos(rot), sin(rot) * 150 * eTime);
+					moveTimer.first += eTime;
+					if (moveTimer.first >= moveTimer.second)
+					{
+						isUp = false;
+						moveTimer.first = 0;
+					}
+				}
 			}
 		    if (windTimer.first >= windTimer.second)
 			{
@@ -142,6 +151,7 @@ void Dragon::Attack(PlayerCharacter* player, float eTime)
 						fireTimer.first = 0;
 						windTimer.first = 0;
 						attackTimer.first = 0;
+						isUp = true;
 						index = RandomInt(0, 1);
 					}
 					if (dFire->IsOverlapped(player->collider))
@@ -161,28 +171,26 @@ void Dragon::Attack(PlayerCharacter* player, float eTime)
 			dragonCondition = WING;
 			wingTimer.first += eTime;
 			if (dWaveLength->IsOverlapped(player->collider))
-				isDown = true;
-
+			{
+				if(canDown)
+					isDown = true;
+			}
 			if (isDown)
 			{
-				if (dragonCondition != THUNDER) {
-					printf("asdfsadfsadfasgsagfa");
-					player->AddPosY(800 * eTime);
-				}
-
-				damageTimer.first += eTime;
-				if(damageTimer.first >= damageTimer.second)
+				player->AddPosY(700 * eTime);
+				downTimer.first += eTime;
+				if (downTimer.first >= downTimer.second)
 				{
-					damageTimer.first = 0;
 					isDown = false;
+					canDown= false;
+					downTimer.first = 0;
 				}
 			}
-
 			if (wingTimer.first >= wingTimer.second)
 			{
 				dragonCondition = IDLE;
 				thunderTimer.first += eTime;
-				if (thunderTimer.first >= .5f) {
+				if (thunderTimer.first >= .15f) {
 					dragonCondition = THUNDER;
 					if (dThunder->IsOverlapped(player->collider))
 					{
@@ -199,6 +207,8 @@ void Dragon::Attack(PlayerCharacter* player, float eTime)
 						thunderTimer.first = 0;
 						wingTimer.first = 0;
 						attackTimer.first = 0;
+						isDown = true;
+						canDown = true;
 						index = RandomInt(0, 1);
 					}
 				}
