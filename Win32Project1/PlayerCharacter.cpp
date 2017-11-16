@@ -259,7 +259,8 @@ void PlayerCharacter::Move(float eTime)
 		if (ZeroInputMgr->GetKey('X') == INPUTMGR_KEYDOWN)
 			isRoll = true;
 
-		if (isRoll && stamina > 0) {
+		if (isRoll && stamina - 20 > 0) 
+		{
 			rollTimer.first += eTime;
 
 			speed = 450;
@@ -349,7 +350,7 @@ void PlayerCharacter::Idle()
 		}
 
 		if(stamina <= 100)
-			stamina += 0.001f;
+			stamina += 0.01f;
 	}
 }
 

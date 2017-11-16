@@ -8,6 +8,7 @@
 ThirdStage::ThirdStage() : totemNum(5)
 {
 	background = new ZeroSprite("Resource/UI/Background/background.png");
+	ui = new UIManager();
 
 	for (int i = 1; i <= 5; i++)
 	{
@@ -26,6 +27,8 @@ ThirdStage::ThirdStage() : totemNum(5)
 	player = new PlayerCharacter();
 	PushScene(player);
 
+	PushScene(ui);
+
 	failBackground->SetColorA(0);
 	failSprite->SetColorA(0);
 
@@ -41,8 +44,16 @@ void ThirdStage::Update(float eTime)
 {
 	ZeroIScene::Update(eTime);
 
+	for (auto t : totemList)
+	{
+		if(t->isDamaged)
+			ui->EnemyUI(t);
+	}
+
 	item->Update(eTime);
 	player->Update(eTime);
+
+	ui->PlayerUI(player);
 
 	CheckOut(eTime);
 }
@@ -64,6 +75,20 @@ void ThirdStage::Render()
 	damageText->Render();
 	healthText->Render();
 	speedText->Render();
+
+	for (auto t : totemList)
+	{
+		if (t->isDamaged && t->health < 90)
+		{
+			ui->enemyHealthBar->Render();
+			ui->enemyHealthFill->Render();
+		}
+	}
+
+	ui->healthBar->Render();
+	ui->healthFill->Render();
+	ui->staminaBar->Render();
+	ui->staminaFill->Render();
 
 	failBackground->Render();
 	failSprite->Render();

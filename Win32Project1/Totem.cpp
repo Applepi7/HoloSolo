@@ -6,6 +6,7 @@ Totem::Totem(int pos) : totemCondition(IDLE), attackTimer(0, 3), lazerTimer(0, 1
 									// attackTimer : 5초동안 가만히 있다가
 									// lazerTimer : 1초동안 레이저 파바ㅏㅏ바ㅏ박
 {
+	enemyType = TOTEM;
 	health = 150;
 
 	totemAttack = new ZeroSprite("Resource/Enemy/Totem/Attack/totem_attack.png");
@@ -89,7 +90,13 @@ void Totem::Damage(PlayerCharacter * player, float eTime)
 	}
 
 	else if ((totemIdle->IsOverlapped(player->collider) || totemAttack->IsOverlapped(player->collider)) && player->isAttack)
+	{
 		health -= player->attackPower;
+		isDamaged = true;
+		damagedTimer.first += eTime;
+		if (damagedTimer.first >= damagedTimer.second)
+			isDamaged = false;
+	}
 }
 
 void Totem::Attack(float eTime)

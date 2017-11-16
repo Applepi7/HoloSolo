@@ -4,7 +4,7 @@
 
 #include <math.h>
 
-Enemy::Enemy() : followDistanceX(300), followDistanceY(300)
+Enemy::Enemy() : followDistanceX(300), followDistanceY(300), damagedTimer(0, 1)
 {
 }
 

@@ -4,7 +4,8 @@
 
 Wisp::Wisp() : wispCondition(MOVE), attackTimer(0, 1.0f), isAlive(true), speed(40)
 {
-	health = 90;
+	enemyType = WISP;
+	health = 100;
 
 	wispMove = new ZeroAnimation(3.0f);
 	for (int i = 1; i <= 2; i++) {
@@ -68,10 +69,16 @@ bool Wisp::IsCollision(PlayerCharacter* player)
 		return false;
 }
 
-void Wisp::Damage(PlayerCharacter * player)
+void Wisp::Damage(PlayerCharacter * player, float eTime)
 {
 	if (IsCollision(player) && player->isAttack)
-		health -= player->attackPower;	
+	{
+		isDamaged = true;
+		health -= player->attackPower;
+		damagedTimer.first += eTime;
+		if (damagedTimer.first >= damagedTimer.second)
+			isDamaged = false;
+	}
 
 	if (health <= 0) isAlive = false;
 }

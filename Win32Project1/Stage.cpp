@@ -10,17 +10,18 @@
 Stage::Stage()
 {
 	item = new Item();
+	//ui = new UIManager();
 
 	healthText = new ZeroFont(30, "", "Luckiest Guy");
 	damageText = new ZeroFont(30, "", "Luckiest Guy");
 	speedText = new ZeroFont(30, "", "Luckiest Guy");
 
-
 	failSprite = new ZeroSprite("Resource/UI/Result/fail.png");
 	failBackground = new ZeroSprite("Resource/UI/Result/failBackground.png");
 
-
 	PushScene(item);
+	//PushScene(ui);
+
 	PushScene(damageText);
 	PushScene(healthText);
 	PushScene(speedText);

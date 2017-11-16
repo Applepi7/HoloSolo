@@ -5,6 +5,7 @@
 
 Golem::Golem() : golemCondition(IDLE), attackTimer(0, 3.0f), basicATimer(0, 1.3f), crackATimer(0, 2.0f), isAttack(false), isAlive(true), isShowCrack(false), isDamage(false), index(RandomInt(0, 2))
 {
+	enemyType = GOLEM;
 	health = 400;
 
 	golemIdle = new ZeroAnimation(3.5f);

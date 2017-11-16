@@ -3,9 +3,10 @@
 
 
 
-Slime::Slime() : slimeCondition(MOVE), boomDistance(100), speed(25), isAlive(true), isPop(false), boomTimer(0, 3), popTimer(0, .5f)
+Slime::Slime() : slimeCondition(MOVE), boomDistance(100), speed(25), isAlive(true), isPop(false), boomTimer(0, 1.7f), popTimer(0, .5f)
 {
 	health = 90;
+	enemyType = SLIME;
 
 	ZeroSoundMgr->PushSound("Resource/Sound/Slime", "boomSound");
 	ZeroSoundMgr->PushSound("Resource/Sound/Slime", "damageSound");
@@ -61,7 +62,7 @@ void Slime::SelfBoom(PlayerCharacter * target, float eTime)
 		if (popTimer.first >= popTimer.second) {
 			PopScene(slimeMove);
 			PopScene(slimeBoom);
-			target->health -= 10;
+			target->health -= 20;
 			isPop = true;
 		}
 	}
@@ -80,10 +81,16 @@ bool Slime::IsCollision(PlayerCharacter * player)
 		return false;
 }
 
-void Slime::Damage(PlayerCharacter* player)
+void Slime::Damage(PlayerCharacter* player, float eTime)
 {
 	if (IsCollision(player) && player->isAttack)
+	{
+		isDamaged = true;
 		health -= player->attackPower;
+		damagedTimer.first += eTime;
+		if (damagedTimer.first >= damagedTimer.second)
+			isDamaged = false;
+	}
 
 	if (health <= 0) isPop = true;
 }

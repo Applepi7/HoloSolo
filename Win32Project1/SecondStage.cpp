@@ -8,9 +8,8 @@
 
 SecondStage::SecondStage() : damageTimer(0, .25f), wispNum(10)
 {
-	ui = new UIManager();
-
 	background = new ZeroSprite("Resource/UI/Background/background.png");
+	ui = new UIManager();
 
 	for (int i = 0; i < 10; i++)
 	{
@@ -22,6 +21,8 @@ SecondStage::SecondStage() : damageTimer(0, .25f), wispNum(10)
 
 	player = new PlayerCharacter();
 	PushScene(player);
+
+	PushScene(ui);
 
 	failBackground->SetColorA(0);
 	failSprite->SetColorA(0);
@@ -44,35 +45,19 @@ void SecondStage::Update(float eTime)
 		if (w->IsCollision(player)) {
 			w->Attack(player, eTime);
 		}
+		if (w->isDamaged)
+			ui->EnemyUI(w);
 
-		printf("wisp health : %.2f\n", w->health);
 	}
 	item->Update(eTime);
 	player->Update(eTime);
+	//ui->Update(eTime);
 
-	if (player->health >= 0) {
-		switch (player->defaultHealth)
-		{
-		case 100:
-			ui->healthFill->SetScale(player->health * 0.01, 1);
-			break;
-		case 125:
-			ui->healthFill->SetScale(player->health * 0.008, 1);
-			break;
-		case 150:
-			ui->healthFill->SetScale(player->health * 0.0067, 1);
-			break;
-		}
-	}
-	else
-		ui->healthFill->SetScale(0, 1);
-
-	ui->staminaFill->SetScale(player->stamina * 0.01, 1);
-
+	ui->PlayerUI(player);
 
 	CheckOut(eTime);
 
-	printf("%d\n", player->health);
+	printf("player stamina : %.2f\n", player->stamina);
 }
 
 void SecondStage::Render()
@@ -84,8 +69,8 @@ void SecondStage::Render()
 	for (auto w : wispList)
 	{
 		w->Render();
-	}player->Render();
-	
+	}
+	player->Render();
 
 	if (wispNum == 0)
 		item->Render();
@@ -100,6 +85,15 @@ void SecondStage::Render()
 	ui->staminaBar->Render();
 	ui->staminaFill->Render();
 
+	for (auto w : wispList)
+	{
+		if (w->isDamaged && w->health < 100)
+		{
+			ui->enemyHealthBar->Render();
+			ui->enemyHealthFill->Render();
+		}
+	}
+
 	failBackground->Render();
 	failSprite->Render();
 }
@@ -113,7 +107,7 @@ void SecondStage::CheckOut(float eTime)
 	for (auto w = wispList.begin(); w != wispList.end();)
 	{
 		
-		(*w)->Damage(player);
+		(*w)->Damage(player, eTime);
 
 		if (!(*w)->isAlive)
 		{
@@ -133,5 +127,5 @@ void SecondStage::CheckOut(float eTime)
 	}
 
 	ShowResult(player, eTime);
-	printf("player health : %.2f", player->health);
+	printf("player health : %.2f\n", player->health);
 }

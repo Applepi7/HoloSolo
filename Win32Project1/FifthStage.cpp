@@ -8,6 +8,8 @@
 
 FifthStage::FifthStage()
 {
+	ui = new UIManager();
+	
 	background = new ZeroSprite("Resource/UI/Background/background.png");
 	clearSprite = new ZeroSprite("Resource/UI/Result/clear.png");
 	clearSprite->SetColorA(0);
@@ -17,6 +19,8 @@ FifthStage::FifthStage()
 	player = new PlayerCharacter();
 	PushScene(dragon);
 	PushScene(player);
+
+	PushScene(ui);
 
 	failBackground->SetColorA(0);
 	failSprite->SetColorA(0);
@@ -34,7 +38,11 @@ void FifthStage::Update(float eTime)
 
 	player->Update(eTime);
 	if (dragon->isAlive)
+	{
 		dragon->Update(eTime);
+		ui->EnemyUI(dragon);
+	}
+	ui->PlayerUI(player);
 
 	CheckOut(eTime);
 
@@ -48,11 +56,23 @@ void FifthStage::Render()
 
 	if(dragon->isAlive)
 		dragon->Render();
+
 	player->Render();
 
 	damageText->Render();
 	healthText->Render();
 	speedText->Render();
+
+	ui->healthBar->Render();
+	ui->healthFill->Render();
+	ui->staminaBar->Render();
+	ui->staminaFill->Render();
+
+	if (dragon->isAlive)
+	{
+		ui->enemyHealthBar->Render();
+		ui->enemyHealthFill->Render();
+	}
 
 	clearSprite->Render();
 	failBackground->Render();

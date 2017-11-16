@@ -14,7 +14,7 @@ private:
 
 	ZeroSprite* background;
 
-	void CheckOut() override;
+	void CheckOut(float eTime) override;
 
 public:
 	FirstStage();

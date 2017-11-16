@@ -9,11 +9,14 @@
 FourthStage::FourthStage()
 {
 	background = new ZeroSprite("Resource/UI/Background/background.png");
+	ui = new UIManager();
 
 	golem = new Golem();
 	player = new PlayerCharacter();
 	PushScene(golem);
 	PushScene(player);
+
+	PushScene(ui);
 
 	failBackground->SetColorA(0);
 	failSprite->SetColorA(0);
@@ -34,7 +37,10 @@ void FourthStage::Update(float eTime)
 	if (golem->isAlive) {
 		golem->Update(eTime);
 		golem->Attack(player, eTime);
+		ui->EnemyUI(golem);
 	}
+
+	ui->PlayerUI(player);
 
 	CheckOut(eTime);
 }
@@ -45,7 +51,7 @@ void FourthStage::Render()
 
 	background->Render();
 
-	if(golem->isAlive)
+	if (golem->isAlive)
 		golem->Render();
 	else
 		item->Render();
@@ -55,6 +61,17 @@ void FourthStage::Render()
 	damageText->Render();
 	healthText->Render();
 	speedText->Render();
+
+	if (golem->isAlive)
+	{
+		ui->enemyHealthBar->Render();
+		ui->enemyHealthFill->Render();
+	}
+
+	ui->healthBar->Render();
+	ui->healthFill->Render();
+	ui->staminaBar->Render();
+	ui->staminaFill->Render();
 
 	failBackground->Render();
 	failSprite->Render();

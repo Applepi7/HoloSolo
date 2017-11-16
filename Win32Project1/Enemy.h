@@ -27,7 +27,22 @@ protected:
 	};
 
 public:
+	enum EnemyType
+	{
+		SLIME,
+		WISP,
+		TOTEM,
+		GOLEM,
+		DRAGON
+	};
+
+	EnemyType enemyType;
+
+	pair<float, float> damagedTimer;
+
 	float health;
+
+	bool isDamaged;
 
 	void Update(float eTime) override;
 	void Render() override;

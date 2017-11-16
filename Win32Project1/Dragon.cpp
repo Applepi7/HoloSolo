@@ -6,6 +6,7 @@
 
 Dragon::Dragon() : isAlive(true), isDown(false), dragonCondition(IDLE), attackTimer(0, 3), windTimer(0, .5f), wingTimer(0, 1.0f), thunderTimer(0, 2.0f), fireTimer(0, 2.0f), damageTimer(0, .2f), index(RandomInt(0, 1))
 {
+	enemyType = DRAGON;
 	health = 500;
 
 	dragonIdle = new ZeroAnimation(2.5f);

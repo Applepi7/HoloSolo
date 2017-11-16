@@ -9,6 +9,7 @@
 FirstStage::FirstStage() : slimeNum(10)
 {
 	background = new ZeroSprite("Resource/UI/Background/background.png");
+	ui = new UIManager();
 
 	for (int i = 0; i < 10; i++)
 	{
@@ -20,6 +21,8 @@ FirstStage::FirstStage() : slimeNum(10)
 
 	player = new PlayerCharacter();
 	PushScene(player);
+
+	PushScene(ui);
 
 	failBackground->SetColorA(0);
 	failSprite->SetColorA(0);
@@ -41,15 +44,19 @@ void FirstStage::Update(float eTime)
 		s->Update(eTime);
 		s->Follow(player, s, s->speed, eTime, s->isAlive);
 		s->SelfBoom(player, eTime);
-		s->Damage(player);
+		s->Damage(player, eTime);
+		if(s->isDamaged)
+			ui->EnemyUI(s);
 
 		printf("slime health : %.2f\n", s->health);
 
 	}
 	player->Update(eTime);
 	item->Update(eTime);
+	
+	ui->PlayerUI(player);
 
-	CheckOut();
+	CheckOut(eTime);
 }
 
 void FirstStage::Render()
@@ -68,6 +75,20 @@ void FirstStage::Render()
 	healthText->Render();
 	speedText->Render();
 
+	ui->healthBar->Render();
+	ui->healthFill->Render();
+	ui->staminaBar->Render();
+	ui->staminaFill->Render();
+
+	for (auto s : slimeList)
+	{
+		if (s->isDamaged && s->health < 90) 
+		{
+			ui->enemyHealthBar->Render();
+			ui->enemyHealthFill->Render();
+		}
+	}
+
 	failBackground->Render();
 	failSprite->Render();
 }
@@ -76,7 +97,7 @@ void FirstStage::PopStage()
 {
 }
 
-void FirstStage::CheckOut()
+void FirstStage::CheckOut(float eTime)
 {
 	for (auto s = slimeList.begin(); s != slimeList.end();)
 	{
@@ -97,5 +118,6 @@ void FirstStage::CheckOut()
 		}
 	}
 
+	ShowResult(player, eTime);
 	printf("player health : %.2f\n", player->health);
 }

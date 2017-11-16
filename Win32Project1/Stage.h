@@ -14,6 +14,7 @@ public:
 	Stage();
 
 	Item* item;
+	UIManager* ui;
 
 	ZeroFont* damageText;
 	ZeroFont* healthText;
