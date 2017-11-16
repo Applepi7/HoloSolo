@@ -11,6 +11,10 @@ private:
 	int page;
 
 	bool isStart;
+	
+	bool isStartPress;
+	bool isHowToPress;
+	bool isProlPress;
 
 	void ShowHowTo();
 
@@ -18,8 +22,11 @@ public:
 	MenuScene();
 
 	ZeroSprite* startBtn;
+	ZeroSprite* startBtnPress;
 	ZeroSprite* howtoBtn;
+	ZeroSprite* howtoBtnPress;
 	ZeroSprite* prolBtn;
+	ZeroSprite* prolBtnPress;
 
 	ZeroSprite* howToPage1;
 	ZeroSprite* howToPage2;
