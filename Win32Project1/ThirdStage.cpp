@@ -118,8 +118,8 @@ void ThirdStage::CheckOut(float eTime)
 
 	if (totemNum == 0) {
 		if (IsCollision(player, item)) {
-			//GameManager::GetInstance()->itemType = item->type;
 			PopStage();
+			GameManager::GetInstance()->itemType = item->type;
 			ZeroSceneMgr->ChangeScene(new FourthStage());
 		}
 	}
@@ -127,4 +127,5 @@ void ThirdStage::CheckOut(float eTime)
 	ShowResult(player, eTime);
 
 	printf("player health : %.2f", player->health);
+	printf("%d\n", GameManager::GetInstance()->itemType);
 }

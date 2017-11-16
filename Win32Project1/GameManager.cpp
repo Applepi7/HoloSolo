@@ -18,7 +18,7 @@ GameManager * GameManager::GetInstance()
 	if (instance == nullptr)
 	{
 		instance = new GameManager();
-		return instance;
 	}
-	return nullptr;
+
+	return instance;
 }

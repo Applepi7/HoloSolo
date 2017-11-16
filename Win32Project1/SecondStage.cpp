@@ -57,6 +57,7 @@ void SecondStage::Update(float eTime)
 	CheckOut(eTime);
 
 	printf("player stamina : %.2f\n", player->stamina);
+	printf("%d\n", GameManager::GetInstance()->itemType);
 }
 
 void SecondStage::Render()
@@ -119,7 +120,7 @@ void SecondStage::CheckOut(float eTime)
 
 	if (wispNum == 0) {
 		if (IsCollision(player, item)) {
-			// GameManager::GetInstance()->itemType = item->type;
+			GameManager::GetInstance()->itemType = item->type;
 			PopStage();
 			ZeroSceneMgr->ChangeScene(new ThirdStage()); 
 		}

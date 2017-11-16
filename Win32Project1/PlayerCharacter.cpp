@@ -122,7 +122,7 @@ PlayerCharacter::PlayerCharacter() : isAlive(true), canInput(true), canAttack(tr
 
 	
 
-	SetAbility(RandomInt(0, 5));
+	SetAbility(GameManager::GetInstance()->itemType);
 }
 
 void PlayerCharacter::Update(float eTime)
